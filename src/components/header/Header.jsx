@@ -7,7 +7,7 @@ const Header = () => {
   const { theme, toggleTheme } = useTheme()
   return (
     <header className={styles.header}>
-      <div className={styles.inner}>
+      <div className={`inner ${styles.inner}`}>
         <NavLink to="/" className={styles.logo} end>
           Your Name
         </NavLink>
@@ -25,10 +25,10 @@ const Header = () => {
           ))}
         </nav>
         <div className={styles.actions}>
-          <button type='button' className={styles.btnOutline}>
+          <button type='button' className="btn btn__outline btn__small">
             Resume
           </button>
-          <button type='button' className={styles.btnPrimary}>
+          <button type='button'  className="btn btn__primary btn__small">
             Hire me          
             </button>
           <button
