@@ -29,7 +29,8 @@
         }
         .desc {
             font-size: $font-size-sm;
-            color:var(--color-text-muted)
+            color:var(--color-text-muted);
+            min-height: 5rem;
         }
         .cta {
             gap: $space-1;
