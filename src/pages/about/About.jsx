@@ -12,24 +12,19 @@ const About = () => {
 
   const shouldReduceMotion = useReducedMotion()
 
-  const motionProps = shouldReduceMotion ? {} : {
-    initial: { opacity: 0, y: 14 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: .45, ease: [.22, 1, .36, 1] }
-  }
   return (
     <div className={styles.about_page}>
       <div className={`inner ${styles.inner}`}>
 
-        <AboutHero icons={icons} motionProps={motionProps} />
+        <AboutHero icons={icons}  />
         <div className={styles.grid}>
           <div className={styles.column}>
-            <AboutCard icons={icons} motionProps={motionProps} />
-            <CoreValues icons={icons} coreValues={coreValues} motionProps={motionProps} />
+            <AboutCard icons={icons}  />
+            <CoreValues icons={icons} coreValues={coreValues}  />
           </div>
           <aside className={styles.column}>
-            <CareerTimeline icons={icons} timeline={timeline} motionProps={motionProps} />
-            <AducationCard icons={icons} motionProps={motionProps} />
+            <CareerTimeline icons={icons} timeline={timeline}  />
+            <AducationCard icons={icons}  />
 
           </aside>
         </div>

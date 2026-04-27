@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from '../../pages/about/About.module.scss'
 import { motion as Motion } from 'framer-motion'
-const AboutHero = ({ icons, motionProps }) => {
+const AboutHero = ({ icons}) => {
 
     const IconMail = icons.mail
     const IconPin = icons.pin
