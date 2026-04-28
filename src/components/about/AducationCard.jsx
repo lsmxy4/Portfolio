@@ -1,13 +1,20 @@
 import React from 'react'
 import styles from '../../pages/about/About.module.scss'
+import { motion as Motion } from 'framer-motion'
+import { articleVariants } from '../../utils/aniValue'
 const AducationCard = ({ icons }) => {
 
   const IconGraduation = icons.graduation
   return (
-    <article  aria-labelledby='edu-title'
-          className={styles.card}>
+    <Motion.article
+      variants={articleVariants}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ amount: .3 }}
+      aria-labelledby='edu-title'
+      className={styles.card}>
       <div className={styles.cardHeader}>
-        <span className={styles.cardIcon}>
+        <span className={`${styles.eduIcon} ${styles.cardIcon}`}>
           <IconGraduation />
         </span>
         <div>
@@ -16,7 +23,7 @@ const AducationCard = ({ icons }) => {
           </h2>
           <p className={styles.cardSubtitle}>
             Formal background
-            
+
           </p>
         </div>
       </div>
@@ -25,7 +32,7 @@ const AducationCard = ({ icons }) => {
         <p className={styles.eduDegree}>Computer Science</p>
         <p className={styles.eduBadge}>2024-2026</p>
       </div>
-    </article>
+    </Motion.article>
   )
 }
 

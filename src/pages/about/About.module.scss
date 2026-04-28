@@ -209,6 +209,11 @@
     color: var(--color-primary)
 }
 
+.eduIcon {
+    background: color-mix(in srgb, var(--color-success) 18%, transparent);
+    color: var(--color-success);
+}
+
 .cardTitle {
     font-size: $font-size-lg;
     font-weight: 700;
@@ -333,18 +338,58 @@
     border: 1px solid var(--color-border);
     margin-bottom: .5rem;
 }
-.jobTitle{
+
+.jobTitle {
     margin-bottom: .3rem;
     font-size: $font-size-md;
     font-weight: 700;
     color: var(--color-text);
 }
+
 .company {
     font-weight: 600;
     font-size: $font-size-sm;
     color: var(--dot, var(--color-primary));
 }
+
 .timelineCardIcon {
     background: color-mix(in srgb, var(--color-warning) 18%, transparent);
     color: var(--color-warning);
+}
+
+.bullets {
+    list-style: disc;
+    padding-left: $space-2;
+    font-size: $font-size-xs;
+    line-height: 1.55;
+    color: var(--color-text-muted);
+}
+
+.eduRow {
+    display: flex;
+    flex-direction: column;
+    gap: $space-1;
+    justify-content: flex-start;
+}
+
+.eduSchool {
+    font-size: $font-size-md;
+    color: var(--color-text);
+    font-weight: 700;
+}
+
+.eduDegree {
+    font-size: $font-size-sm;
+    color: var(--color-text-muted);
+}
+
+.eduBadge {
+    display: inline-block;
+    padding: .3rem 0.7rem;
+    border-radius: $radius-full;
+    font-size: $font-size-xs;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    border: 1px solid var(--color-border);
+    margin-bottom: .5rem;
 }

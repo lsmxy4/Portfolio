@@ -1,9 +1,16 @@
 import React from 'react'
 import styles from '../../pages/about/About.module.scss'
+import { motion as Motion } from 'framer-motion'
+import { articleVariants } from '../../utils/aniValue'
+
 const CareerTimeline = ({ icons, timeline }) => {
   const IconBriefcase = icons.briefcase
   return (
-    <article
+    <Motion.article
+      variants={articleVariants}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ amount: .3 }}
       aria-labelledby='timeline-title'
       className={styles.card}>
       <div className={styles.cardHeader}>
@@ -39,7 +46,7 @@ const CareerTimeline = ({ icons, timeline }) => {
         ))}
       </ul>
 
-    </article>
+    </Motion.article>
   )
 }
 

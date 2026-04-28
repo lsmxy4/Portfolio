@@ -1,6 +1,7 @@
 import React from 'react'
 import styles from '../../pages/about/About.module.scss'
 import { motion as Motion } from 'framer-motion'
+import { contentVariants,itemVariants,visualVariants } from '../../utils/aniValue'
 const AboutHero = ({ icons}) => {
 
     const IconMail = icons.mail
@@ -8,21 +9,36 @@ const AboutHero = ({ icons}) => {
     const IconDownload = icons.download
     const IconGithub = icons.github
     return (
-        <Motion.section className={styles.hero} aria-labelledby='about-hero-heading'>
-            <div className={styles.heroContent}>
-                <span className={styles.badge}>
+        <section className={styles.hero} aria-labelledby='about-hero-heading'>
+            <Motion.div 
+            className={styles.heroContent}
+            values={contentVariants}
+            initial = "hidden"
+            whileInView="show"
+            viewport={{amount:.3}}
+            >
+                <Motion.span
+                variants={itemVariants} 
+                className={styles.badge}>
                     <span className={styles.badgeDot} aria-hidden />
                     Open to opportunities
-                </span>
+                </Motion.span>
                 <p className={styles.eyebrow}>Hello, I&apos;m</p>
-                <h1 id='about-hero-heading' className={styles.title}>
+                <Motion.h1 
+                variants={itemVariants}
+                id='about-hero-heading' 
+                className={styles.title}>
                     Your name
-                </h1>
-                <p className={styles.lead}>
+                </Motion.h1>
+                <Motion.p 
+                variants={itemVariants}
+                className={styles.lead}>
                     Full-stack engineer focused on fast, accessible web experiences. I enjoy turning ambiguous product goals into
                     maintainable systems, clear UI, and measurable outcomes.
-                </p>
-                <div className={styles.metaRow}>
+                </Motion.p>
+                <Motion.div 
+                variants={itemVariants}
+                className={styles.metaRow}>
                     <span className={styles.meta}>
                         <span className={styles.metaIcon}>
                             <IconMail />
@@ -36,8 +52,10 @@ const AboutHero = ({ icons}) => {
                         Remote
                     </span>
 
-                </div>
-                <div className={styles.ctaRow}>
+                </Motion.div>
+                <Motion.div 
+                variants={itemVariants}
+                className={styles.ctaRow}>
                     <a href="#" className="btn btn__primary">
                         <IconDownload />
                         Download resume
@@ -46,9 +64,15 @@ const AboutHero = ({ icons}) => {
                         <IconGithub />
                         View Github
                     </a>
-                </div>
-            </div>
-            <div className={styles.heroVisual}>
+                </Motion.div>
+            </Motion.div>
+            <Motion.div 
+            variants={itemVariants}
+            initial ="hidden"
+            whileInView="show"
+            transition={{delay:1}}
+            viewport={{once:true,amount:.3}}
+            className={styles.heroVisual}>
                 <div className={styles.profileCard}>
                     <div className={styles.profilePlaceholder}/>
                 </div>
@@ -58,8 +82,8 @@ const AboutHero = ({ icons}) => {
                     <span className={styles.statPill}>Freelance friendly</span>
 
                 </div>
-            </div>
-        </Motion.section>
+            </Motion.div>
+        </section>
     )
 }
 

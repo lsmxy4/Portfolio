@@ -2,47 +2,7 @@ import React from 'react'
 import styles from './Hero.module.scss'
 import { motion as Motion, scale } from 'framer-motion'
 import Stats from '../stats/Stats'
-
-const contentVariants = {
-    hidden: {},
-    show: {
-        transition: {
-            staggerChildren: .15,
-            delayChildren: .3
-        }
-    }
-}
-const itemVariants = {
-    hidden: {
-        opacity: 0,
-        y: 24
-    },
-    show: {
-        opacity: 1,
-        y: 0,
-        transition: {
-            duration: .3,
-            ease: [.22, 1, .36, 1]
-        }
-    }
-}
-const visualVariants = {
-    hidden: {
-        opacity: 0,
-        y: 40,
-        scale: .96
-    },
-    show: {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        transition: {
-            duration: .7,
-            ease: [.22, 1, .36, 1],
-            delay: .5
-        }
-    }
-}
+import { contentVariants,itemVariants,visualVariants } from '../../utils/aniValue'
 
 const Hero = () => {
     return (
