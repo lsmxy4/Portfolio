@@ -3,7 +3,7 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
 import Home from "./pages/Home"
 import About from './pages/about/About'
 import Contact from './pages/Contact'
-import ProjectsPages from "./pages/ProjectsPages"
+import ProjectsPages from "./pages/projects/ProjectsPages"
 import Skills from "./pages/Skills"
 import PlaceholderPage from "./pages/PlaceholderPage"
 import Blog from "./pages/Blog"
