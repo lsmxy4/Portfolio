@@ -56,3 +56,13 @@ export const articleVariants = {
         },
     },
 }
+
+export const projectItemMotion = {
+    initial: { opacity: 0, y: 16 },
+    animate: { opacity: 1, y: 0 },
+}
+
+export const projectItemTransition = {
+    duration: 0.4,
+    ease: [0.22, 1, 0.36, 1],
+}

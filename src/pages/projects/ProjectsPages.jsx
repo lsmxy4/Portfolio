@@ -1,8 +1,9 @@
 import React, { useMemo, useState } from 'react'
 import styles from './ProjectsPages.module.scss'
 import FeaturedProjectCard from '../../components/featuredProjectCard/FeaturedProjectCard'
-import { useReducedMotion } from 'framer-motion'
+import { motion as Motion, useReducedMotion } from 'framer-motion'
 import { projectFilters, projectsPageItems } from '../../utils/projectsPageData'
+import { projectItemMotion, projectItemTransition } from '../../utils/aniValue'
 const ProjectsPages = () => {
 
   const [filter, setFilter] = useState('all')
@@ -21,13 +22,12 @@ const ProjectsPages = () => {
     <div className={styles.project_section}>
       <div className="inner">
         <header className={styles.hero}>
-          <span 
-          className = 'badge badge__primary badge__center'
+          <span
+            className="badge badge__primary badge__center"
           >Featured work</span>
-          <h1 className={styles.title}>Projects I&apos;m proud of</h1>
-          <p className={styles.lead}>
-            From shipped products to open-source experiments <br/> 
-            — a sample of things I enjoyed building end to end.
+          <h1 className="tit">Projects I&apos;m proud of</h1>
+          <p className="txt">
+            From shipped products to open-source experiments <br /> — a sample of things I enjoyed building end to end.
           </p>
         </header>
         <div className={styles.filters} role='tablist' aria-label='Filter projects by category'>
@@ -47,8 +47,14 @@ const ProjectsPages = () => {
           <p>No project in this category yet</p>
         ) : (
           <div className={styles.grid}>
-            {visible.map((project) => (
-              <div key={project.id}>
+            {visible.map((project,index) => (
+              <Motion.div
+                layout={!shouldReduceMotion}
+                {...projectItemMotion}
+                transition={
+                  projectItemMotion ? { ...projectItemTransition, delay: index * 0.05 } : undefined
+                }
+                key={project.id}>
 
                 <FeaturedProjectCard
 
@@ -62,7 +68,7 @@ const ProjectsPages = () => {
                   codeHref={project.codeHref}
                   domoLabel={project.demoLabel}
                 />
-              </div>
+              </Motion.div>
 
             ))}
           </div>
@@ -76,4 +82,4 @@ const ProjectsPages = () => {
   )
 }
 
-export default ProjectsPages
+export default ProjectsPages;
