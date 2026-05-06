@@ -5,7 +5,11 @@ const ACCENT = {
     primary: styles.accent_primary,
     success: styles.accent_success,
     info: styles.accent_info,
-    warning: styles.accent_warning
+    warning: styles.accent_warning,
+    frontend:styles.accent_frontend,
+    backend:styles.accent_backend,
+    testing:styles.accent_testing,
+    develop:styles.accent_develop
 }
 
 const ProgressBar = ({
@@ -76,7 +80,7 @@ const ProgressBar = ({
             </div>
             <div className={styles.track}>
                 <Motion.div
-                    className={`${styles.fill} ${accentClass}`}
+                    className={`${styles.fill} ${ACCENT[accent] ?? ACCENT.primary}`}
                     initial={prefersReducedMotion?false:{width:'0%'}}
                     animate={{width:`${end}%`}}
                     transition={fillTransition}

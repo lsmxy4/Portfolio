@@ -1,7 +1,7 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
 import Home from "./pages/Home"
 import About from './pages/about/About'
-import Contact from './pages/Contact'
+import ContantPage from "./pages/contant/ContantPage"
 import ProjectsPages from "./pages/projects/ProjectsPages"
 
 import Skills from "./pages/skills/Skills"
@@ -36,7 +36,7 @@ function App() {
             <Route path="projects" element={<ProjectsPages />} />
             <Route path="skills" element={<SkillsPages />} />
             <Route path="blog" element={<Blog />} />
-            <Route path="contact" element={<Contact />} />
+            <Route path="contact" element={<ContantPage />} />
             <Route path="privacy" element={<PlaceholderPage title="Privacy" />} />
             <Route path="terms" element={<PlaceholderPage title="Terms" />} />
             <Route path="404" element={<NotFound />} />

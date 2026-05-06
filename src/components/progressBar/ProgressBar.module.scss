@@ -5,16 +5,16 @@
     flex-direction: column;
     gap: $space-1;
 
-    .labelPow {
+    .labelRow {
         display: flex;
         justify-content: space-between;
         align-items: baseline;
         font-size: $font-size-xs;
     }
-    
+
     .label {
         font-size: $font-size-sm;
-        color: var(--color-text-muted);
+        color: var(--color-text-muted)
     }
 
     .pct {
@@ -25,14 +25,14 @@
     .track {
         height: .5rem;
         border-radius: 999px;
-        background: var(--gray-100);
+        background-color: var(--gray-100);
         overflow: hidden;
     }
 
     .fill {
         height: 100%;
         border-radius: inherit;
-        transition: width .35s ease;
+        // transition: width .35s ease;
 
         &.accent_primary {
             background-color: var(--color-primary);
@@ -49,5 +49,22 @@
         &.accent_warning {
             background-color: var(--color-warning);
         }
+
+        &.accent_frontend {
+            background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-info) 100%);
+        }
+
+        &.accent_backend {
+            background: linear-gradient(90deg, #059669 0%, var(--color-success) 100%);
+        }
+
+        &.accent_testing {
+            background: linear-gradient(90deg, #7c3aed 0%, #db2777 55%, #ec4899 100%);
+        }
+
+        &.accent_devops {
+            background: linear-gradient(90deg, #ea580c 0%, var(--color-warning) 45%, #ca8a04 100%);
+        }
     }
+
 }

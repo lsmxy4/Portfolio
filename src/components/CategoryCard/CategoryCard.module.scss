@@ -1,21 +1,68 @@
 @use '../../styles/variables' as *;
-.card{
-    padding: $space-2;
-    border-radius: $radius-md;
+
+.card {
+    padding: $space-3;
+    border-radius: $radius-sm;
     background-color: var(--color-card-bg);
     border: 1px solid var(--color-border);
     box-shadow: var(--shadow-bg);
     transition: $transition-theme;
 }
 
-.title{
+.title {
     margin-bottom: $space-1;
-    font-size: $font-size-sm;
-    color: var(--color-text);
+    font-size: $font-size-md;
+    color: var(--color-text)
 }
 
-.list{
+.list {
     display: flex;
     flex-direction: column;
+    gap: $space-3;
+}
+
+.head {
+    display: flex;
+    align-items: flex-start;
     gap: $space-1;
+    margin-bottom: $space-2;
+}
+
+.iconWrap {
+    width: 4rem;
+    height: 4rem;
+    flex-shrink: 0;
+    border: 1px solid var(--color-border);
+    display: grid;
+    place-items: center;
+    background-color: var(--color-bg-muted);
+    border-radius: $radius-sm;
+    color: var(--icon-color, var(--color-primary))
+}
+
+.title {
+    font-size: $font-size-md;
+    color: var(--color-text)
+}
+
+.subtitle {
+    margin-top: $space-1;
+    font-size: $font-size-xs;
+    color: var(--color-text-muted)
+}
+
+.tagRow {
+    display: flex;
+    gap: $space-1;
+    margin-top: $space-3;
+    padding-top: $space-3;
+    border-top: 1px solid var(--color-border);
+}
+
+.tagChip {
+    font-size: $font-size-xs;
+    padding: $space-0 $space-2;
+    border: 1px solid var(--color-border);
+    background-color: var(--color-bg-muted);
+    border-radius: $radius-full;
 }
