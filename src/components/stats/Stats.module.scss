@@ -4,7 +4,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: $space-10; // 변수를 활용한 넉넉한 간격
+    gap: $space-10;
     width: 100%;
     margin-top: $space-5;
     transition: $transition-theme;
@@ -16,7 +16,7 @@
         min-width: 15rem; // 레이아웃 균형 유지
 
         .value {
-            /* 이미지처럼 매우 큰 숫자 */
+            /* 매우 큰 숫자 */
             font-size: 4.5rem;
             font-weight: 800;
             line-height: 1;
