@@ -76,6 +76,10 @@
                 .point { background-color: #5d5dff; }
             }
 
+            .txt{
+                font-size: $font-size-lg;
+            }
+
             /* 2. 버튼 Hover 효과 (핵심) */
             .cta {
                 display: flex;
