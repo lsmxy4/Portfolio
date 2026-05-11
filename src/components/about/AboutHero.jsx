@@ -28,7 +28,7 @@ const AboutHero = ({ icons}) => {
                 variants={itemVariants}
                 id='about-hero-heading' 
                 className={styles.title}>
-                    Your name
+                    신동환
                 </Motion.h1>
                 <Motion.p 
                 variants={itemVariants}

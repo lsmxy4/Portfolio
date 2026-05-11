@@ -65,7 +65,7 @@ const Header = () => {
     <header key={pathname} className={styles.header}>
       <div className={`inner ${styles.inner}`}>
         <NavLink to="/" className={styles.logo} end onClick={closeMenu}>
-          Your Name
+          SDH
         </NavLink>
         <nav className={styles.nav} aria-label='Main'>
           {navItems.map(({ to, label }) => (
