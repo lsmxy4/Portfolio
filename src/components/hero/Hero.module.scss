@@ -1,5 +1,6 @@
 @use '../../styles/variables' as *;
 
+// 테마별 변수 설정
 :root {
     --hero-bg: #ffffff;
     --hero-text: #1a1a1a;
@@ -8,7 +9,6 @@
     --hero-badge-border: #dcd7ff;
     --hero-divider: #eeeeee;
     --hero-btn-outline-border: #eeeeee;
-    --hero-btn-outline-shadow: rgba(0, 0, 0, 0.05);
 }
 
 [data-theme='dark'] {
@@ -16,10 +16,9 @@
     --hero-text: #ffffff;
     --hero-subtext: #b0b0b0;
     --hero-badge-bg: #1a1a2e;
-    --hero-badge-border: #{$color-primary}; // $color-primary 사용
+    --hero-badge-border: #6c5dd3;
     --hero-divider: rgba(255, 255, 255, 0.1);
     --hero-btn-outline-border: #444444;
-    --hero-btn-outline-shadow: transparent;
 }
 
 .hero {
@@ -28,7 +27,6 @@
     min-height: 90vh;
     display: flex;
     align-items: center;
-    font-family: $font-sans;
     transition: $transition-theme;
 
     .inner {
@@ -41,7 +39,7 @@
             text-align: center;
             gap: $space-6;
 
-            /* 1. 상단 배지 */
+            /* 1. 배지 Hover: 살짝 불투명도 조절 */
             .badge {
                 display: inline-flex;
                 align-items: center;
@@ -50,90 +48,93 @@
                 border: 1.5px solid var(--hero-badge-border);
                 color: #6c5dd3;
                 border-radius: $radius-full;
-                padding: $space-1 $space-4;
+                padding: 10px 24px;
                 font-size: $font-size-sm;
                 font-weight: 600;
-                transition: $transition-theme;
+                transition: all 0.3s ease;
+                cursor: default;
 
-                &::before {
-                    content: '';
-                    width: 0.8rem;
-                    height: 0.8rem;
-                    background-color: #6c5dd3;
-                    border-radius: 50%;
+                &:hover {
+                    background-color: color-mix(in srgb, var(--hero-badge-bg), #6c5dd3 10%);
                 }
             }
 
-            /* 2. 메인 타이틀 (줄 간격 강조) */
             .tit {
-                font-size: clamp(2.8rem, 6.5vw, 4.8rem);
+                font-size: clamp(2.8rem, 6.5vw, 4.5rem);
                 font-weight: 800;
-                line-height: 1.5;
+                line-height: 1.4;
                 display: flex;
                 flex-direction: column;
                 gap: $space-2;
-                word-break: keep-all;
 
                 .highlight, .point {
+                    background-color: #6c5dd3;
                     color: #ffffff;
-                    padding: 0.4rem $space-5;
+                    padding: 4px 24px;
                     border-radius: $radius-sm;
-                    display: inline-block;
                 }
-
-                .highlight { background-color: #6c5dd3; }
                 .point { background-color: #5d5dff; }
             }
 
-            /* 3. 서브 텍스트 */
-            .txt {
-                color: var(--hero-subtext);
-                line-height: 1.8;
-                font-size: $font-size-lg;
-                max-width: 80rem;
-                transition: $transition-theme;
-            }
-
-            /* 4. 버튼 그룹 */
+            /* 2. 버튼 Hover 효과 (핵심) */
             .cta {
                 display: flex;
                 gap: $space-3;
-                margin-top: $space-1;
 
                 button {
                     font-size: $font-size-md;
-                    padding: $space-3 $space-6;
+                    padding: 18px 36px;
                     border-radius: $radius-sm;
                     font-weight: 700;
                     cursor: pointer;
-                    transition: $transition-theme, transform 0.2s ease;
-
-                    &:active { transform: scale(0.96); }
+                    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
                 }
 
                 .btnPrimary {
                     background-color: #5d5dff;
                     color: white;
                     border: none;
-                    box-shadow: 0 1rem 2rem rgba(93, 93, 255, 0.2);
+                    box-shadow: 0 10px 20px rgba(93, 93, 255, 0.2);
+
+                    &:hover {
+                        transform: translateY(-4px); // 위로 살짝 올라감
+                        background-color: lighten(#5d5dff, 5%);
+                        box-shadow: 0 15px 30px rgba(93, 93, 255, 0.4); // 글로우 효과 강화
+                    }
                 }
 
                 .btnOutline {
                     background-color: transparent;
                     color: var(--hero-text);
                     border: 1px solid var(--hero-btn-outline-border);
-                    box-shadow: var(--hero-btn-outline-shadow);
+
+                    &:hover {
+                        background-color: var(--hero-text); // 배경색 채워짐
+                        color: var(--hero-bg); // 글자색 반전
+                        border-color: var(--hero-text);
+                        transform: translateY(-4px);
+                    }
                 }
             }
 
-            /* 5. 하단 통계 섹션 경계선 */
             .statsWrapper {
                 margin-top: $space-10;
                 width: 100%;
-                max-width: 60rem;
                 border-top: 1px solid var(--hero-divider);
                 padding-top: $space-6;
-                transition: border-color 0.2s ease;
+
+                :global(.statsContainer) {
+                    display: flex;
+                    justify-content: center;
+                    gap: $space-12;
+
+                    .statItem {
+                        transition: transform 0.3s ease;
+                        &:hover {
+                            transform: scale(1.05);
+                        }
+                    }
+                }
             }
         }
     }
