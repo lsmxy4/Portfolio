@@ -1,35 +1,122 @@
+@use 'sass:color';
 @use '../../styles/variables' as *;
 
-// 테마별 변수 설정
 :root {
     --hero-bg: #ffffff;
     --hero-text: #1a1a1a;
-    --hero-subtext: #666666;
-    --hero-badge-bg: #f3f0ff;
-    --hero-badge-border: #dcd7ff;
-    --hero-divider: #eeeeee;
-    --hero-btn-outline-border: #eeeeee;
+    /* 라이트 모드용 설정 */
+    --hero-glow-opacity: 0.15; // 빛의 진하기 (라이트 모드는 연하게)
+    --hero-glow-mix-mode: multiply; // 흰 배경에서는 색이 섞여야 보임
+    --hero-noise-opacity: 0.05; // 노이즈 입자감
 }
 
 [data-theme='dark'] {
     --hero-bg: #0a0a0a;
     --hero-text: #ffffff;
-    --hero-subtext: #b0b0b0;
-    --hero-badge-bg: #1a1a2e;
-    --hero-badge-border: #6c5dd3;
-    --hero-divider: rgba(255, 255, 255, 0.1);
-    --hero-btn-outline-border: #444444;
+    /* 다크 모드용 설정 */
+    --hero-glow-opacity: 0.4; // 빛의 진하기 (다크 모드는 강하게)
+    --hero-glow-mix-mode: screen; // 검은 배경에서는 발광해야 보임
+    --hero-noise-opacity: 0.03;
+}
+
+@keyframes meshFlow {
+    0% {
+        transform: translate(0, 0) scale(1) rotate(0deg);
+        border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+    }
+
+    33% {
+        transform: translate(10%, -5%) scale(1.1) rotate(5deg);
+        border-radius: 60% 40% 30% 70% / 50% 30% 70% 50%;
+    }
+
+    66% {
+        transform: translate(-5%, 10%) scale(0.9) rotate(-5deg);
+        border-radius: 30% 70% 50% 50% / 50% 70% 30% 50%;
+    }
+
+    100% {
+        transform: translate(0, 0) scale(1) rotate(0deg);
+        border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+    }
 }
 
 .hero {
+    position: relative;
+    overflow: hidden;
     background-color: var(--hero-bg);
-    color: var(--hero-text);
     min-height: 90vh;
     display: flex;
     align-items: center;
     transition: $transition-theme;
 
+    /* 노이즈 질감 (라이트 모드에서도 보임) */
+    &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        opacity: var(--hero-noise-opacity, 0.04);
+        pointer-events: none;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        filter: contrast(120%) brightness(100%);
+    }
+
+    .bgGlows {
+        position: absolute;
+        inset: 0;
+        filter: blur(100px);
+        z-index: 0;
+        pointer-events: none;
+        /* 핵심: 테마에 따라 블렌딩 모드가 바뀜 */
+        mix-blend-mode: var(--hero-glow-mix-mode);
+
+        div {
+            position: absolute;
+            opacity: var(--hero-glow-opacity);
+            transition: opacity 0.3s ease;
+        }
+
+        .glow1 {
+            top: -10%;
+            left: -10%;
+            width: 75%;
+            height: 75%;
+            background: radial-gradient(circle, #7c3aed 0%, transparent 70%); // rgba 대신 고정색 권장
+            animation: meshFlow 15s ease-in-out infinite;
+        }
+
+        .glow2 {
+            bottom: -5%;
+            right: -5%;
+            width: 65%;
+            height: 65%;
+            background: radial-gradient(circle, #5d5dff 0%, transparent 70%);
+            animation: meshFlow 20s ease-in-out infinite reverse;
+        }
+
+        .glow3 {
+            top: 20%;
+            right: 10%;
+            width: 45%;
+            height: 45%;
+            background: radial-gradient(circle, #7c3aed 0%, transparent 70%);
+            animation: meshFlow 18s ease-in-out infinite;
+        }
+
+        .glowMouse {
+            background: radial-gradient(circle, #7c3aed 0%, transparent 70%);
+            width: 35%;
+            height: 35%;
+            filter: blur(60px);
+            /* 마우스 글로우는 라이트 모드에서 multiply로 더 선명하게 */
+            mix-blend-mode: var(--hero-glow-mix-mode);
+        }
+    }
+
     .inner {
+        position: relative;
+        z-index: 2; // 노이즈(1)보다 위에 배치
         padding: $space-12 0;
 
         .content {
@@ -67,16 +154,20 @@
                 flex-direction: column;
                 gap: $space-2;
 
-                .highlight, .point {
+                .highlight,
+                .point {
                     background-color: #6c5dd3;
                     color: #ffffff;
                     padding: 4px 24px;
                     border-radius: $radius-sm;
                 }
-                .point { background-color: #5d5dff; }
+
+                .point {
+                    background-color: #5d5dff;
+                }
             }
 
-            .txt{
+            .txt {
                 font-size: $font-size-lg;
             }
 
@@ -86,6 +177,10 @@
                 gap: $space-3;
 
                 button {
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 8px;
                     font-size: $font-size-md;
                     padding: 18px 36px;
                     border-radius: $radius-sm;
@@ -102,7 +197,7 @@
 
                     &:hover {
                         transform: translateY(-4px); // 위로 살짝 올라감
-                        background-color: lighten(#5d5dff, 5%);
+                        background-color: color.adjust(#5d5dff, $lightness: 5%);
                         box-shadow: 0 15px 30px rgba(93, 93, 255, 0.4); // 글로우 효과 강화
                     }
                 }
@@ -134,6 +229,7 @@
 
                     .statItem {
                         transition: transform 0.3s ease;
+
                         &:hover {
                             transform: scale(1.05);
                         }
