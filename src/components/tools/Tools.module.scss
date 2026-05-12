@@ -1,19 +1,193 @@
 @use '../../styles/variables' as *;
-.tools{
-    .inner{
-        padding: $space-12 0;
-        .grid{
+
+.tools {
+    background-color: #050505;
+    padding: $space-24 0;
+    color: #fff;
+    font-family: $font-sans;
+
+    .inner {
+        max-width: $breakpoint-xl;
+        margin: 0 auto;
+        padding: 0 $space-6;
+    }
+
+    /* 1. 상단 헤더 스타일 */
+    .header {
+        text-align: center;
+        margin-bottom: $space-20;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba($color-primary, 0.15);
+            padding: 6px 16px;
+            border-radius: 99px;
+            border: 1px solid rgba($color-primary, 0.3);
+            font-size: 12px;
+            font-weight: 700;
+            color: lighten($color-primary, 15%);
+            margin-bottom: $space-4;
+        }
+
+        .mainTitle {
+            font-size: 4.8rem;
+            font-weight: 900;
+            letter-spacing: -0.03em;
+            margin-bottom: $space-2;
+        }
+
+        .desc {
+            font-size: $font-size-md;
+            color: #777;
+            font-weight: 500;
+        }
+
+        .titleLine {
+            width: 40px;
+            height: 4px;
+            background: $color-primary;
+            margin-top: $space-6;
+            border-radius: 2px;
+        }
+    }
+
+    /* 2. 카테고리 그룹 & 그리드 */
+    .stackGrid {
+        display: flex;
+        flex-direction: column;
+        gap: $space-16;
+    }
+
+    .categoryGroup {
+        .categoryHeader {
+            display: flex;
+            align-items: center;
+            gap: $space-3;
+            margin-bottom: $space-6;
+
+            .dot { width: 8px; height: 8px; border-radius: 50%; background: $color-info; }
+            .groupName { font-size: 13px; font-weight: 800; color: #999; letter-spacing: 0.1em; }
+            .line { flex: 1; height: 1px; background: linear-gradient(90deg, rgba(255,255,255,0.1), transparent); }
+        }
+
+        .grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: $space-6;
+        }
+    }
+
+    /* 3. Collaboration Box */
+    .collaborationBox {
+        margin-top: $space-24;
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: $radius-lg;
+        padding: $space-10;
+
+        .boxHeader {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: $space-10;
+
+            .boxTitle {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                font-size: 2.4rem;
+                font-weight: 800;
+                .boxIcon { background: #1a1a1a; padding: 8px; border-radius: 10px; font-size: 20px; }
+            }
+            .boxSubLabel { color: #555; font-size: 13px; }
+        }
+
+        .toolList {
             display: grid;
-            gap: $space-2;
-            grid-template-columns: 1fr;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: $space-4;
+        }
 
-            @media (min-width:640px) {
-                grid-template-columns: repeat(2,1fr);
-            }
+        .toolChip {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: $space-4 $space-5;
+            border-radius: $radius-md;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            transition: 0.3s;
+            &:hover { background: rgba(255,255,255,0.06); transform: translateY(-3px); }
 
-            @media (min-width:1024px) {
-                grid-template-columns: repeat(4,1fr);
+            .chipDot { width: 8px; height: 8px; border-radius: 50%; }
+            .chipTitle { display: block; font-size: 15px; font-weight: 700; color: #eee; margin-bottom: 2px; }
+            .chipDesc { display: block; font-size: 12px; color: #555; }
+        }
+    }
+
+    /* 4. Footer Bar */
+    .footerBar {
+        margin-top: $space-10;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 2.4rem;
+        padding: $space-6 $space-10;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .statItem {
+            text-align: center;
+            .statNum { display: block; font-size: 3.6rem; font-weight: 900; line-height: 1; margin-bottom: 4px; }
+            .statLabel { font-size: 12px; color: #666; font-weight: 600; }
+        }
+
+        .divider { width: 1px; height: 50px; background: rgba(255, 255, 255, 0.1); }
+
+        .tagRow { display: flex; gap: 8px; margin-bottom: 6px; }
+        .tag { padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 800; }
+        .tagDesc { font-size: 11px; color: #555; font-weight: 600; text-align: center; margin: 0; }
+
+        .iconRow { display: flex; align-items: center; margin-bottom: 6px; }
+        .iconCircle {
+            width: 32px; height: 32px; border-radius: 50%; background: #000;
+            border: 1.5px solid #333; font-size: 11px; font-weight: 800;
+            display: flex; align-items: center; justify-content: center;
+            margin-right: -10px;
+        }
+        .plusMore { font-size: 12px; color: #666; margin-left: 18px; font-weight: 700; }
+
+        .learning {
+            .learnText {
+                font-size: 2rem; font-weight: 900; color: #00ffa3;
+                display: flex; align-items: center; gap: 10px;
+                margin-bottom: 4px;
+                .greenDot { 
+                    width: 10px; height: 10px; background: #00ffa3; border-radius: 50%; 
+                    box-shadow: 0 0 15px rgba(0, 255, 163, 0.6); 
+                }
             }
+        }
+
+        .contactBtn {
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            padding: 16px 32px;
+            border-radius: 16px;
+            color: #fff;
+            font-weight: 800;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.2);
+            transition: 0.3s;
+            &:hover { transform: translateY(-4px); box-shadow: 0 15px 30px rgba(99, 102, 241, 0.4); }
+            .mailIcon { font-size: 18px; }
         }
     }
 }

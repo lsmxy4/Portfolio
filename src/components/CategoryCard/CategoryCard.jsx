@@ -1,55 +1,32 @@
-import React from 'react'
-import styles from './CategoryCard.module.scss'
-import ProgressBar from '../progressBar/ProgressBar'
-const CategoryCard = ({
-    title,
-    subtitle,
-    accent = 'primary',
-    skills = [],
-    progress = 1,
-    tags = [],
-    icon,
-    iconColor
+import React from 'react';
+import styles from './CategoryCard.module.scss';
 
-}) => {
+const CategoryCard = ({ title, subtitle, version, icon, iconColor, bgGlow }) => {
     return (
-        <article
-            style={iconColor ? { ['--icon-color']: iconColor } : undefined}
-            className={styles.card}
+        <article 
+            className={styles.card} 
+            style={{ 
+                '--icon-color': iconColor,
+                '--bg-glow': bgGlow 
+            }}
         >
-            <div className={styles.head}>
-                {icon ? <div className={styles.iconWrap}>{icon}</div> : null}
-                <div className={styles.headText}>
-                    <h3 className={styles.title}>
-                        {title}
-                    </h3>
-                    {subtitle? <p className={styles.subtitle}>{subtitle}</p>:null}
-                </div>
-            </div>
-            <div className={styles.list}>
-                {skills.map(({ name, percent, showPercent }) => (
-                    <ProgressBar
-                        key={name}
-                        label={name}
-                        percent={percent}
-                        accent={accent}
-                        progress={progress}
-                        showPercent={showPercent !== false}
+            <div className={styles.iconBox}>
+                {icon && (
+                    <img 
+                        src={icon} 
+                        alt={`${title} icon`} 
+                        className={styles.iconImage} 
                     />
-                ))}
+                )}
             </div>
-
-            {tags.length > 0 ? (
-                <div className={styles.tagRow}>
-                    {tags.map((tag) => (
-                        <span key={tag} className={styles.tagChip}>
-                            {tag}
-                        </span>
-                    ))}
-                </div>
-            ) : null}
+            
+            <div className={styles.info}>
+                <h3 className={styles.title}>{title}</h3>
+                {version && <span className={styles.version}>{version}</span>}
+                {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
+            </div>
         </article>
-    )
-}
+    );
+};
 
-export default CategoryCard
+export default CategoryCard;
