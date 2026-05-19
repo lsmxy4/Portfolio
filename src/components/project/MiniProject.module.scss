@@ -1,0 +1,61 @@
+@use '../../styles/variables' as *;
+
+.project_section {
+    background-color: var(--color-bg-muted);
+    transition: $transition-theme;
+
+    .inner {
+        padding: $space-12 0;
+    }
+
+    .header {
+        text-align: center;
+        margin-bottom: $space-12;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(#a855f7, 0.1);
+            padding: 6px 16px;
+            border-radius: $radius-full;
+            border: 1px solid rgba(#a855f7, 0.2);
+            font-size: $font-size-xs;
+            font-weight: 700;
+            color: #a855f7;
+            margin-bottom: $space-4;
+        }
+
+        .desc {
+            font-size: $font-size-sm;
+            color: var(--tools-text-sub);
+            margin-top: $space-2;
+        }
+
+        .titleLine {
+            width: 40px;
+            height: 4px;
+            background: #a855f7;
+            margin-top: $space-4;
+            border-radius: 2px;
+        }
+    }
+
+    /* 미니 프로젝트용 기존의 3열 반응형 격자 그리드 시스템 */
+    .grid {
+        display: grid;
+        gap: $space-6;
+        grid-template-columns: 1fr;
+
+        @media (min-width: 768px) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @media (min-width: 1024px) {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+}

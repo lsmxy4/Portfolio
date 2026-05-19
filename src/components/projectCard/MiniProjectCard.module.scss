@@ -1,0 +1,98 @@
+@use '../../styles/variables' as *;
+
+.card {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    background-color: var(--color-card-bg);
+    box-shadow: var(--shadow-sm);
+    transition: $transition-theme, transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: $radius-md;
+
+    &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    }
+
+    .thumb {
+        aspect-ratio: 16 / 10;
+        background: linear-gradient(135deg, var(--color-bg-muted), var(--color-border));
+        overflow: hidden;
+        border-bottom: 1px solid var(--card-border);
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .placeholder {
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    .body {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        gap: $space-3;
+        padding: $space-5;
+
+        .title {
+            font-size: 2.0rem;
+            font-weight: 800;
+        }
+
+        .desc {
+            font-size: $font-size-sm;
+            color: var(--color-text-muted);
+            min-height: 5rem;
+            line-height: 1.6;
+        }
+
+        .tags {
+            display: flex;
+            gap: $space-1;
+            flex-wrap: wrap;
+
+            .tagChip {
+                background: var(--box-bg);
+                border: 1px solid var(--card-border);
+                padding: 4px 10px;
+                border-radius: 6px;
+                font-size: 11px;
+                font-weight: 700;
+            }
+        }
+
+        .cta {
+            display: flex;
+            gap: $space-1;
+            margin-top: auto;
+            padding-top: $space-1;
+
+            .ctaBtn {
+                flex: 1;
+                text-align: center;
+                padding: 10px;
+                border-radius: 8px;
+                font-size: 13px;
+                font-weight: 700;
+                background: var(--box-bg);
+                border: 1px solid var(--card-border);
+                color: var(--tools-text-main);
+                transition: 0.2s;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: 6px;
+
+                &:hover {
+                    background: var(--card-border);
+                }
+            }
+        }
+    }
+}
