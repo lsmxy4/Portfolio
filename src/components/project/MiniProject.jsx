@@ -1,11 +1,9 @@
 import React from 'react'
 import styles from './MiniProject.module.scss'
-import { projectList } from '../../utils/projectList'
-import MiniProjectCard from '../ProjectCard/MiniProjectCard'
+import { miniProjectList } from '../../utils/MiniProjectList'
+import MiniProjectCard from '../projectCard/MiniProjectCard'
 
 const MiniProject = () => {
-    // 미니 프로젝트만 필터링
-    const miniProjects = projectList.filter(p => p.type === 'mini' || !p.isMain);
 
     return (
         <div className={styles.project_section} aria-labelledby='mini-project-heading'>
@@ -22,9 +20,9 @@ const MiniProject = () => {
                 </header>
 
                 <div className={styles.grid}>
-                    {miniProjects.map((p, idx) => (
+                    {miniProjectList && miniProjectList.map((p, idx) => (
                         <MiniProjectCard
-                            key={`${p.title}-${idx}`}
+                            key={`${p.title || idx}-${idx}`}
                             {...p}
                         />
                     ))}

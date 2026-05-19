@@ -14,14 +14,18 @@ const MiniProjectCard = ({ title, desc, tags = [], thumb, cta = [] }) => {
 
                 <div className={styles.tags}>
                     {tags.map((tag, idx) => {
+                        // 1. 객체 데이터에서 텍스트와 색상 변수(variant) 분리 추출
                         const tagContent = typeof tag === 'object'
                             ? (tag.label || tag.name || JSON.stringify(tag))
                             : tag;
 
+                        const variant = typeof tag === 'object' ? tag.variant : 'neutral';
+
                         return (
                             <span
                                 key={`tag-${title}-${idx}`}
-                                className={styles.tagChip}
+                                // 2. 기존 tagChip 스타일에 동적 테마 색상 클래스를 조합해서 적용
+                                className={`${styles.tagChip} ${styles[variant] || ''}`}
                             >
                                 {tagContent}
                             </span>

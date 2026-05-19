@@ -12,7 +12,6 @@ const MainProjectCard = ({ title, desc, tags = [], thumb, cta = [], details = {}
                 <h3 className={styles.title}>{title}</h3>
                 <p className={styles.desc}>{desc}</p>
 
-                {/* 대형 스펙 보드 데이터가 있을 경우 렌더링 */}
                 {Object.keys(details).length > 0 && (
                     <div className={styles.detailsBoard}>
                         {details.role && (
@@ -39,9 +38,16 @@ const MainProjectCard = ({ title, desc, tags = [], thumb, cta = [], details = {}
                 {/* 1. tags 객체/문자열 유연화 및 고유 key 조합 적용 */}
                 <div className={styles.tags}>
                     {tags.map((tag, idx) => {
-                        const tagContent = typeof tag === 'object' ? (tag.label || tag.name || JSON.stringify(tag)) : tag;
+                        // 1. 객체일 때 알맹이(문자열)와 색상 테마(variant) 추출
+                        const tagContent = typeof tag === 'object' ? (tag.label || tag.name) : tag;
+                        const variant = typeof tag === 'object' ? tag.variant : 'neutral'; // 기본값 neutral
+
                         return (
-                            <span key={`main-tag-${title}-${idx}`} className={styles.tagChip}>
+                            <span
+                                key={`tag-${title}-${idx}`}
+                                // 2. 기본 칩 스타일(tagChip)과 동적 색상 스타일(styles[variant])을 조합해서 매핑
+                                className={`${styles.tagChip} ${styles[variant] || ''}`}
+                            >
                                 {tagContent}
                             </span>
                         );

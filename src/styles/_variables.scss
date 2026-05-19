@@ -20,6 +20,8 @@ $font-sans: 'SUIT Variable', 'Inter', system-ui, -apple-system, 'Segoe UI', sans
   --footer-skill-bg3: #FFEDD5;
   --footer-circle-bg: #f3f4f6;
   --footer-circle-border: #e5e7eb;
+  
+  --mini-card-bg: #ffffff;
 }
 
 [data-theme='dark'] {
@@ -27,12 +29,12 @@ $font-sans: 'SUIT Variable', 'Inter', system-ui, -apple-system, 'Segoe UI', sans
   --tools-text-main: #ffffff;
   --tools-text-sub: #888888;
   --tools-text-muted: #555555;
-
+  
   --card-bg: rgba(255, 255, 255, 0.03);
   --card-border: rgba(255, 255, 255, 0.3);
   --box-bg: rgba(255, 255, 255, 0.02);
   --box-border: rgba(255, 255, 255, 0.05);
-
+  
   --footer-bg: rgba(255, 255, 255, 0.03);
   --footer-border: rgba(255, 255, 255, 0.08);
   --footer-skill-bg1: #1A0F2E;
@@ -40,6 +42,8 @@ $font-sans: 'SUIT Variable', 'Inter', system-ui, -apple-system, 'Segoe UI', sans
   --footer-skill-bg3: #2A1A0F;
   --footer-circle-bg: #000000;
   --footer-circle-border: #333333;
+  
+  --mini-card-bg: #111111;
 }
 
 $font-size-xs: 1.2rem; // 12px
