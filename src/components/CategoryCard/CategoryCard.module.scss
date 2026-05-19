@@ -5,8 +5,8 @@
     width: 16rem;
     height: 18rem;
     padding: $space-5 $space-2;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
     border-radius: $radius-md;
     display: flex;
     flex-direction: column;
@@ -16,6 +16,7 @@
     cursor: pointer;
     overflow: hidden;
 
+    /* 배경 은은한 광채는 다크모드에서만 더 돋보이게 */
     &::before {
         content: '';
         position: absolute;
@@ -29,14 +30,21 @@
 
     &:hover {
         transform: translateY(-0.8rem);
-        background: rgba(255, 255, 255, 0.07);
+        background: var(--card-bg);
         border-color: var(--icon-color);
-        box-shadow: 0 1.5rem 3.5rem rgba(0, 0, 0, 0.5);
 
-        &::before { opacity: 0.12; }
+        // 화이트 모드와 다크 모드 모두에서 어울리는 부드러운 입체 섀도우 처리
+        box-shadow: 0 1.5rem 3.5rem rgba(0, 0, 0, 0.08),
+            0 0.5rem 1.5rem rgba(var(--icon-color), 0.05);
+
+        &::before {
+            opacity: 0.12;
+        }
+
         .iconBox {
+            // 호버 시 로고 고유 색상 번짐 디테일 강화
             filter: drop-shadow(0 0 1.2rem var(--icon-color));
-            transform: scale(1.1) translateY(-0.4rem);
+            transform: scale(1.08) translateY(-0.2rem);
         }
     }
 
@@ -62,17 +70,22 @@
         position: relative;
         z-index: 1;
         text-align: center;
+
         .title {
             font-size: $font-size-sm;
             font-weight: 700;
-            color: #ececec;
+            color: var(--tools-text-main);
             margin-bottom: $space-1;
         }
-        .version, .subtitle {
+
+        .version,
+        .subtitle {
             display: block;
             font-size: $font-size-xs;
-            color: #5a5a5a;
+            color: var(--tools-text-sub);
             font-weight: 500;
         }
     }
+
+    
 }

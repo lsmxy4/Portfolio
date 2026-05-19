@@ -93,9 +93,9 @@ const Tools = () => {
                     <div className={styles.divider} />
                     <div className={styles.footerCategory}>
                         <div className={styles.tagRow}>
-                            <span className={styles.tag} style={{background: '#2D1B4B', color: '#A78BFA'}}>Frontend</span>
-                            <span className={styles.tag} style={{background: '#1E293B', color: '#60A5FA'}}>Backend</span>
-                            <span className={styles.tag} style={{background: '#422006', color: '#FBBF24'}}>Infra</span>
+                            <span className={styles.tag1} style={{ color: '#A78BFA'}}>Frontend</span>
+                            <span className={styles.tag2} style={{ color: '#60A5FA'}}>Backend</span>
+                            <span className={styles.tag3} style={{ color: '#FBBF24'}}>Infra</span>
                         </div>
                         <p className={styles.tagDesc}>기술 카테고리</p>
                     </div>

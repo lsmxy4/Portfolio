@@ -2,7 +2,8 @@ import spring from "../assets/icons/Spring.png";
 import react from "../assets/icons/React.png";
 import JS from "../assets/icons/JavaScript.png";
 import Docker from "../assets/icons/Docker.png"; // 이 부분이 빠져있었습니다!
-import GitHub from "../assets/icons/GitHub.png";
+import githubDark from "../assets/icons/GitHub.png";
+import githubLight from "../assets/icons/GitHub-light.png";
 import Git from "../assets/icons/Git.png";
 import Figma from "../assets/icons/Figma.png";
 import Vite from "../assets/icons/Vite.png";
@@ -44,7 +45,8 @@ export const categories = [
         category: 'INFRA / DEVOPS',
         title: 'GitHub Actions',
         subtitle: 'CI/CD',
-        icon: GitHub,
+        icon: githubDark,
+        iconLight: githubLight,
         iconColor: '#2088FF',
         bgGlow: 'rgba(32, 136, 255, 0.1)'
     },

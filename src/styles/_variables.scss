@@ -1,6 +1,46 @@
 @import url(https://cdn.jsdelivr.net/gh/sun-typeface/SUIT@2/fonts/variable/woff2/SUIT-Variable.css);
 $base-unit: 1rem; // 10px 기준
-$font-sans: 'SUIT Variable','Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+$font-sans: 'SUIT Variable', 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+:root {
+  --tools-bg: #ffffff;
+  --tools-text-main: #111827;
+  --tools-text-sub: #6b7280;
+  --tools-text-muted: #9ca3af;
+
+  --card-bg: #ffffff;
+  --card-border: rgba(0, 0, 0, 0.06);
+  --box-bg: #f9fafb;
+  --box-border: rgba(0, 0, 0, 0.05);
+
+  --footer-bg: #ffffff;
+  --footer-border: rgba(0, 0, 0, 0.06);
+  --footer-skill-bg1: #EDE9FE;
+  --footer-skill-bg2: #DBEAFE;
+  --footer-skill-bg3: #FFEDD5;
+  --footer-circle-bg: #f3f4f6;
+  --footer-circle-border: #e5e7eb;
+}
+
+[data-theme='dark'] {
+  --tools-bg: #050505;
+  --tools-text-main: #ffffff;
+  --tools-text-sub: #888888;
+  --tools-text-muted: #555555;
+
+  --card-bg: rgba(255, 255, 255, 0.03);
+  --card-border: rgba(255, 255, 255, 0.06);
+  --box-bg: rgba(255, 255, 255, 0.02);
+  --box-border: rgba(255, 255, 255, 0.05);
+
+  --footer-bg: rgba(255, 255, 255, 0.03);
+  --footer-border: rgba(255, 255, 255, 0.08);
+  --footer-skill-bg1: #1A0F2E;
+  --footer-skill-bg2: #0F1A2E;
+  --footer-skill-bg3: #2A1A0F;
+  --footer-circle-bg: #000000;
+  --footer-circle-border: #333333;
+}
 
 $font-size-xs: 1.2rem; // 12px
 $font-size-sm: 1.4rem; // 14px
