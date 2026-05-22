@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './SkillsPages.module.scss'
-import CategoryCard from '../../components/categoryCard/CategoryCard'
+import CategoryCard from '../../components/CategoryCard/CategoryCard'
 import { icons } from '../../utils/icons'
 import { motion as Motion, useReducedMotion } from 'framer-motion'
 import { certifications, skillCategories } from '../../utils/skillsPageData'
