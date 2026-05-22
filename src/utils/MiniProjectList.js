@@ -23,6 +23,7 @@ export const miniProjectList = [
         title: '감정 일기장',
         desc: '자신의 오늘의 기분을 기록하고 설정할 수 있는 일기장입니다.',
         thumb: emotion,
+        thumbLight: emotionlight,
         tags: [
             { label: 'React', variant: 'neutral' },
             { label: 'JavaScript', variant: 'javaScript' },
@@ -36,6 +37,7 @@ export const miniProjectList = [
         title: '끝말잇기',
         desc: '나혼자서 할수있는 끝말있기 게임입니다.',
         thumb: wordgame,
+        thumbLight: wordgamelight,
         tags: [
             { label: 'React', variant: 'neutral' },
             { label: 'JavaScript', variant: 'javaScript' },

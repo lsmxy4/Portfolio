@@ -1,25 +1,27 @@
 import React from 'react'
-import styles from '../../pages/about/About.module.scss'
+import styles from '../../pages/about/About.module.scss' // 정돈된 공통 SCSS 경로로 지정
 import { motion as Motion } from 'framer-motion'
-import { contentVariants, itemVariants, visualVariants } from '../../utils/aniValue'
+import { visualVariants } from '../../utils/aniValue'
+
 const AboutCard = ({ icons }) => {
-  const IconUser = icons.user
+  const IconUser = icons?.user || (() => <span>👤</span>)
 
   return (
     <Motion.article
       variants={visualVariants}
       initial="hidden"
       whileInView="show"
-      viewport={{ amount: .3 }}
-      aria-labelledby='about-card-title'
-      className={styles.card}>
+      viewport={{ amount: 0.3 }}
+      aria-labelledby="about-card-title"
+      className={styles.card}
+    >
       <div className={styles.cardHeader}>
         <span className={styles.cardIcon}>
           <IconUser />
         </span>
 
         <div>
-          <h2 id='about-card-title' className={styles.cardTitle}>
+          <h2 id="about-card-title" className={styles.cardTitle}>
             About me
           </h2>
           <p className={styles.cardSubtitle}>
@@ -27,20 +29,19 @@ const AboutCard = ({ icons }) => {
           </p>
         </div>
       </div>
-      <div>
+
+      <div className={styles.cardBodyContent}>
         <p className={styles.body}>
-          I started as a curious builder who liked shipping small tools that solved real problems. Over time that turned
-          into a career shipping production web apps: APIs, data modeling, front-end architecture, and the glue in between.
-
-
+          I started as a curious builder who liked shipping small tools that solved real problems.
+          Over time that turned into a career shipping production web apps: APIs, data modeling,
+          front-end architecture, and the glue in between.
         </p>
         <p className={styles.body}>
-
-          My default mindset is pragmatic: choose boring technology where it helps, invest complexity where it earns its
-          keep, and keep interfaces honest — fast, accessible, and easy to reason about.
+          My default mindset is pragmatic: choose boring technology where it helps,
+          invest complexity where it earns its keep, and keep interfaces honest —
+          fast, accessible, and easy to reason about.
         </p>
       </div>
-
     </Motion.article>
   )
 }

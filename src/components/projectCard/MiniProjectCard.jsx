@@ -1,11 +1,13 @@
 import React from 'react'
 import styles from './MiniProjectCard.module.scss'
 
-const MiniProjectCard = ({ title, desc, tags = [], thumb, cta = [] }) => {
+const MiniProjectCard = ({ title, desc, tags = [], thumb, thumbLight = null, cta = [] }) => {
     return (
         <article className={styles.card}>
             <div className={styles.thumb}>
-                {thumb ? <img src={thumb} alt={title} /> : <div className={styles.placeholder} />}
+                {thumb && <img src={thumb} alt={title} className={styles.darkImg} />}
+                {thumbLight && <img src={thumbLight} alt={title} className={styles.lightImg} />}
+                {!thumb && !thumbLight && <div className={styles.placeholder} />}
             </div>
 
             <div className={styles.body}>
