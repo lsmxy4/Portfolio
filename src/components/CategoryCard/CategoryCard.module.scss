@@ -1,21 +1,91 @@
 @use '../../styles/variables' as *;
-.card{
-    padding: $space-2;
+
+.card {
+    position: relative;
+    width: 16rem;
+    height: 18rem;
+    padding: $space-5 $space-2;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
     border-radius: $radius-md;
-    background-color: var(--color-card-bg);
-    border: 1px solid var(--color-border);
-    box-shadow: var(--shadow-bg);
-    transition: $transition-theme;
-}
-
-.title{
-    margin-bottom: $space-1;
-    font-size: $font-size-sm;
-    color: var(--color-text);
-}
-
-.list{
     display: flex;
     flex-direction: column;
-    gap: $space-1;
+    align-items: center;
+    justify-content: center;
+    transition: $transition-theme, transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    overflow: hidden;
+
+    /* 배경 은은한 광채는 다크모드에서만 더 돋보이게 */
+    &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at center, var(--icon-color) 0%, transparent 80%);
+        opacity: 0.05;
+        z-index: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+    }
+
+    &:hover {
+        transform: translateY(-0.8rem);
+        background: var(--card-bg);
+        border-color: var(--icon-color);
+
+        // 화이트 모드와 다크 모드 모두에서 어울리는 부드러운 입체 섀도우 처리
+        box-shadow: 0 1.5rem 3.5rem rgba(0, 0, 0, 0.08),
+            0 0.5rem 1.5rem rgba(var(--icon-color), 0.05);
+
+        &::before {
+            opacity: 0.12;
+        }
+
+        .iconBox {
+            // 호버 시 로고 고유 색상 번짐 디테일 강화
+            filter: drop-shadow(0 0 1.2rem var(--icon-color));
+            transform: scale(1.08) translateY(-0.2rem);
+        }
+    }
+
+    .iconBox {
+        position: relative;
+        z-index: 1;
+        width: 7rem;
+        height: 6rem;
+        margin-bottom: $space-4;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+
+        .iconImage {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+    }
+
+    .info {
+        position: relative;
+        z-index: 1;
+        text-align: center;
+
+        .title {
+            font-size: $font-size-sm;
+            font-weight: 700;
+            color: var(--tools-text-main);
+            margin-bottom: $space-1;
+        }
+
+        .version,
+        .subtitle {
+            display: block;
+            font-size: $font-size-xs;
+            color: var(--tools-text-sub);
+            font-weight: 500;
+        }
+    }
+
+    
 }

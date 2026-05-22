@@ -1,0 +1,53 @@
+@use '../../styles/variables' as *;
+
+.project_section {
+    background-color: var(--color-bg-muted);
+    transition: $transition-theme;
+
+    .inner {
+        padding: $space-12 0;
+    }
+
+    .header {
+        text-align: center;
+        margin-bottom: $space-12;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba($color-primary, 0.1);
+            padding: 6px 16px;
+            border-radius: $radius-full;
+            border: 1px solid rgba($color-primary, 0.2);
+            font-size: $font-size-xs;
+            font-weight: 700;
+            color: $color-primary;
+            margin-bottom: $space-4;
+        }
+
+        .desc {
+            font-size: $font-size-sm;
+            color: var(--tools-text-sub);
+            margin-top: $space-2;
+        }
+
+        .titleLine {
+            width: 40px;
+            height: 4px;
+            background: $color-primary;
+            margin-top: $space-4;
+            border-radius: 2px;
+        }
+    }
+
+    /* 대형 프로젝트용 가로/와이드 적층식 레이아웃 리스트 */
+    .grid {
+        display: flex;
+        flex-direction: column;
+        gap: $space-6;
+    }
+}

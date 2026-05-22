@@ -1,0 +1,305 @@
+@use '../../styles/variables' as *;
+
+.contact_section {
+    padding: $space-4 0 $space-8;
+    background: var(--color-bg-muted);
+    transition: $transition-theme;
+}
+
+.layout {
+    display: grid;
+    gap: $space-5;
+    align-items: start;
+
+    @media (min-width:$breakpoint-lg) {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    }
+}
+
+.intro {
+    display: flex;
+    flex-direction: column;
+    gap: $space-2;
+}
+
+.links {
+    flex-direction: column;
+    gap: $space-1;
+    display: flex;
+    margin-top: $space-0;
+}
+
+.linkIcon {
+    flex-shrink: 0;
+    width: $space-5;
+    height: $space-5;
+    border-radius: $radius-md;
+    background: color-mix(in srgb, var(--color-primary) 12%, transparent);
+    display: grid;
+    place-items: center;
+    color: var(--color-primary);
+}
+
+.linkBody {
+    flex: 1;
+}
+
+.linkLabel {
+    margin-bottom: $space-0;
+    font-size: $font-size-xs;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .04rem;
+    color: var(--color-text-muted)
+}
+
+.linkValue {
+    margin-bottom: $space-0;
+    font-size: $font-size-sm;
+    font-weight: 600;
+    color: var(--color-text);
+    word-break: break-all;
+}
+
+.linkActions {
+    display: flex;
+    flex-shrink: 0;
+    gap: $space-0;
+}
+
+.iconBtn {
+    border: 1px solid var(--color-border);
+    // width: $space-4;
+    // height: $space-4;
+    display: grid;
+    place-items: center;
+    border-radius: $radius-md;
+    padding: $space-1;
+    transition: $transition-theme;
+}
+
+.linkCard {
+    border: 1px solid var(--color-border);
+    padding: $space-2;
+    border-radius: $radius-md;
+    display: flex;
+    align-items: center;
+    gap: $space-1;
+    transition: $transition-theme;
+
+    &:hover {
+        border-color: color-mix(in srgb, var(--color-primary) 35%, var(--color-border));
+        box-shadow: var(--shadow-md);
+
+        .iconBtn {
+            border-color: color-mix(in srgb, var(--color-primary) 35%, var(--color-border));
+            background: var(--color-card-bg);
+
+        }
+    }
+}
+
+.statusBlock {
+    margin-top: $space-5;
+    padding-top: $space-5;
+    border-top: 1px solid var(--color-border);
+}
+
+.statusHead {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    margin-bottom: $space-2;
+}
+
+.statusDot {
+    width: .5rem;
+    height: .5rem;
+    border-radius: $radius-full;
+    background-color: var(--color-success);
+    box-shadow: 0 0 0 0.4rem color-mix(in srgb, var(--color-success) 25%, transparent);
+}
+
+.statusTitle {
+    font-size: $font-size-md;
+    font-weight: 800;
+    color: var(--color-text)
+}
+
+.availability {
+    display: grid;
+    gap: $space-1;
+    grid-template-columns: 1fr;
+
+    @media (min-width:$breakpoint-sm) {
+        grid-template-columns: repeat(3, 1fr);
+
+    }
+}
+
+.availCard {
+    border: 1px solid var(--color-border);
+    padding: $space-3;
+    border-radius: $radius-md;
+    background-color: var(--color-card-bg);
+    transition: $transition-theme;
+}
+
+.availIcon {
+    width: $space-3;
+    height: $space-3;
+    display: flex;
+    margin-bottom: $space-0;
+    color: var(--color-primary)
+}
+
+.availLabel {
+    margin-bottom: $space-0;
+    font-size: $font-size-xs;
+    font-weight: 800;
+    color: var(--color-text)
+}
+
+.availDesc {
+    font-size: $font-size-xs;
+    color: var(--color-text-muted)
+}
+
+.formCard {
+    background-color: var(--color-card-bg);
+    border: 1px solid var(--color-border);
+    padding: $space-4 $space-3;
+    border-radius: $radius-md;
+    transition: $transition-theme;
+    box-shadow: var(--shadow-md);
+}
+
+.formHead {
+    margin-bottom: $space-3;
+}
+
+.formTitle {
+    margin-bottom: $space-0;
+    font-size: $font-size-lg;
+    font-weight: 800;
+    color: var(--color-text);
+}
+
+.formLead {
+    font-size: $font-size-sm;
+    line-height: 1.55;
+    color: var(--color-text-muted);
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: $space-2;
+}
+
+.row2 {
+    display: grid;
+    gap: $space-1;
+
+    @media (min-width:$breakpoint-sm) {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: $space-0;
+}
+
+.label,
+.inquiryLabel {
+    font-size: $font-size-xs;
+    font-weight: 700;
+    color: var(--color-text);
+}
+
+.optional {
+    font-weight: 500;
+    color: var(--color-text-muted);
+}
+
+.input,
+.textarea,
+.select {
+    width: 100%;
+    padding: $space-1;
+    border: 1px solid var(--color-border);
+    border-radius: $radius-sm;
+    background-color: var(--color-bg-muted);
+    font-size: $font-size-sm;
+    outline: none;
+
+    &:focus {
+        border-color: color-mix(in srgb, var(--color-primary) 55%, var(--color-border));
+        box-shadow: 0 0 0 0.3rem color-mix(in srgb, var(--color-primary) 15%, transparent);
+    }
+
+    &::placeholder {
+        color: var(--color-text-muted);
+    }
+}
+
+.textarea {
+    min-height: 14rem;
+}
+
+.textareaFoot {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.select {
+    cursor: pointer;
+}
+
+.inquiryPow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-0;
+}
+
+.topicBtn {
+    padding: $space-0 $space-1;
+    border-radius: $radius-full;
+    border: 1px solid var(--color-border);
+    background-color: var(--color-bg-muted);
+    color: var(--color-text-muted);
+    transition: $transition-theme;
+
+    &:hover {
+        color: var(--color-text);
+        border-color: color-mix(in srgb, var(--color-primary) 40%, var(--color-border));
+
+    }
+}
+
+.topicBtnActive {
+    background-color: var(--color-primary);
+    color: var(--btn-primary-text);
+    border-color: transparent;
+}
+
+.submit {
+    &:hover {
+        filter: brightness(1.09);
+    }
+
+    &:disabled {
+        opacity: .65;
+        cursor: not-allowed;
+        filter: none;
+    }
+}
+
+.privacyNote{
+    margin-top: $space-1;
+    text-align: center;
+    font-size: $font-size-xs;
+    color: var(--color-text-muted);
+}
