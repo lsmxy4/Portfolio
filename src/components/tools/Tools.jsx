@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Tools.module.scss';
-import CategoryCard from '../categoryCard/CategoryCard';
+import CategoryCard from '../CategoryCard/CategoryCard';
 import { categories } from '../../utils/categories';
 import { motion as Motion } from 'framer-motion';
 
