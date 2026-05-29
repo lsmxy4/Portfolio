@@ -99,88 +99,147 @@
         }
     }
 
-    /* 3. Collaboration Box */
-    .collaborationBox {
-        margin-top: $space-24;
-        background: var(--box-bg);
-        border: 1px solid var(--box-border);
-        border-radius: $radius-lg;
-        padding: $space-10;
-        transition: $transition-theme;
+.collaborationBox {
+    margin-top: $space-24;
+    background: var(--box-bg);
+    border: 1px solid var(--box-border);
+    border-radius: $radius-lg;
+    padding: $space-10;
+    transition: $transition-theme;
 
-        .boxHeader {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            margin-bottom: $space-10;
+    @media (max-width: $breakpoint-lg) {
+        padding: $space-8;
+        margin-top: $space-16;
+    }
+    @media (max-width: $breakpoint-sm) {
+        padding: $space-6 $space-5;
+        margin-top: $space-12;
+        border-radius: $radius-md;
+    }
 
-            .boxTitle {
-                display: flex;
-                align-items: center;
-                gap: 12px;
-                font-size: 2.4rem;
-                font-weight: 800;
+    .boxHeader {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-bottom: $space-10;
 
-                .boxIcon {
-                    background: var(--footer-circle-bg);
-                    border: 1px solid var(--box-border);
-                    padding: 8px;
-                    border-radius: 10px;
-                    font-size: 20px;
-                }
-            }
-
-            .boxSubLabel {
-                color: var(--tools-text-sub);
-                font-size: 13px;
-            }
+        @media (max-width: $breakpoint-sm) {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: $space-2;
+            margin-bottom: $space-6;
         }
 
-        .toolList {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: $space-4;
-        }
-
-        .toolChip {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            padding: $space-4 $space-5;
-            border-radius: $radius-md;
+        .boxTitle {
             display: flex;
             align-items: center;
-            gap: 16px;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.01);
+            gap: 12px;
+            font-size: 2.4rem;
+            font-weight: 800;
 
-            &:hover {
-                transform: translateY(-3px);
-                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.04);
+            @media (max-width: $breakpoint-sm) {
+                font-size: 1.8rem;
             }
 
-            .chipDot {
-                width: 8px;
-                height: 8px;
-                border-radius: 50%;
-            }
+            .boxIcon {
+                background: var(--footer-circle-bg);
+                border: 1px solid var(--box-border);
+                padding: 8px;
+                border-radius: 10px;
+                font-size: 20px;
 
-            .chipTitle {
-                display: block;
-                font-size: 15px;
-                font-weight: 700;
-                color: var(--tools-text-main);
-                margin-bottom: 2px;
+                @media (max-width: $breakpoint-sm) {
+                    padding: 6px;
+                    font-size: 16px;
+                }
             }
+        }
 
-            .chipDesc {
-                display: block;
-                font-size: 12px;
-                color: var(--tools-text-sub);
+        .boxSubLabel {
+            color: var(--tools-text-sub);
+            font-size: 13px;
+
+            @media (max-width: $breakpoint-sm) {
+                font-size: 11px;
+                padding-left: 2px;
             }
         }
     }
 
-    /* 4. Footer Bar */
+    .toolList {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: $space-4;
+
+        @media (max-width: 320px) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .toolChip {
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
+        padding: $space-4 $space-5;
+        border-radius: $radius-md;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.01);
+
+        @media (max-width: $breakpoint-sm) {
+            padding: $space-3 $space-4;
+            gap: 12px;
+        }
+
+        &:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.04);
+
+            @media (max-width: $breakpoint-sm) {
+                transform: translateY(-1px);
+            }
+        }
+
+        .chipDot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .chipTextWrapper {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .chipTitle {
+            display: block;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--tools-text-main);
+            margin-bottom: 2px;
+
+            @media (max-width: $breakpoint-sm) {
+                font-size: 14px;
+            }
+        }
+
+        .chipDesc {
+            display: block;
+            font-size: 12px;
+            color: var(--tools-text-sub);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+
+            @media (max-width: $breakpoint-sm) {
+                font-size: 11px;
+            }
+        }
+    }
+}
+
     .footerBar {
         margin-top: $space-10;
         background: var(--footer-bg);
@@ -193,8 +252,37 @@
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
         transition: $transition-theme;
 
+        @media (max-width: $breakpoint-lg) {
+            padding: $space-6 $space-6;
+            gap: $space-4;
+        }
+
+        @media (max-width: $breakpoint-sm) {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: $space-6;
+            border-radius: 1.6rem;
+            padding: $space-8 $space-4;
+        }
+
+        .columnGroup {
+            display: flex;
+            align-items: center;
+            gap: inherit;
+
+            @media (max-width: $breakpoint-sm) {
+                flex-direction: column;
+                width: 100%;
+            }
+        }
+
         .statItem {
             text-align: center;
+
+            @media (max-width: $breakpoint-sm) {
+                width: 100%;
+            }
 
             .statNum {
                 display: block;
@@ -202,6 +290,10 @@
                 font-weight: 900;
                 line-height: 1;
                 margin-bottom: 4px;
+
+                @media (max-width: $breakpoint-sm) {
+                    font-size: 3rem;
+                }
             }
 
             .statLabel {
@@ -215,36 +307,48 @@
             width: 1px;
             height: 50px;
             background: var(--card-border);
+
+            @media (max-width: $breakpoint-sm) {
+                width: 40px;
+                height: 1px;
+                margin: 0 auto;
+                background: var(--color-border);
+            }
+        }
+
+        .centerContent {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .tagRow {
             display: flex;
             gap: 8px;
             margin-bottom: 6px;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
-        .tag1 {
-            padding: 4px 10px;
-            border-radius: 6px;
-            background: var(--footer-skill-bg1);
-            font-size: 11px;
-            font-weight: 800;
-        }
-
-        .tag2 {
-            padding: 4px 10px;
-            border-radius: 6px;
-            background: var(--footer-skill-bg2);
-            font-size: 11px;
-            font-weight: 800;
-        }
-
+        .tag1,
+        .tag2,
         .tag3 {
             padding: 4px 10px;
             border-radius: 6px;
-            background: var(--footer-skill-bg3);
             font-size: 11px;
             font-weight: 800;
+        }
+
+        .tag1 {
+            background: var(--footer-skill-bg1);
+        }
+
+        .tag2 {
+            background: var(--footer-skill-bg2);
+        }
+
+        .tag3 {
+            background: var(--footer-skill-bg3);
         }
 
         .tagDesc {
@@ -259,6 +363,7 @@
             display: flex;
             align-items: center;
             margin-bottom: 6px;
+            justify-content: center;
         }
 
         .iconCircle {
@@ -284,14 +389,25 @@
         }
 
         .learning {
+            @media (max-width: $breakpoint-sm) {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
             .learnText {
                 font-size: 2rem;
                 font-weight: 900;
-                color: #00b371; // 라이트 가독성을 위해 살짝 다운톤된 그린
-                display: flex;
+                color: #00b371;
+                display: inline-flex;
                 align-items: center;
                 gap: 10px;
                 margin-bottom: 4px;
+
+                @media (max-width: $breakpoint-sm) {
+                    font-size: 1.6rem;
+                    justify-content: center;
+                }
 
                 .greenDot {
                     width: 10px;
@@ -312,13 +428,24 @@
             font-size: 15px;
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 10px;
             box-shadow: 0 10px 20px rgba(99, 102, 241, 0.15);
             transition: all 0.3s ease;
 
+            @media (max-width: $breakpoint-sm) {
+                width: 100%;
+                padding: 14px 24px;
+                font-size: 14px;
+            }
+
             &:hover {
                 transform: translateY(-4px);
                 box-shadow: 0 15px 30px rgba(99, 102, 241, 0.3);
+
+                @media (max-width: $breakpoint-sm) {
+                    transform: translateY(-2px);
+                }
             }
 
             .mailIcon {

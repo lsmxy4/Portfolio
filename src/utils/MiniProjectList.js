@@ -16,7 +16,7 @@ export const miniProjectList = [
             { label: 'JavaScript', variant: 'javaScript' },
         ],
         cta: [
-            { label: 'GitHub', url: 'https://github.com/example/beta' },
+            { label: 'GitHub', url: 'https://github.com/lsmxy4/wether' },
         ],
     },
     {
@@ -30,7 +30,7 @@ export const miniProjectList = [
             { label: 'Figma', variant: 'figma' },
         ],
         cta: [
-            { label: 'GitHub', url: 'https://github.com/example/gamma' },
+            { label: 'GitHub', url: 'https://github.com/lsmxy4/react-router-dom' },
         ],
     },
     {
@@ -43,7 +43,7 @@ export const miniProjectList = [
             { label: 'JavaScript', variant: 'javaScript' },
         ],
         cta: [
-            { label: 'GitHub', url: 'https://github.com/example/gamma' },
+            { label: 'GitHub', url: 'https://github.com/lsmxy4/wordGame' },
         ],
     },
 ];

@@ -14,8 +14,8 @@ export const mainProjectList = [
             result: '디자인 시스템 구축 완료',
         },
         cta: [
-            { label: '라이브 데모', url: 'https://example.com/alpha' },
-            { label: 'GitHub', url: 'https://github.com/example/alpha' },
+            { label: '라이브 데모', url: 'https://tocobo-wo28.vercel.app/' },
+            { label: 'GitHub', url: 'https://github.com/lsmxy4/Tocobo' },
         ],
     },
     {
@@ -34,8 +34,8 @@ export const mainProjectList = [
             result: '카카오로 로그인하기 성공',
         },
         cta: [
-            { label: '라이브 데모', url: 'https://example.com/alpha' },
-            { label: 'GitHub', url: 'https://github.com/example/alpha' },
+            { label: '라이브 데모', url: 'http://bookstory.store' },
+            { label: 'GitHub', url: 'https://github.com/lsmxy4/2-picstory' },
         ],
     },
 ];
