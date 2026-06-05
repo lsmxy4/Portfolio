@@ -7,8 +7,8 @@ const AboutCard = () => {
       <div className={styles.cardHeader}>
         <div className={styles.cardIcon}>👤</div>
         <div>
-          <h2 className={styles.cardTitle}>About Me</h2>
-          <p className={styles.cardSubtitle}>How I work</p>
+          <h2 className={styles.cardTitle}>자기소개</h2>
+          <p className={styles.cardSubtitle}>저는...</p>
         </div>
       </div>
       
