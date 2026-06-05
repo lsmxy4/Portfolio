@@ -22,16 +22,20 @@ $panel-top: 5.7rem;
     border-bottom: 1px solid var(--color-border);
     padding: $space-2 0;
 
-
     .inner {
-
         display: flex;
         align-items: center;
         justify-content: space-between;
+        
+        width: 100%;               
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 $space-4;
 
         @media (max-width: ($nav-breakpoint - 1px)) {
             flex-wrap: nowrap;
-            gap: $space-1
+            gap: $space-1;
+            padding: 0 $space-2;  // 모바일 환경에서는 여백을 조금 줄여줍니다.
         }
 
         .logo {
@@ -39,10 +43,13 @@ $panel-top: 5.7rem;
             font-size: $font-size-lg;
             text-transform: uppercase;
             font-weight: 900;
+            font-size: 2.8rem;
+            line-height: 1;
+            padding-left: 100px;
 
             // color: var(--color-text)
             @media (max-width: ($nav-breakpoint - 1px)) {
-                font-size: $font-size-sm;
+                font-size: $font-size-md;
 
             }
         }

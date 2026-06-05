@@ -10,6 +10,17 @@
     transition: $transition-theme, transform 0.3s ease, box-shadow 0.3s ease;
     border-radius: $radius-md;
 
+    @media (min-width: 961px) {
+        &:nth-child(even) {
+            flex-direction: row-reverse;
+
+            .thumb {
+                border-right: none;
+                border-left: 1px solid var(--card-border); // 선 위치를 왼쪽으로 변경
+            }
+        }
+    }
+
     @media (max-width: 960px) {
         flex-direction: column;
     }

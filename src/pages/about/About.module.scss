@@ -1,291 +1,122 @@
 @use '../../styles/variables' as *;
 
+// 1. 레이아웃
 .about_page {
     padding: $space-4 0 $space-8;
     background-color: var(--color-bg-muted);
     transition: $transition-theme;
 
     .inner {
+        max-width: 120rem;
+        margin: 0 auto;
+        padding: 0 $space-3;
         display: flex;
+        flex-direction: column;
         gap: $space-5;
-        flex-direction: column;
-
-    }
-}
-
-.hero {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: $space-3;
-
-    @media (max-width:$breakpoint-sm) {
-        flex-direction: column;
-        align-items: flex-start;
-
-    }
-
-}
-
-.heroContent {
-    display: flex;
-    flex-direction: column;
-    // justify-content: flex-start;
-    gap: $space-2
-}
-
-.badge {
-    padding: .3rem .7rem;
-    font-size: $font-size-xs;
-    display: inline-flex;
-    align-items: center;
-    gap: .4rem;
-    border-radius: $radius-full;
-    background-color: rgba(16, 185, 128, .15);
-    width: auto;
-    font-weight: 600;
-    align-self: flex-start;
-    color: var(--color-success)
-}
-
-.badgeDot {
-    width: .5rem;
-    height: .5rem;
-    border-radius: $radius-full;
-    background-color: currentColor;
-    box-shadow: 0 0 0 .3rem rgba(16, 185, 128, .25);
-}
-
-.eyebrow {
-    font-size: $font-size-sm;
-    font-weight: 500;
-    color: var(--color-text-muted)
-}
-
-.title {
-    font-size: clamp($font-size-3xl, 4.5vw, $space-8);
-    list-style: 1.12;
-    font-weight: 800;
-    color: var(--color-text)
-}
-
-.lead {
-    max-width: 50rem;
-    line-height: 1.65;
-    color: var(--color-text-muted);
-    font-size: $font-size-md;
-}
-
-.metaRow {
-    display: flex;
-    flex-wrap: wrap;
-    gap: $space-2
-}
-
-.meta {
-    display: inline-flex;
-    align-items: center;
-    gap: .6rem;
-    font-size: $font-size-sm;
-    color: var(--color-text-muted);
-}
-
-.metaIcon {
-    display: flex;
-    color: var(--color-primary);
-    flex-shrink: 0;
-}
-
-.ctaRow {
-    display: flex;
-    gap: $space-1;
-
-    .btn {
-        display: inline-flex;
-        gap: $space-1;
-        align-items: center;
     }
 }
 
 .grid {
     display: grid;
+    gap: $space-5;
     align-items: start;
-    gap: $space-3;
-
-    @media (min-width:$breakpoint-lg) {
-        grid-template-columns: minmax(0, 1.65fr) minmax(28rem, 1fr);
+    @media (min-width: $breakpoint-lg) {
+        grid-template-columns: 32rem 1fr; 
     }
 }
 
-.column {
+.sidebar {
     display: flex;
-    gap: $space-3;
     flex-direction: column;
-
+    gap: $space-3;
+    @media (min-width: $breakpoint-lg) {
+        position: sticky;
+        top: $space-4;
+    }
 }
 
-
-.heroVisual {
+.mainContent {
     display: flex;
     flex-direction: column;
-    gap: $space-2;
+    gap: $space-4;
+}
+
+// 2. 컴포넌트 섹션 헤더 & 통계
+.sectionHeader {
+    display: flex;
+    flex-direction: column;
     align-items: center;
-
-    .profileCard {
-        width: 36rem;
-        aspect-ratio: 1;
-        background: linear-gradient(155deg,
-                color-mix(in srgb, var(--color-card-bg) 88%, var(--color-primary)),
-                var(--color-card-bg));
-        border: 1px solid var(--color-border);
-        border-radius: $radius-xl;
-        box-shadow: var(--shadow-md);
-        position: relative;
-        overflow: hidden;
-
-        &::after {
-            content: "";
-            position: absolute;
-            inset: -40%;
-            background: radial-gradient(circle at 30% 20%,
-                    color-mix(in srgb, var(--color-primary) 18%, transparent),
-                    transparent 55%);
-            pointer-events: none;
-        }
-
-        .profilePlaceholder {
-            width: 42%;
-            height: 42%;
-            border-radius: $radius-full;
-            border: .2rem dashed color-mix(in srgb, var(--color-text-muted) 45%, transparent);
-            opacity: 0.55;
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-
-
-        }
-
-    }
-
-    .statPills {
-        display: flex;
-        gap: $space-1;
-        justify-content: center;
-        max-width: 38rem;
-    }
-
-    .statPill {
-        padding: .3rem .7rem;
-        font-size: $font-size-sm;
-        display: inline-flex;
+    margin-bottom: $space-4;
+    text-align: center;
+    .sectionBadge {
+        font-size: $font-size-xs;
+        padding: 0.2rem 0.8rem;
         border-radius: $radius-full;
-        background-color: var(--color-card-bg);
         border: 1px solid var(--color-border);
-        color: var(--color-text);
-        white-space: nowrap;
+        color: var(--color-text-muted);
+        margin-bottom: $space-2;
     }
-
+    .sectionTitle {
+        font-size: 2.5rem; font-weight: 800; color: var(--color-text); position: relative; padding-bottom: $space-1;
+        &::after {
+            content: ""; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+            width: 50%; height: 0.3rem; background: var(--color-primary); border-radius: $radius-full;
+        }
+    }
 }
 
+.statsSection {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: $space-2;
+    background: var(--color-card-bg);
+    border: 1px solid var(--color-border);
+    border-radius: $radius-lg;
+    padding: $space-3;
+    @media (min-width: $breakpoint-sm) { grid-template-columns: repeat(4, 1fr); }
+    .statItem {
+        display: flex; flex-direction: column; align-items: center; gap: $space-0;
+        .statValue { font-size: $font-size-2xl; font-weight: 800; color: var(--color-primary); }
+        .statLabel { font-size: $font-size-xs; color: var(--color-text-muted); }
+    }
+}
+
+// 3. 카드 및 공통 컴포넌트
 .card {
     background-color: var(--color-card-bg);
     border: 1px solid var(--color-border);
     border-radius: $radius-lg;
     padding: $space-4;
     box-shadow: var(--shadow-sm);
-    transition: $transition-theme;
 }
 
-.cardIcon {
-    width: $space-6;
-    height: $space-6;
-    border-radius: $radius-sm;
-    background: color-mix(in srgb, var(--color-primary) 14%, transparent);
-    flex-shrink: 0;
-    display: grid;
-    place-items: center;
-    color: var(--color-primary)
-}
-
-.eduIcon {
-    background: color-mix(in srgb, var(--color-success) 18%, transparent);
-    color: var(--color-success);
-}
-
-.cardTitle {
-    font-size: $font-size-lg;
-    font-weight: 700;
-    color: var(--color-text-muted)
-}
-
-.cardSubtitle {
-    margin-top: .2rem;
-    font-size: $font-size-xs;
-    color: var(--color-text-muted)
-}
-
-.body {
-    font-size: $font-size-sm;
-    line-height: 1.7;
-    color: var(--color-text-muted);
-
-    &+& {
-        margin-top: $space-2;
+.heroWrapper {
+    @extend .card;
+    display: flex; flex-direction: column; align-items: center; text-align: center; padding: $space-3;
+    .profileCircle {
+        width: 12rem; height: 12rem; border-radius: 50%; border: 0.3rem solid var(--color-primary);
+        display: flex; align-items: center; justify-content: center; margin-bottom: $space-2; background: var(--color-bg-muted); font-size: 4rem;
+    }
+    .name { font-size: $font-size-xl; font-weight: 800; margin-bottom: $space-0; }
+    .jobTitle { color: var(--color-text-muted); font-size: $font-size-sm; margin-bottom: $space-2; }
+    .contactList {
+        width: 100%; display: flex; flex-direction: column; gap: $space-1;
+        .contactItem {
+            padding: $space-1 $space-2; border: 1px solid var(--color-border); border-radius: $radius-sm;
+            font-size: $font-size-xs; color: var(--color-text-muted); transition: 0.2s;
+            &:hover { background: var(--color-bg-muted); color: var(--color-text); }
+        }
     }
 }
 
-.cardHeader {
-    display: flex;
-    align-items: center;
-    gap: $space-1;
-    margin-bottom: $space-2;
-
+.eduItem {
+    margin-top: $space-3;
+    .eduHeader { display: flex; justify-content: space-between; align-items: center; margin-bottom: $space-0; }
+    .eduSchool { font-size: $font-size-md; color: var(--color-text); }
+    .eduBadge { background: var(--color-bg-muted); padding: 0.2rem 0.6rem; border-radius: $radius-full; font-size: $font-size-xs; color: var(--color-primary); }
+    .eduDegree { font-size: $font-size-sm; color: var(--color-text-muted); margin-bottom: $space-1; }
+    .eduDesc { font-size: $font-size-xs; color: var(--color-text-muted); line-height: 1.5; }
 }
-
-.valuesGrid {
-    display: grid;
-    gap: $space-1;
-    margin-top: .4rem;
-
-    @media (min-width:$breakpoint-sm) {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-}
-
-.valueCard {
-    background-color: var(--color-bg-muted);
-    border: 1px solid var(--color-border);
-    border-radius: $radius-md;
-    padding: $space-2;
-    transition: $transition-theme;
-}
-
-.valueIcon {
-    width: $space-5;
-    height: $space-5;
-    border-radius: $radius-sm;
-    background: color-mix(in srgb, var(--color-primary) 10%, transparent);
-    flex-shrink: 0;
-    display: grid;
-    place-items: center;
-    color: var(--color-primary)
-}
-
-
-.valueTitle {
-    font-size: $font-size-sm;
-    font-weight: 700;
-    color: var(--color-text)
-}
-
-.valueDesc {
-    line-height: 1.55;
-    font-size: $font-size-xs;
-    color: var(--color-text-muted)
-}
-
 
 .timeline {
     padding-left: $space-3;
@@ -393,3 +224,38 @@
     border: 1px solid var(--color-border);
     margin-bottom: .5rem;
 }
+
+.hireStatus {
+    background: var(--color-card-bg);
+    border: 1px solid var(--color-border);
+    padding: $space-3;
+    border-radius: $radius-lg;
+    text-align: center;
+
+    .statusBadge {
+        color: #10b981;
+        font-size: $font-size-xs;
+        margin-bottom: $space-1;
+    }
+    
+    p { font-size: $font-size-xs; color: var(--color-text-muted); margin-bottom: $space-2; }
+    
+    .contactBtn {
+        width: 100%;
+        padding: $space-1;
+        background: var(--color-bg-muted);
+        border: 1px solid var(--color-border);
+        border-radius: $radius-sm;
+        color: var(--color-text);
+        cursor: pointer;
+        &:hover { background: var(--color-primary); color: white; }
+    }
+}
+
+/* 메인 영역 그리드 재조정 */
+.mainContent {
+    display: flex;
+    flex-direction: column;
+    gap: $space-3;
+}
+

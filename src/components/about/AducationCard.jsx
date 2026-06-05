@@ -1,38 +1,32 @@
 import React from 'react'
 import styles from '../../pages/about/About.module.scss'
-import { motion as Motion } from 'framer-motion'
-import { articleVariants } from '../../utils/aniValue'
-const AducationCard = ({ icons }) => {
 
-  const IconGraduation = icons.graduation
+const AducationCard = () => {
   return (
-    <Motion.article
-      variants={articleVariants}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ amount: .3 }}
-      aria-labelledby='edu-title'
-      className={styles.card}>
-      <div className={styles.cardHeader}>
-        <span className={`${styles.eduIcon} ${styles.cardIcon}`}>
-          <IconGraduation />
-        </span>
-        <div>
-          <h2 id='edu-title' className={styles.cardTitle}>
-            Education
-          </h2>
-          <p className={styles.cardSubtitle}>
-            Formal background
-
-          </p>
+    <div className={styles.card}>
+      <h3 className={styles.cardTitle}>학력 및 교육</h3>
+      
+      {/* 대학교 교육 */}
+      <div className={styles.eduItem}>
+        <div className={styles.eduHeader}>
+          <h4 className={styles.eduSchool}>대학교 재학</h4>
+          <span className={styles.eduBadge}>2024.03 - 현재</span>
         </div>
+        <p className={styles.eduDegree}>컴퓨터공학 관련 전공</p>
+        <p className={styles.eduDesc}>• 알고리즘 · 자료구조 · 운영체제 학습 중</p>
       </div>
-      <div className={styles.eduRow}>
-        <p className={styles.eduSchool}>Your University</p>
-        <p className={styles.eduDegree}>Computer Science</p>
-        <p className={styles.eduBadge}>2024-2026</p>
+
+      {/* 독학/온라인 강의 */}
+      <div className={styles.eduItem}>
+        <div className={styles.eduHeader}>
+          <h4 className={styles.eduSchool}>독학 / 온라인 강의</h4>
+          <span className={styles.eduBadge}>2023 - 2024</span>
+        </div>
+        <p className={styles.eduDegree}>웹 개발 전반</p>
+        <p className={styles.eduDesc}>• 여러가지 영상을 보고 독학</p>
+        <p className={styles.eduDesc}>• 도서관에서 책을 빌려 읽어보고 실제로 해본다</p>
       </div>
-    </Motion.article>
+    </div>
   )
 }
 

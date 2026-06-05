@@ -1,52 +1,25 @@
 import React from 'react'
 import styles from '../../pages/about/About.module.scss'
-import { motion as Motion } from 'framer-motion'
-import { articleVariants } from '../../utils/aniValue'
 
-const CareerTimeline = ({ icons, timeline }) => {
-  const IconBriefcase = icons.briefcase
+const CareerTimeline = ({ timeline }) => {
   return (
-    <Motion.article
-      variants={articleVariants}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ amount: .3 }}
-      aria-labelledby='timeline-title'
-      className={styles.card}>
-      <div className={styles.cardHeader}>
-        <span className={`${styles.cardIcon} ${styles.timelineCardIcon}`}>
-          <IconBriefcase />
-        </span>
-
-        <div>
-          <h2 id='timeline-title' className={styles.cardTitle}>
-            Career timeline
-          </h2>
-          <p className={styles.cardSubtitle}>
-            Selected roles
-          </p>
-        </div>
-      </div>
+    <div className={styles.card}>
+      <h3 className={styles.cardTitle}>경력</h3>
       <ul className={styles.timeline}>
-        {timeline.map((item) => (
-          <li
-            className={styles.timelineItem}
-            key={item.range}
-            style={{ '--dot': item.dot, '--company': item.companyColor }}
-          >
+        {timeline.map((item, index) => (
+          <li key={index} className={styles.timelineItem}>
             <span className={styles.rangePill}>{item.range}</span>
-            <h3 className={styles.jobTitle}>{item.title}</h3>
+            <h4 className={styles.jobTitle}>{item.title}</h4>
             <p className={styles.company}>{item.company}</p>
             <ul className={styles.bullets}>
-              {item.bullets.map((bullet) => (
-                <li key={bullet}>{bullet}</li>
+              {item.bullets.map((bullet, bIndex) => (
+                <li key={bIndex}>{bullet}</li>
               ))}
             </ul>
           </li>
         ))}
       </ul>
-
-    </Motion.article>
+    </div>
   )
 }
 
