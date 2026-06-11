@@ -59,4 +59,28 @@
         }
 
     }
+
+    .viewMoreWrapper {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 40px;
+        padding-right: 20px;
+    }
+
+    .viewMoreBtn {
+        display: inline-block;
+        padding: 12px 24px;
+        background-color: #f8f9fa;
+        border: 1px solid #e9ecef;
+        border-radius: 8px;
+        color: #333;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+
+        &:hover {
+            background-color: #e9ecef;
+            transform: translateX(5px);
+        }
+    }
 }

@@ -22,62 +22,47 @@ const ProjectsPages = () => {
     <div className={styles.project_section}>
       <div className="inner">
         <header className={styles.hero}>
-          <span
-            className="badge badge__primary badge__center"
-          >Featured work</span>
-          <h1 className="tit">Projects I&apos;m proud of</h1>
-          <p className="txt">
-            From shipped products to open-source experiments <br /> — a sample of things I enjoyed building end to end.
+          <span className="badge badge__primary badge__center">Featured work</span>
+          <h1 className={styles.title}>모든 프로잭트</h1>
+          <p className={styles.txt}>
+            제가 만들었던 모든 프로잭트들 입니다. <br />
+            이곳에서 한눈에 볼수 있으며 카태고리별 나누어서 볼수도 있습니다.
           </p>
         </header>
-        <div className={styles.filters} role='tablist' aria-label='Filter projects by category'>
+
+        {/* 필터 섹션 */}
+        <div className={styles.filters} role='tablist'>
           {projectFilters.map(({ id, label }) => (
             <button
               key={id}
-              type='button'
               role='tab'
               aria-selected={filter === id}
               onClick={() => setFilter(id)}
-              className={`${styles.filterBtn} ${filter == id ? styles.filterBtnActive : ''}`}
-            >{label}</button>
+              className={`${styles.filterBtn} ${filter === id ? styles.filterBtnActive : ''}`}
+            >
+              {label}
+            </button>
           ))}
         </div>
 
+        {/* 프로젝트 그리드 */}
         {visible.length === 0 ? (
-          <p>No project in this category yet</p>
+          <p className="txt-center">No project in this category yet</p>
         ) : (
           <div className={styles.grid}>
-            {visible.map((project,index) => (
+            {visible.map((project, index) => (
               <Motion.div
                 layout={!shouldReduceMotion}
                 {...projectItemMotion}
-                transition={
-                  projectItemMotion ? { ...projectItemTransition, delay: index * 0.05 } : undefined
-                }
-                key={project.id}>
-
-                <FeaturedProjectCard
-
-                  title={project.title}
-                  description={project.description}
-                  tags={project.tags}
-                  gradient={project.gradient}
-                  status={project.status}
-                  meta={project.meta}
-                  demoHref={project.demoHref}
-                  codeHref={project.codeHref}
-                  domoLabel={project.demoLabel}
-                />
+                transition={{ ...projectItemTransition, delay: index * 0.05 }}
+                key={project.id}
+              >
+                <FeaturedProjectCard {...project} />
               </Motion.div>
-
             ))}
           </div>
         )}
       </div>
-
-
-
-
     </div>
   )
 }

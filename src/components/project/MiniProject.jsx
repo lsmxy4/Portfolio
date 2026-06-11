@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import styles from './MiniProject.module.scss'
 import { miniProjectList } from '../../utils/MiniProjectList'
 import MiniProjectCard from '../projectCard/MiniProjectCard'
@@ -27,6 +28,11 @@ const MiniProject = () => {
                         />
                     ))}
                 </div>
+                <div className={styles.viewMoreWrapper}>
+                    <Link to="/projects" className={styles.viewMoreBtn}>
+                        모든 프로젝트 보기 ➔
+                    </Link>
+                </div>  
             </div>
         </div>
     )
