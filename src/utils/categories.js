@@ -7,6 +7,8 @@ import githubLight from "../assets/icons/GitHub-light.png";
 import Git from "../assets/icons/Git.png";
 import Figma from "../assets/icons/Figma.png";
 import Vite from "../assets/icons/Vite.png";
+import Python from "../assets/icons/Python.png";
+import MongoDB from "../assets/icons/MongoDB.png";
 
 export const categories = [
     {
@@ -15,6 +17,22 @@ export const categories = [
         version: 'v3.5.11',
         icon: spring,
         iconColor: '#6DB33F',
+        bgGlow: 'rgba(109, 179, 63, 0.1)'
+    },
+    {
+        category: 'BACKEND',
+        title: 'Python',
+        version: 'v3.12',
+        icon: Python,
+        iconColor: '#5B8DD9',
+        bgGlow: 'rgba(109, 179, 63, 0.1)'
+    },
+    {
+        category: 'BACKEND',
+        title: 'MongoDB',
+        version: 'NoSQL DB',
+        icon: MongoDB,
+        iconColor: '#4FAA41',
         bgGlow: 'rgba(109, 179, 63, 0.1)'
     },
     {
