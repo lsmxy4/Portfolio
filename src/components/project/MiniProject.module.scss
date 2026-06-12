@@ -1,11 +1,91 @@
 @use '../../styles/variables' as *;
 
+@keyframes miniGlowFloat {
+    0%, 100% {
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+
+    50% {
+        transform: translate3d(0, -20px, 0) scale(1.06);
+    }
+}
+
+@keyframes miniDotsMove {
+    to {
+        transform: translate3d(-36px, -36px, 0);
+    }
+}
+
+@keyframes miniSparkle {
+    0%, 100% {
+        transform: rotate(0deg) scale(1);
+        opacity: 0.7;
+    }
+
+    50% {
+        transform: rotate(18deg) scale(1.18);
+        opacity: 1;
+    }
+}
+
 .project_section {
-    background-color: var(--color-bg-muted);
+    position: relative;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 12% 18%, rgba(168, 85, 247, 0.12), transparent 30rem),
+        radial-gradient(circle at 88% 34%, rgba(14, 165, 233, 0.1), transparent 34rem),
+        var(--color-bg-muted);
     transition: $transition-theme;
 
+    .bgDecor {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        overflow: hidden;
+    }
+
+    .glowOne,
+    .glowTwo {
+        position: absolute;
+        border-radius: 50%;
+        opacity: 0.75;
+        filter: blur(8px);
+        animation: miniGlowFloat 9s ease-in-out infinite;
+    }
+
+    .glowOne {
+        top: 12%;
+        left: 6%;
+        width: 18rem;
+        height: 18rem;
+        background: radial-gradient(circle, rgba(168, 85, 247, 0.22), transparent 70%);
+    }
+
+    .glowTwo {
+        right: 8%;
+        bottom: 18%;
+        width: 22rem;
+        height: 22rem;
+        background: radial-gradient(circle, rgba(245, 158, 11, 0.16), transparent 70%);
+        animation-delay: -3.2s;
+    }
+
+    .dotPattern {
+        position: absolute;
+        inset: 12% -10% auto;
+        height: 42rem;
+        opacity: 0.28;
+        background-image: radial-gradient(rgba(168, 85, 247, 0.22) 1px, transparent 1px);
+        background-size: 36px 36px;
+        mask-image: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent);
+        animation: miniDotsMove 20s linear infinite;
+    }
+
     .inner {
-        padding: $space-12 0;
+        position: relative;
+        z-index: 1;
+        padding: $space-16 0;
     }
 
     .header {
@@ -23,28 +103,65 @@
             padding: 6px 16px;
             border-radius: $radius-full;
             border: 1px solid rgba(#a855f7, 0.2);
+            box-shadow: 0 14px 34px rgba(168, 85, 247, 0.12);
             font-size: $font-size-xs;
-            font-weight: 700;
+            font-weight: 800;
             color: #a855f7;
             margin-bottom: $space-4;
         }
 
+        .badgeIcon {
+            display: inline-flex;
+            animation: miniSparkle 2.1s ease-in-out infinite;
+        }
+
+        .title {
+            font-size: clamp(3.6rem, 6vw, 5.6rem);
+            font-weight: 900;
+            line-height: 1.1;
+            letter-spacing: -0.05em;
+            background: linear-gradient(120deg, var(--color-text), #a855f7 45%, #0ea5e9 72%, var(--color-text));
+            background-clip: text;
+            color: transparent;
+        }
+
         .desc {
-            font-size: $font-size-sm;
-            color: var(--tools-text-sub);
+            max-width: 56rem;
+            font-size: $font-size-md;
+            color: var(--color-text-muted);
+            line-height: 1.7;
             margin-top: $space-2;
         }
 
         .titleLine {
-            width: 40px;
+            width: 8rem;
             height: 4px;
-            background: #a855f7;
-            margin-top: $space-4;
+            background: linear-gradient(90deg, transparent, #a855f7, #0ea5e9, transparent);
+            margin-top: $space-5;
             border-radius: 2px;
+        }
+
+        .metaRow {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: $space-2;
+            margin-top: $space-5;
+
+            span {
+                padding: 9px 14px;
+                border: 1px solid var(--card-border);
+                border-radius: $radius-full;
+                background: color-mix(in srgb, var(--color-card-bg) 82%, transparent);
+                color: var(--color-text-muted);
+                box-shadow: 0 12px 32px rgba(15, 23, 42, 0.05);
+                font-size: 12px;
+                font-weight: 800;
+                backdrop-filter: blur(14px);
+            }
         }
     }
 
-    /* 미니 프로젝트용 기존의 3열 반응형 격자 그리드 시스템 */
     .grid {
         display: grid;
         gap: $space-6;
@@ -57,30 +174,59 @@
         @media (min-width: 1024px) {
             grid-template-columns: repeat(3, 1fr);
         }
-
     }
 
     .viewMoreWrapper {
         display: flex;
-        justify-content: flex-end;
-        margin-top: 40px;
-        padding-right: 20px;
+        justify-content: center;
+        margin-top: $space-8;
     }
 
     .viewMoreBtn {
-        display: inline-block;
-        padding: 12px 24px;
-        background-color: #f8f9fa;
-        border: 1px solid #e9ecef;
-        border-radius: 8px;
-        color: #333;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 15px 28px;
+        background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: $radius-full;
+        color: #fff;
         text-decoration: none;
-        font-weight: 600;
-        transition: all 0.3s ease;
+        font-weight: 900;
+        box-shadow: 0 18px 38px rgba(99, 102, 241, 0.22);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+        span {
+            transition: transform 0.3s ease;
+        }
 
         &:hover {
-            background-color: #e9ecef;
-            transform: translateX(5px);
+            transform: translateY(-4px);
+            box-shadow: 0 24px 48px rgba(99, 102, 241, 0.32);
+
+            span {
+                transform: translateX(4px);
+            }
+        }
+    }
+
+    @media (max-width: $breakpoint-sm) {
+        .inner {
+            padding: $space-12 0;
+        }
+
+        .header {
+            margin-bottom: $space-8;
+        }
+
+        .grid {
+            gap: $space-4;
+        }
+
+        .viewMoreBtn {
+            width: 100%;
+            max-width: 32rem;
         }
     }
 }
