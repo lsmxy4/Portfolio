@@ -1,14 +1,34 @@
 import React from 'react'
 import styles from './MainProjectCard.module.scss'
+import { motion as Motion } from 'framer-motion'
 
-const MainProjectCard = ({ title, desc, tags = [], thumb, cta = [], details = {} }) => {
+const MainProjectCard = ({ index = 0, title, desc, tags = [], thumb, cta = [], details = {} }) => {
+    const projectNumber = String(index + 1).padStart(2, '0')
     return (
-        <article className={styles.card}>
+        <Motion.article
+            className={styles.card}
+            initial={{ opacity: 0, y: 34 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.24 }}
+            transition={{ delay: index * 0.08, duration: 0.58, ease: 'easeOut' }}
+        >
             <div className={styles.thumb}>
-                {thumb ? <img src={thumb} alt={title} /> : <div className={styles.placeholder} />}
+                {thumb ? (
+                    <img src={thumb} alt={title} />
+                ) : (
+                    <div className={styles.placeholder}>
+                        <span className={styles.projectNo}>Project {projectNumber}</span>
+                        <strong>{title}</strong>
+                        <small>Featured Work</small>
+                    </div>
+                )}
             </div>
 
             <div className={styles.body}>
+                <div className={styles.kicker}>
+                    <span>Main Project</span>
+                    <span>{projectNumber}</span>
+                </div>
                 <h3 className={styles.title}>{title}</h3>
                 <p className={styles.desc}>{desc}</p>
 
@@ -27,25 +47,22 @@ const MainProjectCard = ({ title, desc, tags = [], thumb, cta = [], details = {}
                             </div>
                         )}
                         {details.result && (
-                            <div className={styles.detailItem}>
+                            <div className={`${styles.detailItem} ${styles.resultItem}`}>
                                 <span className={styles.label}>↗ 주요 성과</span>
-                                <span className={styles.value} style={{ color: '#10b981' }}>{details.result}</span>
+                                <span className={styles.value}>{details.result}</span>
                             </div>
                         )}
                     </div>
                 )}
 
-                {/* 1. tags 객체/문자열 유연화 및 고유 key 조합 적용 */}
                 <div className={styles.tags}>
                     {tags.map((tag, idx) => {
-                        // 1. 객체일 때 알맹이(문자열)와 색상 테마(variant) 추출
                         const tagContent = typeof tag === 'object' ? (tag.label || tag.name) : tag;
-                        const variant = typeof tag === 'object' ? tag.variant : 'neutral'; // 기본값 neutral
+                        const variant = typeof tag === 'object' ? tag.variant : 'neutral';
 
                         return (
                             <span
                                 key={`tag-${title}-${idx}`}
-                                // 2. 기본 칩 스타일(tagChip)과 동적 색상 스타일(styles[variant])을 조합해서 매핑
                                 className={`${styles.tagChip} ${styles[variant] || ''}`}
                             >
                                 {tagContent}
@@ -54,7 +71,6 @@ const MainProjectCard = ({ title, desc, tags = [], thumb, cta = [], details = {}
                     })}
                 </div>
 
-                {/* 2. cta 버튼 객체 디스트럭처링 및 렌더링 누수 방지 */}
                 <div className={styles.cta}>
                     {cta.map((btn, idx) => {
                         if (!btn) return null;
@@ -77,7 +93,7 @@ const MainProjectCard = ({ title, desc, tags = [], thumb, cta = [], details = {}
                     })}
                 </div>
             </div>
-        </article>
+        </Motion.article>
     )
 }
 

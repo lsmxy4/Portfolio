@@ -1,11 +1,92 @@
 @use '../../styles/variables' as *;
 
+@keyframes projectGlowFloat {
+    0%, 100% {
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+
+    50% {
+        transform: translate3d(0, -28px, 0) scale(1.05);
+    }
+}
+
+@keyframes projectGridMove {
+    to {
+        transform: translate3d(-48px, -48px, 0);
+    }
+}
+
+@keyframes projectBadgePulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.7;
+    }
+
+    50% {
+        transform: scale(1.16);
+        opacity: 1;
+    }
+}
+
 .project_section {
-    background-color: var(--color-bg-muted);
+    position: relative;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 14% 18%, rgba(124, 58, 237, 0.12), transparent 32rem),
+        radial-gradient(circle at 86% 42%, rgba(59, 130, 246, 0.1), transparent 36rem),
+        var(--color-bg-muted);
     transition: $transition-theme;
+    .bgDecor {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        overflow: hidden;
+    }
+
+    .glowPrimary,
+    .glowSecondary {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(8px);
+        opacity: 0.75;
+        animation: projectGlowFloat 10s ease-in-out infinite;
+    }
+
+    .glowPrimary {
+        top: 10%;
+        left: 4%;
+        width: 24rem;
+        height: 24rem;
+        background: radial-gradient(circle, rgba(124, 58, 237, 0.2), transparent 70%);
+    }
+
+    .glowSecondary {
+        right: 6%;
+        bottom: 16%;
+        width: 28rem;
+        height: 28rem;
+        background: radial-gradient(circle, rgba(16, 185, 129, 0.16), transparent 70%);
+        animation-delay: -4s;
+    }
+
+    .gridPattern {
+        position: absolute;
+        inset: 10% -12% auto;
+        height: 50rem;
+        opacity: 0.24;
+        background-image:
+            linear-gradient(rgba(124, 58, 237, 0.12) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(124, 58, 237, 0.12) 1px, transparent 1px);
+        background-size: 48px 48px;
+        mask-image: linear-gradient(90deg, transparent, #000 16%, #000 84%, transparent);
+        animation: projectGridMove 22s linear infinite;
+    }
 
     .inner {
-        padding: $space-12 0;
+         position: relative;
+        z-index: 1;
+        padding: $space-16 0;
     }
 
     .header {
@@ -23,24 +104,79 @@
             padding: 6px 16px;
             border-radius: $radius-full;
             border: 1px solid rgba($color-primary, 0.2);
+            box-shadow: 0 14px 34px rgba(124, 58, 237, 0.12);
             font-size: $font-size-xs;
-            font-weight: 700;
+            font-weight: 800;
             color: $color-primary;
             margin-bottom: $space-4;
         }
 
+        .badgeIcon {
+            display: inline-flex;
+            animation: projectBadgePulse 2s ease-in-out infinite;
+        }
+
+        .title {
+            font-size: clamp(3.8rem, 6vw, 5.8rem);
+            font-weight: 900;
+            line-height: 1.1;
+            letter-spacing: -0.05em;
+            background: linear-gradient(120deg, var(--color-text), #7c3aed 46%, #3b82f6 72%, var(--color-text));
+            background-clip: text;
+            color: transparent;
+        }
+
         .desc {
-            font-size: $font-size-sm;
-            color: var(--tools-text-sub);
+            max-width: 52rem;
+            font-size: $font-size-md;
+            color: var(--color-text-muted);
+            line-height: 1.7;
             margin-top: $space-2;
         }
 
         .titleLine {
-            width: 40px;
+            width: 8rem;
             height: 4px;
-            background: $color-primary;
-            margin-top: $space-4;
+             background: linear-gradient(90deg, transparent, $color-primary, $color-info, transparent);
+            margin-top: $space-5;
             border-radius: 2px;
+        }
+        summary {
+            display: inline-grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: $space-2;
+            margin-top: $space-6;
+            padding: $space-2;
+            border: 1px solid var(--card-border);
+            border-radius: $radius-full;
+            background: color-mix(in srgb, var(--color-card-bg) 82%, transparent);
+            box-shadow: 0 22px 60px rgba(15, 23, 42, 0.06);
+            backdrop-filter: blur(16px);
+        }
+
+        .summaryItem {
+            min-width: 11rem;
+            padding: 10px 18px;
+            border-radius: $radius-full;
+            background: color-mix(in srgb, var(--box-bg) 78%, transparent);
+
+            strong,
+            span {
+                display: block;
+            }
+
+            strong {
+                color: $color-primary;
+                font-size: $font-size-md;
+                font-weight: 900;
+            }
+
+            span {
+                margin-top: 2px;
+                color: var(--color-text-muted);
+                font-size: 11px;
+                font-weight: 800;
+            }
         }
     }
 
@@ -48,6 +184,30 @@
     .grid {
         display: flex;
         flex-direction: column;
-        gap: $space-6;
+        gap: $space-8;
+    }
+
+    @media (max-width: $breakpoint-sm) {
+        .inner {
+            padding: $space-12 0;
+        }
+
+        .header {
+            margin-bottom: $space-8;
+
+            .summary {
+                width: 100%;
+                grid-template-columns: 1fr;
+                border-radius: $radius-md;
+            }
+
+            .summaryItem {
+                min-width: 0;
+            }
+        }
+
+        .grid {
+            gap: $space-5;
+        }
     }
 }
