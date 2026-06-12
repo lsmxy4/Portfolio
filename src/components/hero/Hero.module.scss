@@ -4,11 +4,14 @@
 :root {
     --hero-bg: #ffffff;
     --hero-text: #1a1a1a;
-    /* 라이트 모드용 설정 */
     --hero-glow-opacity: 0.15; // 빛의 진하기 (라이트 모드는 연하게)
     --hero-glow-mix-mode: multiply; // 흰 배경에서는 색이 섞여야 보임
     --hero-noise-opacity: 0.05; // 노이즈 입자감
     --hero-badge-border: #dcd7ff;
+    --hero-card-bg: rgba(255, 255, 255, 0.78);
+    --hero-card-border: rgba(108, 93, 211, 0.18);
+    --hero-card-shadow: 0 24px 70px rgba(93, 93, 255, 0.16);
+    --hero-grid-color: rgba(108, 93, 211, 0.14);
 }
 
 [data-theme='dark'] {
@@ -19,6 +22,10 @@
     --hero-glow-mix-mode: screen; // 검은 배경에서는 발광해야 보임
     --hero-noise-opacity: 0.03;
     --hero-badge-border: #6c5dd3;
+    --hero-card-bg: rgba(255, 255, 255, 0.78);
+    --hero-card-border: rgba(108, 93, 211, 0.18);
+    --hero-card-shadow: 0 24px 70px rgba(93, 93, 255, 0.16);
+    --hero-grid-color: rgba(108, 93, 211, 0.14);
 }
 
 @keyframes meshFlow {
@@ -43,6 +50,91 @@
     }
 }
 
+@keyframes gridDrift {
+    0% {
+        transform: translate3d(0, 0, 0) rotate(0deg);
+    }
+
+    100% {
+        transform: translate3d(-48px, -48px, 0) rotate(0deg);
+    }
+}
+
+@keyframes floatCard {
+
+    0%,
+    100% {
+        translate: 0 0;
+    }
+
+    50% {
+        translate: 0 -18px;
+    }
+}
+
+@keyframes orbitSpin {
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+@keyframes orbitCounterSpin {
+    to {
+        transform: rotate(-360deg);
+    }
+}
+
+@keyframes codeReveal {
+
+    0%,
+    18% {
+        width: 0;
+        opacity: 0.35;
+    }
+
+    42%,
+    100% {
+        width: 100%;
+        opacity: 1;
+    }
+}
+
+@keyframes badgePulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.28);
+    }
+
+    50% {
+        box-shadow: 0 0 0 8px rgba(124, 58, 237, 0);
+    }
+}
+
+@keyframes textShine {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    100% {
+        background-position: 200% 50%;
+    }
+}
+
+@keyframes scrollBounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+        opacity: 0.35;
+    }
+
+    50% {
+        transform: translateY(12px);
+        opacity: 1;
+    }
+}
+
 .hero {
     position: relative;
     overflow: hidden;
@@ -55,9 +147,10 @@
     @media (max-width: $breakpoint-lg) {
         min-height: 80vh;
     }
+
     @media (max-width: $breakpoint-sm) {
         min-height: auto;
-        padding: $space-16 0 $space-10; 
+        padding: $space-16 0 $space-10;
     }
 
     /* 노이즈 질감 (라이트 모드에서도 보임) */
@@ -122,6 +215,147 @@
         }
     }
 
+    .motionGrid {
+        position: absolute;
+        inset: -20%;
+        z-index: 0;
+        pointer-events: none;
+        opacity: 0.58;
+        background-image:
+            linear-gradient(var(--hero-grid-color) 1px, transparent 1px),
+            linear-gradient(90deg, var(--hero-grid-color) 1px, transparent 1px);
+        background-size: 48px 48px;
+        mask-image: radial-gradient(circle at center, #000 0 38%, transparent 72%);
+        animation: gridDrift 18s linear infinite;
+    }
+
+    .floatingCard {
+        position: absolute;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        color: var(--hero-text);
+        background: var(--hero-card-bg);
+        border: 1px solid var(--hero-card-border);
+        box-shadow: var(--hero-card-shadow);
+        backdrop-filter: blur(18px);
+        pointer-events: none;
+        animation: floatCard 6s ease-in-out infinite;
+    }
+
+    .codeCard {
+        top: 19%;
+        left: clamp(16px, 5vw, 76px);
+        width: clamp(210px, 22vw, 320px);
+        padding: 18px 20px;
+        border-radius: $radius-lg;
+        font-family: 'SFMono-Regular', 'Consolas', monospace;
+        font-size: clamp(0.68rem, 0.9vw, 0.82rem);
+        line-height: 1.6;
+
+        span:not(.cardDot) {
+            display: block;
+            overflow: hidden;
+            white-space: nowrap;
+            color: var(--hero-text-muted, var(--hero-text));
+            animation: codeReveal 5.5s steps(34, end) infinite;
+            animation-delay: calc(var(--line-index) * 0.55s);
+        }
+    }
+
+    .cardDot {
+        width: 42px;
+        height: 10px;
+        margin-bottom: 4px;
+        border-radius: $radius-full;
+        background: linear-gradient(90deg, #ff6b6b 0 24%, #ffd166 24% 48%, #06d6a0 48% 72%, transparent 72%);
+    }
+
+    .deployCard {
+        right: clamp(16px, 6vw, 88px);
+        bottom: 24%;
+        align-items: flex-start;
+        min-width: 156px;
+        padding: 18px 20px;
+        border-radius: $radius-md;
+        animation-delay: -2.4s;
+
+        strong {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            line-height: 1;
+            color: #5d5dff;
+        }
+
+        small {
+            color: var(--hero-text-muted, inherit);
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+        }
+    }
+
+    .deployStatus {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        color: #06d6a0;
+        font-size: $font-size-xs;
+        font-weight: 800;
+        text-transform: uppercase;
+
+        &::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: currentColor;
+            animation: badgePulse 1.8s ease-in-out infinite;
+        }
+    }
+
+    .orbit {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        z-index: 1;
+        width: min(72vw, 760px);
+        aspect-ratio: 1;
+        border: 1px dashed var(--hero-card-border);
+        border-radius: 50%;
+        pointer-events: none;
+        transform: translate(-50%, -50%);
+        animation: orbitSpin 34s linear infinite;
+
+        span {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 74px;
+            min-height: 34px;
+            padding: 0 14px;
+            border-radius: $radius-full;
+            color: #6c5dd3;
+            background: var(--hero-card-bg);
+            border: 1px solid var(--hero-card-border);
+            box-shadow: 0 12px 30px rgba(93, 93, 255, 0.12);
+            font-size: $font-size-xs;
+            font-weight: 800;
+            transform: rotate(calc(var(--orbit-index) * 90deg)) translateX(min(36vw, 380px)) rotate(calc(var(--orbit-index) * -90deg));
+
+            &::before {
+                content: '';
+                position: absolute;
+                inset: -6px;
+                border-radius: inherit;
+                border: 1px solid rgba(108, 93, 211, 0.12);
+            }
+        }
+    }
+
     .inner {
         position: relative;
         z-index: 2;
@@ -172,10 +406,12 @@
                     border-radius: 50%;
                     background-color: #7c3aed;
                     flex-shrink: 0;
+                    animation: badgePulse 1.8s ease-in-out infinite;
                 }
             }
 
             &:hover {
+
                 // 사용 중이신 프로젝트 컬러 결합 방식(rgba) 스펙과 호환되도록 정리
                 .badge {
                     background-color: rgba(#6c5dd3, 0.15);
@@ -206,6 +442,9 @@
                 border-radius: $radius-sm;
                 display: inline-block;
                 width: max-content;
+                background-image: linear-gradient(110deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.4) 45%, rgba(255, 255, 255, 0) 65%);
+                background-size: 220% 100%;
+                animation: textShine 3.2s linear infinite;
                 max-width: 100%;
 
                 @media (max-width: $breakpoint-sm) {
@@ -272,7 +511,7 @@
                     transform: translateY(-4px);
                     background-color: color.adjust(#5d5dff, $lightness: 5%);
                     box-shadow: 0 15px 30px rgba(93, 93, 255, 0.4);
-                    
+
                     @media (max-width: $breakpoint-sm) {
                         transform: translateY(-2px);
                     }
@@ -317,6 +556,7 @@
                 @media (max-width: $breakpoint-md) {
                     gap: $space-6;
                 }
+
                 @media (max-width: $breakpoint-sm) {
                     display: grid;
                     grid-template-columns: repeat(2, 1fr);
@@ -334,4 +574,52 @@
             }
         }
     }
+.scrollCue {
+        position: absolute;
+        left: calc(50% - 14px);
+        bottom: $space-6;
+        z-index: 3;
+        width: 28px;
+        height: 46px;
+        border: 1px solid var(--hero-card-border);
+        border-radius: $radius-full;
+        pointer-events: none;
+
+        span {
+            position: absolute;
+            top: 9px;
+            left: calc(50% - 2.5px);
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: #6c5dd3;
+            animation: scrollBounce 1.8s ease-in-out infinite;
+        }
+    }
+
+    @media (max-width: $breakpoint-lg) {
+        .floatingCard,
+        .orbit {
+            opacity: 0.45;
+        }
+
+        .codeCard {
+            top: 11%;
+        }
+    }
+
+    @media (max-width: $breakpoint-md) {
+        .floatingCard,
+        .orbit {
+            display: none;
+        }
+    }
+
+    @media (max-width: $breakpoint-sm) {
+        .motionGrid,
+        .scrollCue {
+            display: none;
+        }
+    }
+
 }

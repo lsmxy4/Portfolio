@@ -1,13 +1,101 @@
 @use '../../styles/variables' as *;
 
+@keyframes toolsFloat {
+
+    0%,
+    100% {
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+
+    50% {
+        transform: translate3d(0, -22px, 0) scale(1.04);
+    }
+}
+
+@keyframes toolsGridMove {
+    to {
+        transform: translate3d(-42px, -42px, 0);
+    }
+}
+
+@keyframes toolsPulse {
+
+    0%,
+    100% {
+        opacity: 0.55;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.08);
+    }
+}
+
+
 .tools {
+    position: relative;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 12% 14%, rgba(124, 58, 237, 0.12), transparent 30rem),
+        radial-gradient(circle at 88% 38%, rgba(59, 130, 246, 0.1), transparent 34rem),
+        var(--tools-bg);
     background-color: var(--tools-bg);
     padding: $space-24 0;
     color: var(--tools-text-main);
     font-family: $font-sans;
     transition: background-color 0.3s ease, color 0.3s ease;
 
+    .bgDecor {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        overflow: hidden;
+    }
+
+    .orbOne,
+    .orbTwo {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(4px);
+        opacity: 0.7;
+        animation: toolsFloat 9s ease-in-out infinite;
+    }
+
+    .orbOne {
+        top: 10%;
+        left: 7%;
+        width: 18rem;
+        height: 18rem;
+        background: radial-gradient(circle, rgba(124, 58, 237, 0.22), transparent 68%);
+    }
+
+    .orbTwo {
+        right: 7%;
+        bottom: 22%;
+        width: 24rem;
+        height: 24rem;
+        background: radial-gradient(circle, rgba(16, 185, 129, 0.18), transparent 68%);
+        animation-delay: -3.5s;
+    }
+
+    .gridAura {
+        position: absolute;
+        inset: 8% -10% auto;
+        height: 46rem;
+        opacity: 0.32;
+        background-image:
+            linear-gradient(rgba(124, 58, 237, 0.13) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(124, 58, 237, 0.13) 1px, transparent 1px);
+        background-size: 42px 42px;
+        mask-image: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent);
+        animation: toolsGridMove 20s linear infinite;
+    }
+
     .inner {
+        position: relative;
+        z-index: 1;
         max-width: $breakpoint-xl;
         margin: 0 auto;
         padding: 0 $space-6;
@@ -29,17 +117,26 @@
             padding: 6px 16px;
             border-radius: $radius-full;
             border: 1px solid rgba($color-primary, 0.2);
+            box-shadow: 0 14px 32px rgba(124, 58, 237, 0.12);
             font-size: $font-size-xs;
             font-weight: 700;
             color: $color-primary;
             margin-bottom: $space-4;
         }
 
+        .badgeIcon {
+            display: inline-flex;
+            animation: toolsPulse 2.1s ease-in-out infinite;
+        }
+
         .mainTitle {
-            font-size: 4.8rem;
+            font-size: clamp(3.6rem, 6vw, 5.6rem);
             font-weight: 900;
-            letter-spacing: -0.03em;
+            letter-spacing: -0.05em;
             margin-bottom: $space-2;
+            background: linear-gradient(120deg, var(--tools-text-main), #7c3aed 46%, #3b82f6 72%, var(--tools-text-main));
+            background-clip: text;
+            color: transparent;
         }
 
         .desc {
@@ -49,9 +146,9 @@
         }
 
         .titleLine {
-            width: 40px;
+            width: 8rem;
             height: 4px;
-            background: $color-primary;
+            background: linear-gradient(90deg, transparent, $color-primary, $color-info, transparent);
             margin-top: $space-6;
             border-radius: 2px;
         }
@@ -65,6 +162,20 @@
     }
 
     .categoryGroup {
+        position: relative;
+        padding: $space-6;
+        border: 1px solid var(--box-border);
+        border-radius: $radius-lg;
+        background: color-mix(in srgb, var(--box-bg) 82%, transparent);
+        box-shadow: 0 22px 70px rgba(15, 23, 42, 0.05);
+        backdrop-filter: blur(18px);
+        transition: $transition-theme, transform 0.3s ease, border-color 0.3s ease;
+
+        &:hover {
+            transform: translateY(-4px);
+            border-color: rgba($color-primary, 0.28);
+        }
+
         .categoryHeader {
             display: flex;
             align-items: center;
@@ -72,103 +183,147 @@
             margin-bottom: $space-6;
 
             .dot {
-                width: 8px;
-                height: 8px;
+                width: 10px;
+                height: 10px;
                 border-radius: 50%;
                 background: $color-info;
+                box-shadow: 0 0 0 6px rgba($color-info, 0.12);
             }
 
             .groupName {
                 font-size: 13px;
-                font-weight: 800;
+                font-weight: 900;
                 color: var(--tools-text-sub);
-                letter-spacing: 0.1em;
+                letter-spacing: 0.14em;
             }
 
             .line {
                 flex: 1;
                 height: 2px;
-                background: linear-gradient(90deg, var(--card-border), transparent);
+                background: linear-gradient(90deg, rgba($color-primary, 0.35), transparent);
             }
         }
 
         .grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: $space-6;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(15.5rem, 1fr));
+            gap: $space-4;
+            justify-items: center;
         }
     }
 
-.collaborationBox {
-    margin-top: $space-24;
-    background: var(--box-bg);
-    border: 1px solid var(--box-border);
-    border-radius: $radius-lg;
-    padding: $space-10;
-    transition: $transition-theme;
+    .collaborationBox {
+        position: relative;
+        overflow: hidden;
+        margin-top: $space-24;
+        background:
+            linear-gradient(135deg, color-mix(in srgb, var(--box-bg) 86%, transparent), color-mix(in srgb, var(--card-bg) 92%, transparent)),
+            var(--box-bg);
+        border: 1px solid var(--box-border);
+        border-radius: $radius-lg;
+        padding: $space-10;
+        box-shadow: 0 28px 90px rgba(15, 23, 42, 0.08);
+        transition: $transition-theme;
 
-    @media (max-width: $breakpoint-lg) {
-        padding: $space-8;
-        margin-top: $space-16;
-    }
-    @media (max-width: $breakpoint-sm) {
-        padding: $space-6 $space-5;
-        margin-top: $space-12;
-        border-radius: $radius-md;
-    }
+        &::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            background: linear-gradient(120deg, rgba(124, 58, 237, 0.18), transparent 28%, rgba(59, 130, 246, 0.14));
+            opacity: 0.7;
+            pointer-events: none;
+        }
 
-    .boxHeader {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-end;
-        margin-bottom: $space-10;
+        >* {
+            position: relative;
+            z-index: 1;
+        }
 
-        @media (max-width: $breakpoint-sm) {
-            flex-direction: column;
+        .boxHeader {
+            display: flex;
+            justify-content: space-between;
             align-items: flex-start;
-            gap: $space-2;
-            margin-bottom: $space-6;
+            gap: $space-4;
+            margin-bottom: $space-8;
         }
 
         .boxTitle {
             display: flex;
             align-items: center;
             gap: 12px;
-            font-size: 2.4rem;
-            font-weight: 800;
+            font-size: clamp(2rem, 3vw, 2.8rem);
+            font-weight: 900;
+            letter-spacing: -0.03em;
+        }
 
-            @media (max-width: $breakpoint-sm) {
-                font-size: 1.8rem;
-            }
+        .boxIcon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 4.4rem;
+            height: 4.4rem;
+            background: var(--footer-circle-bg);
+            border: 1px solid var(--box-border);
+            border-radius: 1.4rem;
+            font-size: 20px;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
+        }
 
-            .boxIcon {
-                background: var(--footer-circle-bg);
-                border: 1px solid var(--box-border);
-                padding: 8px;
-                border-radius: 10px;
-                font-size: 20px;
-
-                @media (max-width: $breakpoint-sm) {
-                    padding: 6px;
-                    font-size: 16px;
-                }
-            }
+        .boxLead {
+            max-width: 56rem;
+            margin-top: $space-2;
+            color: var(--tools-text-sub);
+            font-size: $font-size-sm;
+            line-height: 1.7;
         }
 
         .boxSubLabel {
-            color: var(--tools-text-sub);
-            font-size: 13px;
+            flex-shrink: 0;
+            color: $color-primary;
+            background: rgba($color-primary, 0.1);
+            border: 1px solid rgba($color-primary, 0.18);
+            border-radius: $radius-full;
+            padding: 8px 14px;
+            font-size: 12px;
+            font-weight: 800;
+        }
+    }
 
-            @media (max-width: $breakpoint-sm) {
-                font-size: 11px;
-                padding-left: 2px;
-            }
+    .highlightRow {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: $space-3;
+        margin-bottom: $space-6;
+    }
+
+    .highlightItem {
+        padding: $space-4;
+        border: 1px solid var(--card-border);
+        border-radius: $radius-md;
+        background: color-mix(in srgb, var(--card-bg) 84%, transparent);
+
+        strong,
+        span {
+            display: block;
+        }
+
+        strong {
+            margin-bottom: 4px;
+            color: $color-primary;
+            font-size: $font-size-xl;
+            font-weight: 900;
+        }
+
+        span {
+            color: var(--tools-text-sub);
+            font-size: $font-size-xs;
+            font-weight: 700;
         }
     }
 
     .toolList {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(24rem, 1fr));
         gap: $space-4;
 
         @media (max-width: 320px) {
@@ -177,38 +332,57 @@
     }
 
     .toolChip {
-        background: var(--card-bg);
+        position: relative;
+        overflow: hidden;
+        background: color-mix(in srgb, var(--card-bg) 88%, transparent);
         border: 1px solid var(--card-border);
         padding: $space-4 $space-5;
         border-radius: $radius-md;
         display: flex;
         align-items: center;
         gap: 16px;
-        transition: all 0.3s ease;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.01);
+        min-height: 8.8rem;
+        transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 
-        @media (max-width: $breakpoint-sm) {
-            padding: $space-3 $space-4;
-            gap: 12px;
+        &::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 0% 0%, color-mix(in srgb, var(--tool-color) 22%, transparent), transparent 42%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
         &:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.04);
+            transform: translateY(-5px);
+            border-color: color-mix(in srgb, var(--tool-color) 60%, var(--card-border));
+            box-shadow: 0 18px 38px rgba(15, 23, 42, 0.09);
 
-            @media (max-width: $breakpoint-sm) {
-                transform: translateY(-1px);
+            &::after {
+                opacity: 1;
+            }
+
+            .chipDot {
+                transform: scale(1.2);
+                box-shadow: 0 0 0 8px color-mix(in srgb, var(--tool-color) 16%, transparent);
             }
         }
 
         .chipDot {
-            width: 8px;
-            height: 8px;
+            position: relative;
+            z-index: 1;
+            width: 12px;
+            height: 12px;
             border-radius: 50%;
             flex-shrink: 0;
+            background: var(--tool-color);
+            box-shadow: 0 0 18px color-mix(in srgb, var(--tool-color) 46%, transparent);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .chipTextWrapper {
+        .chipInfo {
+            position: relative;
+            z-index: 1;
             flex: 1;
             min-width: 0;
         }
@@ -216,13 +390,9 @@
         .chipTitle {
             display: block;
             font-size: 15px;
-            font-weight: 700;
+            font-weight: 800;
             color: var(--tools-text-main);
-            margin-bottom: 2px;
-
-            @media (max-width: $breakpoint-sm) {
-                font-size: 14px;
-            }
+            margin-bottom: 4px;
         }
 
         .chipDesc {
@@ -238,47 +408,25 @@
             }
         }
     }
-}
+
 
     .footerBar {
         margin-top: $space-10;
-        background: var(--footer-bg);
+        background: color-mix(in srgb, var(--footer-bg) 88%, transparent);
         border: 1px solid var(--footer-border);
         border-radius: 2.4rem;
         padding: $space-6 $space-10;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+        gap: $space-4;
+        box-shadow: 0 24px 60px rgba(15, 23, 42, 0.07);
+        backdrop-filter: blur(16px);
         transition: $transition-theme;
-
-        @media (max-width: $breakpoint-lg) {
-            padding: $space-6 $space-6;
-            gap: $space-4;
-        }
-
-        @media (max-width: $breakpoint-sm) {
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            gap: $space-6;
-            border-radius: 1.6rem;
-            padding: $space-8 $space-4;
-        }
-
-        .columnGroup {
-            display: flex;
-            align-items: center;
-            gap: inherit;
-
-            @media (max-width: $breakpoint-sm) {
-                flex-direction: column;
-                width: 100%;
-            }
-        }
 
         .statItem {
             text-align: center;
+            min-width: 7.2rem;
 
             @media (max-width: $breakpoint-sm) {
                 width: 100%;
@@ -290,16 +438,13 @@
                 font-weight: 900;
                 line-height: 1;
                 margin-bottom: 4px;
-
-                @media (max-width: $breakpoint-sm) {
-                    font-size: 3rem;
-                }
+                color: $color-primary;
             }
 
             .statLabel {
                 font-size: 12px;
                 color: var(--tools-text-sub);
-                font-weight: 600;
+                font-weight: 700;
             }
         }
 
@@ -307,19 +452,6 @@
             width: 1px;
             height: 50px;
             background: var(--card-border);
-
-            @media (max-width: $breakpoint-sm) {
-                width: 40px;
-                height: 1px;
-                margin: 0 auto;
-                background: var(--color-border);
-            }
-        }
-
-        .centerContent {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
         }
 
         .tagRow {
@@ -334,9 +466,9 @@
         .tag2,
         .tag3 {
             padding: 4px 10px;
-            border-radius: 6px;
+            border-radius: 8px;
             font-size: 11px;
-            font-weight: 800;
+            font-weight: 900;
         }
 
         .tag1 {
@@ -354,7 +486,7 @@
         .tagDesc {
             font-size: 11px;
             color: var(--tools-text-sub);
-            font-weight: 600;
+            font-weight: 700;
             text-align: center;
             margin: 0;
         }
@@ -373,27 +505,24 @@
             background: var(--footer-circle-bg);
             border: 1.5px solid var(--footer-circle-border);
             font-size: 11px;
-            font-weight: 800;
+            font-weight: 900;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-right: -10px;
             color: var(--tools-text-main);
+            box-shadow: 0 10px 20px rgba(15, 23, 42, 0.08);
         }
 
         .plusMore {
             font-size: 12px;
             color: var(--tools-text-sub);
             margin-left: 18px;
-            font-weight: 700;
+            font-weight: 800;
         }
 
         .learning {
-            @media (max-width: $breakpoint-sm) {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-            }
+            text-align: center;
 
             .learnText {
                 font-size: 2rem;
@@ -404,52 +533,169 @@
                 gap: 10px;
                 margin-bottom: 4px;
 
-                @media (max-width: $breakpoint-sm) {
-                    font-size: 1.6rem;
-                    justify-content: center;
-                }
+            }
 
-                .greenDot {
-                    width: 10px;
-                    height: 10px;
-                    background: #00ffa3;
-                    border-radius: 50%;
-                    box-shadow: 0 0 15px rgba(0, 255, 163, 0.6);
-                }
+            .greenDot {
+                width: 10px;
+                height: 10px;
+                background: #00ffa3;
+                border-radius: 50%;
+                box-shadow: 0 0 15px rgba(0, 255, 163, 0.6);
+                animation: toolsPulse 1.8s ease-in-out infinite;
             }
         }
 
         .contactBtn {
+            border: 0;
             background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
             padding: 16px 32px;
             border-radius: 16px;
             color: #fff;
-            font-weight: 800;
+            font-weight: 900;
             font-size: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
-            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.15);
-            transition: all 0.3s ease;
-
-            @media (max-width: $breakpoint-sm) {
-                width: 100%;
-                padding: 14px 24px;
-                font-size: 14px;
-            }
+            box-shadow: 0 14px 28px rgba(99, 102, 241, 0.2);
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
 
             &:hover {
                 transform: translateY(-4px);
-                box-shadow: 0 15px 30px rgba(99, 102, 241, 0.3);
-
-                @media (max-width: $breakpoint-sm) {
-                    transform: translateY(-2px);
-                }
+                box-shadow: 0 20px 38px rgba(99, 102, 241, 0.32);
             }
 
             .mailIcon {
                 font-size: 18px;
+            }
+        }
+    }
+
+    @media (max-width: $breakpoint-lg) {
+        padding: $space-20 0;
+
+        .collaborationBox {
+            padding: $space-8;
+            margin-top: $space-16;
+        }
+
+        .footerBar {
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: $space-6;
+        }
+    }
+
+    @media (max-width: $breakpoint-sm) {
+        padding: $space-16 0;
+
+        .inner {
+            padding: 0 $space-3;
+        }
+
+        .header {
+            margin-bottom: $space-10;
+        }
+
+        .categoryGroup {
+            padding: $space-4;
+            border-radius: $radius-md;
+
+            .grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: $space-3;
+            }
+        }
+
+        .collaborationBox {
+            padding: $space-6 $space-5;
+            margin-top: $space-12;
+            border-radius: $radius-md;
+
+            .boxHeader {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: $space-2;
+                margin-bottom: $space-6;
+            }
+
+            .boxIcon {
+                width: 3.8rem;
+                height: 3.8rem;
+                font-size: 16px;
+            }
+
+            .boxSubLabel {
+                font-size: 11px;
+            }
+        }
+
+        .highlightRow,
+        .toolList {
+            grid-template-columns: 1fr;
+        }
+
+        .toolChip {
+            padding: $space-3 $space-4;
+            gap: 12px;
+            min-height: 7.6rem;
+
+            &:hover {
+                transform: translateY(-1px);
+            }
+
+            .chipTitle {
+                font-size: 14px;
+            }
+
+            .chipDesc {
+                font-size: 11px;
+            }
+        }
+
+        .footerBar {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: $space-6;
+            border-radius: 1.6rem;
+            padding: $space-8 $space-4;
+
+            .statItem {
+                width: 100%;
+
+                .statNum {
+                    font-size: 3rem;
+                }
+            }
+
+            .divider {
+                width: 40px;
+                height: 1px;
+                margin: 0 auto;
+                background: var(--color-border);
+            }
+
+            .learning {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                .learnText {
+                    font-size: 1.6rem;
+                    justify-content: center;
+                }
+            }
+
+            .contactBtn {
+                width: 100%;
+                padding: 14px 24px;
+                font-size: 14px;
+
+                &:hover {
+                    transform: translateY(-2px);
+                }
             }
         }
     }

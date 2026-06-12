@@ -1,9 +1,19 @@
 import React from 'react'
 import styles from './Hero.module.scss'
 // motion 외에 마우스 인터랙션을 위한 훅들을 추가로 import 해야 합니다.
-import { motion as Motion, useMotionValue, useSpring, motion } from 'framer-motion'
+import { motion, useMotionValue, useSpring } from 'framer-motion'
 import Stats from '../stats/Stats'
 import { contentVariants, itemVariants } from '../../utils/aniValue'
+
+const Motion = motion
+
+const orbitItems = ['React', 'Spring', 'REST', 'UI/UX']
+
+const codeLines = [
+    'const portfolio = buildExperience();',
+    'deploy(idea, scalableProduct);',
+    'connect(frontend, backend);',
+]
 
 const Hero = () => {
     const mouseX = useMotionValue(0);
@@ -28,13 +38,52 @@ const Hero = () => {
             {/* 배경 장식 요소 */}
             <div className={styles.bgGlows}>
                 {/* 마우스 움직임에 반응하는 빛 (z-index가 0이므로 배경으로 깔림) */}
-                <motion.div
+                <Motion.div
                     className={styles.glowMouse}
                     style={{ x: springX, y: springY }}
                 />
                 <div className={styles.glow1} />
                 <div className={styles.glow2} />
                 <div className={styles.glow3} />
+            </div>
+
+            <div className={styles.motionGrid} aria-hidden='true' />
+
+            <Motion.div
+                className={`${styles.floatingCard} ${styles.codeCard}`}
+                style={{ x: springX, y: springY }}
+                initial={{ opacity: 0, y: 24, rotate: -8 }}
+                animate={{ opacity: 1, y: 0, rotate: -4 }}
+                transition={{ delay: 0.7, duration: 0.8, ease: 'easeOut' }}
+                aria-hidden='true'
+            >
+                <span className={styles.cardDot} />
+                {codeLines.map((line, index) => (
+                    <span key={line} style={{ '--line-index': index }}>
+                        {line}
+                    </span>
+                ))}
+            </Motion.div>
+
+            <Motion.div
+                className={`${styles.floatingCard} ${styles.deployCard}`}
+                style={{ x: springX, y: springY }}
+                initial={{ opacity: 0, y: 24, rotate: 8 }}
+                animate={{ opacity: 1, y: 0, rotate: 5 }}
+                transition={{ delay: 0.9, duration: 0.8, ease: 'easeOut' }}
+                aria-hidden='true'
+            >
+                <span className={styles.deployStatus}>Live</span>
+                <strong>99.9%</strong>
+                <small>stable deploy</small>
+            </Motion.div>
+
+            <div className={styles.orbit} aria-hidden='true'>
+                {orbitItems.map((item, index) => (
+                    <span key={item} style={{ '--orbit-index': index }}>
+                        {item}
+                    </span>
+                ))}
             </div>
 
             <div className={`inner ${styles.inner}`}>
@@ -74,6 +123,16 @@ const Hero = () => {
                     </Motion.div>
                 </Motion.div>
             </div>
+
+            <Motion.div
+                className={styles.scrollCue}
+                initial={{ opacity: 0, y: -8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.2, duration: 0.6 }}
+                aria-hidden='true'
+            >
+                <span />
+            </Motion.div>
         </section>
     )
 }
