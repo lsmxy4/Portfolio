@@ -27,7 +27,7 @@ const MiniProject = () => {
                         <span className={styles.badgeIcon}>✦</span> Side Lab
                     </div>
                     <h1 id="mini-project-heading" className={styles.title}>
-                        Mini Projects
+                        미니 프로잭트
                     </h1>
                     <p className={styles.desc}>아이디어를 빠르게 실험하고 완성도 있게 구현해 본 토이 프로젝트입니다.</p>
                     <div className={styles.titleLine} />
