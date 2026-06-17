@@ -1,8 +1,11 @@
 @use '../../styles/variables' as *;
 
 .contact_section {
-    padding: $space-4 0 $space-8;
-    background: var(--color-bg-muted);
+    min-height: 100vh;
+    padding: $space-5 0 $space-10;
+    background:
+        radial-gradient(circle at 86% 12%, color-mix(in srgb, var(--color-primary) 12%, transparent), transparent 34rem),
+        linear-gradient(180deg, var(--color-bg-muted), var(--color-bg));
     transition: $transition-theme;
 }
 
@@ -12,51 +15,115 @@
     align-items: start;
 
     @media (min-width:$breakpoint-lg) {
-        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        grid-template-columns: minmax(0, .9fr) minmax(38rem, 1fr);
     }
+}
+
+.intro,
+.formCard {
+    border: 1px solid var(--color-border);
+    border-radius: $radius-xl;
+    background: color-mix(in srgb, var(--color-card-bg) 94%, transparent);
+    box-shadow: var(--shadow-md);
 }
 
 .intro {
     display: flex;
     flex-direction: column;
-    gap: $space-2;
+    gap: $space-3;
+    padding: $space-5;
+    position: sticky;
+    top: $space-4;
+
+    @media (max-width:$breakpoint-lg) {
+        position: static;
+    }
+}
+
+.eyebrow,
+.formBadge {
+    width: fit-content;
+    padding: .45rem 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: $radius-full;
+    color: var(--color-primary);
+    background: color-mix(in srgb, var(--color-primary) 9%, transparent);
+    font-size: $font-size-xs;
+    font-weight: 900;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+.title {
+    max-width: 62rem;
+    color: var(--color-text);
+    font-size: clamp(3rem, 5vw, 5.2rem);
+    line-height: 1.12;
+    letter-spacing: -0.05em;
+    font-weight: 900;
+}
+
+.lead {
+    max-width: 58rem;
+    color: var(--color-text-muted);
+    font-size: $font-size-md;
+    line-height: 1.8;
 }
 
 .links {
+    display: flex;
     flex-direction: column;
     gap: $space-1;
-    display: flex;
-    margin-top: $space-0;
+    margin-top: $space-1;
 }
 
-.linkIcon {
-    flex-shrink: 0;
-    width: $space-5;
-    height: $space-5;
+.linkCard {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    padding: $space-2;
+    border: 1px solid var(--color-border);
     border-radius: $radius-md;
-    background: color-mix(in srgb, var(--color-primary) 12%, transparent);
+    background: var(--color-bg-muted);
+    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+
+    &:hover {
+        transform: translateY(-.2rem);
+        border-color: color-mix(in srgb, var(--color-primary) 35%, var(--color-border));
+        box-shadow: var(--shadow-sm);
+    }
+}
+
+.linkIcon,
+.availIcon {
+    flex-shrink: 0;
     display: grid;
     place-items: center;
+    border-radius: 1.4rem;
+    background: color-mix(in srgb, var(--color-primary) 12%, transparent);
     color: var(--color-primary);
 }
 
-.linkBody {
-    flex: 1;
+.linkIcon {
+    width: $space-5;
+    height: $space-5;
 }
+
+.linkBody { flex: 1; min-width: 0; }
 
 .linkLabel {
     margin-bottom: $space-0;
     font-size: $font-size-xs;
-    font-weight: 700;
+    font-weight: 800;
     text-transform: uppercase;
     letter-spacing: .04rem;
-    color: var(--color-text-muted)
+    color: var(--color-text-muted);
 }
 
 .linkValue {
-    margin-bottom: $space-0;
+    margin-bottom: 0;
     font-size: $font-size-sm;
-    font-weight: 600;
+    font-weight: 700;
     color: var(--color-text);
     word-break: break-all;
 }
@@ -64,44 +131,30 @@
 .linkActions {
     display: flex;
     flex-shrink: 0;
-    gap: $space-0;
 }
 
 .iconBtn {
-    border: 1px solid var(--color-border);
-    // width: $space-4;
-    // height: $space-4;
+    width: 4rem;
+    height: 4rem;
     display: grid;
     place-items: center;
-    border-radius: $radius-md;
-    padding: $space-1;
-    transition: $transition-theme;
-}
-
-.linkCard {
     border: 1px solid var(--color-border);
-    padding: $space-2;
     border-radius: $radius-md;
-    display: flex;
-    align-items: center;
-    gap: $space-1;
+    color: var(--color-text);
+    background: var(--color-card-bg);
     transition: $transition-theme;
 
-    &:hover {
-        border-color: color-mix(in srgb, var(--color-primary) 35%, var(--color-border));
-        box-shadow: var(--shadow-md);
-
-        .iconBtn {
-            border-color: color-mix(in srgb, var(--color-primary) 35%, var(--color-border));
-            background: var(--color-card-bg);
-
-        }
+    &:hover,
+    &.iconBtnDone {
+        color: white;
+        border-color: transparent;
+        background: var(--color-primary);
     }
 }
 
 .statusBlock {
-    margin-top: $space-5;
-    padding-top: $space-5;
+    margin-top: $space-2;
+    padding-top: $space-4;
     border-top: 1px solid var(--color-border);
 }
 
@@ -113,114 +166,113 @@
 }
 
 .statusDot {
-    width: .5rem;
-    height: .5rem;
+    width: .7rem;
+    height: .7rem;
     border-radius: $radius-full;
-    background-color: var(--color-success);
-    box-shadow: 0 0 0 0.4rem color-mix(in srgb, var(--color-success) 25%, transparent);
+    background-color: $color-success;
+    box-shadow: 0 0 0 .45rem color-mix(in srgb, $color-success 24%, transparent);
 }
 
 .statusTitle {
     font-size: $font-size-md;
-    font-weight: 800;
-    color: var(--color-text)
+    font-weight: 900;
+    color: var(--color-text);
 }
 
 .availability {
     display: grid;
     gap: $space-1;
-    grid-template-columns: 1fr;
 
     @media (min-width:$breakpoint-sm) {
         grid-template-columns: repeat(3, 1fr);
-
     }
 }
 
 .availCard {
-    border: 1px solid var(--color-border);
     padding: $space-3;
+    border: 1px solid var(--color-border);
     border-radius: $radius-md;
-    background-color: var(--color-card-bg);
-    transition: $transition-theme;
+    background: var(--color-card-bg);
 }
 
 .availIcon {
-    width: $space-3;
-    height: $space-3;
-    display: flex;
-    margin-bottom: $space-0;
-    color: var(--color-primary)
+    width: 4rem;
+    height: 4rem;
+    margin-bottom: $space-1;
+
+    svg { width: 2rem; height: 2rem; }
 }
 
 .availLabel {
     margin-bottom: $space-0;
-    font-size: $font-size-xs;
-    font-weight: 800;
-    color: var(--color-text)
+    font-size: $font-size-sm;
+    font-weight: 900;
+    color: var(--color-text);
 }
 
 .availDesc {
     font-size: $font-size-xs;
-    color: var(--color-text-muted)
+    line-height: 1.6;
+    color: var(--color-text-muted);
 }
 
 .formCard {
-    background-color: var(--color-card-bg);
-    border: 1px solid var(--color-border);
-    padding: $space-4 $space-3;
-    border-radius: $radius-md;
-    transition: $transition-theme;
-    box-shadow: var(--shadow-md);
+    padding: $space-5 $space-4;
 }
 
 .formHead {
-    margin-bottom: $space-3;
+    display: grid;
+    gap: $space-1;
+    margin-bottom: $space-4;
 }
 
 .formTitle {
-    margin-bottom: $space-0;
-    font-size: $font-size-lg;
-    font-weight: 800;
+    font-size: clamp(2.4rem, 4vw, 3.4rem);
+    font-weight: 900;
     color: var(--color-text);
+    letter-spacing: -0.03em;
 }
 
 .formLead {
     font-size: $font-size-sm;
-    line-height: 1.55;
+    line-height: 1.7;
     color: var(--color-text-muted);
 }
 
 .form {
     display: flex;
     flex-direction: column;
-    gap: $space-2;
+    gap: $space-3;
 }
 
 .row2 {
     display: grid;
-    gap: $space-1;
+    gap: $space-2;
 
     @media (min-width:$breakpoint-sm) {
         grid-template-columns: 1fr 1fr;
     }
 }
 
-.field {
+.field,
+.fieldGroup {
     display: flex;
     flex-direction: column;
-    gap: $space-0;
+    gap: $space-1;
 }
 
 .label,
 .inquiryLabel {
     font-size: $font-size-xs;
-    font-weight: 700;
+    font-weight: 900;
     color: var(--color-text);
 }
 
-.optional {
-    font-weight: 500;
+.optional,
+.fieldHint,
+.charCount {
+    font-size: $font-size-xs;
+    font-weight: 600;
     color: var(--color-text-muted);
 }
 
@@ -228,16 +280,18 @@
 .textarea,
 .select {
     width: 100%;
-    padding: $space-1;
+    padding: 1.2rem 1.4rem;
     border: 1px solid var(--color-border);
     border-radius: $radius-sm;
     background-color: var(--color-bg-muted);
+    color: var(--color-text);
     font-size: $font-size-sm;
     outline: none;
+    transition: $transition-theme;
 
     &:focus {
         border-color: color-mix(in srgb, var(--color-primary) 55%, var(--color-border));
-        box-shadow: 0 0 0 0.3rem color-mix(in srgb, var(--color-primary) 15%, transparent);
+        box-shadow: 0 0 0 .3rem color-mix(in srgb, var(--color-primary) 15%, transparent);
     }
 
     &::placeholder {
@@ -245,8 +299,17 @@
     }
 }
 
+.inputError {
+    border-color: $color-danger;
+}
+
+.fieldHint {
+    color: $color-danger;
+}
+
 .textarea {
-    min-height: 14rem;
+    min-height: 16rem;
+    resize: vertical;
 }
 
 .textareaFoot {
@@ -258,37 +321,41 @@
     cursor: pointer;
 }
 
-.inquiryPow {
+.inquiryRow {
     display: flex;
     flex-wrap: wrap;
-    gap: $space-0;
+    gap: $space-1;
 }
 
 .topicBtn {
-    padding: $space-0 $space-1;
+    padding: .8rem 1.2rem;
     border-radius: $radius-full;
     border: 1px solid var(--color-border);
     background-color: var(--color-bg-muted);
     color: var(--color-text-muted);
+    font-size: $font-size-xs;
+    font-weight: 800;
     transition: $transition-theme;
 
     &:hover {
         color: var(--color-text);
         border-color: color-mix(in srgb, var(--color-primary) 40%, var(--color-border));
-
     }
 }
 
 .topicBtnActive {
     background-color: var(--color-primary);
-    color: var(--btn-primary-text);
+    color: white;
     border-color: transparent;
 }
 
 .submit {
-    &:hover {
-        filter: brightness(1.09);
-    }
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: $space-1;
+
+    &:hover { filter: brightness(1.09); }
 
     &:disabled {
         opacity: .65;
@@ -297,8 +364,17 @@
     }
 }
 
-.privacyNote{
-    margin-top: $space-1;
+.thanks {
+    padding: $space-3;
+    border-radius: $radius-md;
+    background: color-mix(in srgb, $color-success 12%, transparent);
+    color: var(--color-text);
+    font-size: $font-size-sm;
+    font-weight: 800;
+    line-height: 1.6;
+}
+
+.privacyNote {
     text-align: center;
     font-size: $font-size-xs;
     color: var(--color-text-muted);

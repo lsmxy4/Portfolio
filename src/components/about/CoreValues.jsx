@@ -7,19 +7,22 @@ const CoreValues = ({ coreValues }) => {
       <div className={styles.cardHeader}>
         <div className={styles.cardIcon}>💡</div>
         <div>
-          <h2 className={styles.cardTitle}>Core Values</h2>
-          <p className={styles.cardSubtitle}>Principles I optimize for</p>
+          <h2 className={styles.cardTitle}>성장 방식</h2>
+          <p className={styles.cardSubtitle}>프로젝트를 진행할 때 지키려는 기준</p>
         </div>
       </div>
 
       <div className={styles.valuesGrid}>
-        {coreValues.map((item, index) => (
-          <div key={index} className={styles.valueCard}>
-            <div className={styles.valueIcon}>{item.icon || '✨'}</div>
-            <h3 className={styles.valueTitle}>{item.title}</h3>
-            <p className={styles.valueDesc}>{item.desc}</p>
-          </div>
-        ))}
+        {coreValues.map((item, index) => {
+          const Icon = item.Icon
+          return (
+            <div key={index} className={styles.valueCard}>
+              <div className={styles.valueIcon}>{Icon ? <Icon /> : '✨'}</div>
+              <h3 className={styles.valueTitle}>{item.title}</h3>
+              <p className={styles.valueDesc}>{item.desc}</p>
+            </div>
+          )
+        })}
       </div>
     </article>
   )

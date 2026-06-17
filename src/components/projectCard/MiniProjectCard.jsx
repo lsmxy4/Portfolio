@@ -15,7 +15,7 @@ const MiniProjectCard = ({ index = 0, title, desc, tags = [], thumb, thumbLight 
         >
             <div className={styles.thumb}>
                 <div className={styles.thumbOverlay}>
-                    <span>Mini Project</span>
+                    <span>미니 프로잭트</span>
                     <strong>{projectNumber}</strong>
                 </div>
                 {thumb && <img src={thumb} alt={title} className={styles.darkImg} />}
