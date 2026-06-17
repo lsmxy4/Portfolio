@@ -3,8 +3,7 @@ import Home from "./pages/Home"
 import About from './pages/about/About'
 import Contact from './pages/contact/ContactPage'
 import ProjectsPages from "./pages/projects/ProjectsPages"
-
-import Skills from "./pages/skills/Skills"
+// import Skills from "./pages/skills/Skills"
 import PlaceholderPage from "./pages/PlaceholderPage"
 import Blog from "./pages/Blog"
 import  ThemeProvider from './context/ThemeProvider'
