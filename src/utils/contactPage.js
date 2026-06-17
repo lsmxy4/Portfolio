@@ -1,9 +1,9 @@
 export const contactData = {
-    email: 'hello@dev.com',
+    email: 'lsmay4@gmail.com',
     linkedin: 'https://linkedin.com/in/junho',
     linkedinLabel: 'linkedin.com/in/junho',
-    github: 'https://github.com/junho-dev',
-    githubLabel: 'github.com/junho-dev',
+    github: 'https://github.com/lsmxy4',
+    githubLabel: 'github.com/lsmxy4',
 }
 
 export const topics = [

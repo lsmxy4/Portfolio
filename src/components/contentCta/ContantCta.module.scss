@@ -1,21 +1,146 @@
 @use '../../styles/variables' as *;
 
 .cta_section {
-    padding:$space-12 0;
-    height: 50vh;
-    .inner {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        text-align: center;
-        transition:  $transition-theme;
-        background-color: var(--color-bg);
-        gap: $space-3;
-        .cta {
-            display: flex;
-            justify-content: center;
-            gap: $space-2;
+    padding: $space-10 0 $space-12;
+    background:
+        radial-gradient(circle at 18% 16%, color-mix(in srgb, var(--color-primary) 16%, transparent), transparent 28rem),
+        linear-gradient(180deg, var(--color-bg), var(--color-bg-muted));
+    transition: $transition-theme;
+}
 
-        }
+.inner {
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    gap: $space-4;
+    padding: $space-5;
+    border: 1px solid color-mix(in srgb, var(--color-primary) 24%, var(--color-border));
+    border-radius: $radius-xl;
+    background: color-mix(in srgb, var(--color-card-bg) 94%, transparent);
+    box-shadow: var(--shadow-md);
+
+    &::after {
+        content: '';
+        position: absolute;
+        right: -5rem;
+        bottom: -6rem;
+        width: 18rem;
+        height: 18rem;
+        border-radius: 50%;
+        background: color-mix(in srgb, var(--color-primary) 14%, transparent);
+    }
+
+    @media (min-width: $breakpoint-lg) {
+        grid-template-columns: minmax(0, 1fr) minmax(36rem, .82fr);
+        align-items: center;
+    }
+}
+
+.copyArea {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    gap: $space-2;
+}
+
+.badge {
+    width: fit-content;
+    padding: .45rem 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: $radius-full;
+    color: var(--color-primary);
+    background: color-mix(in srgb, var(--color-primary) 9%, transparent);
+    font-size: $font-size-xs;
+    font-weight: 900;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+.title {
+    max-width: 72rem;
+    color: var(--color-text);
+    font-size: clamp(2.8rem, 5vw, 4.8rem);
+    font-weight: 900;
+    line-height: 1.15;
+    letter-spacing: -0.05em;
+}
+
+.desc {
+    max-width: 66rem;
+    color: var(--color-text-muted);
+    font-size: $font-size-md;
+    line-height: 1.8;
+}
+
+.ctaGrid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    gap: $space-2;
+}
+
+.ctaCard {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    padding: $space-2;
+    border: 1px solid var(--color-border);
+    border-radius: $radius-md;
+    background: var(--color-bg-muted);
+    color: var(--color-text);
+    transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease, background-color .2s ease;
+
+    &:hover {
+        transform: translateY(-.2rem);
+        border-color: color-mix(in srgb, var(--color-primary) 42%, var(--color-border));
+        box-shadow: var(--shadow-sm);
+    }
+}
+
+.primaryCard {
+    background: linear-gradient(135deg, var(--color-primary), $color-primary-hover);
+    color: white;
+    border-color: transparent;
+
+    .iconWrap {
+        background: rgba(255, 255, 255, .16);
+        color: white;
+    }
+
+    small { color: rgba(255, 255, 255, .78); }
+}
+
+.iconWrap {
+    width: 4.8rem;
+    height: 4.8rem;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    border-radius: 1.6rem;
+    background: color-mix(in srgb, var(--color-primary) 12%, transparent);
+    color: var(--color-primary);
+
+    svg {
+        width: 2.2rem;
+        height: 2.2rem;
+    }
+}
+
+.linkText {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: .2rem;
+
+    strong {
+        font-size: $font-size-sm;
+        font-weight: 900;
+    }
+
+    small {
+        color: var(--color-text-muted);
+        font-size: $font-size-xs;
+        font-weight: 700;
+        word-break: break-all;
     }
 }
