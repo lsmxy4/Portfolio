@@ -17,6 +17,11 @@
         border-color: color-mix(in srgb, var(--color-primary), var(--color-border));
         box-shadow: var(--shadow-md);
         transform: translateY(-2px);
+
+        .darkImg,
+        .lightImg {
+            transform: scale(1.04);
+        }
     }
 }
 
@@ -26,7 +31,41 @@
     padding: $space-1;
     display: flex;
     flex-direction: column;
-    gap: .5rem
+    gap: .5rem;
+    overflow: hidden;
+}
+
+.visualImage {
+    padding: 0;
+    background:
+        radial-gradient(circle at 22% 22%, rgba(124, 58, 237, 0.18), transparent 30%),
+        linear-gradient(135deg, var(--color-bg-muted), var(--color-border));
+
+    .darkImg,
+    .lightImg {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.45s ease;
+    }
+
+    .darkImg {
+        display: block;
+    }
+
+    .lightImg {
+        display: none;
+    }
+
+    :global([data-theme="light"]) & {
+        .darkImg {
+            display: none;
+        }
+
+        .lightImg {
+            display: block;
+        }
+    }
 }
 
 .gradient_violet {

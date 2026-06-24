@@ -1,3 +1,10 @@
+import weatherThumb from '../assets/sessionImg/Weather.png'
+import weatherThumbLight from '../assets/sessionImg/WeatherLight.png'
+import emotionThumb from '../assets/sessionImg/Emotion.png'
+import emotionThumbLight from '../assets/sessionImg/EmotionLight.png'
+import wordgameThumb from '../assets/sessionImg/Wordgame.png'
+import wordgameThumbLight from '../assets/sessionImg/WordgameLight.png'
+
 export const projectFilters = [
     { id: 'all', label: 'All' },
     { id: 'web', label: 'Web app' },
@@ -9,6 +16,9 @@ export const projectFilters = [
 export const projectsPageItems = [
     {
         id: 'word-chain',
+        image: wordgameThumb,
+        imageLight: wordgameThumbLight,
+        imageAlt: '끝말잇기 게임 화면 미리보기',
         categories: ['web', 'game'],
         gradient: 'violet',
         title: '끝말잇기 게임',
@@ -55,6 +65,9 @@ export const projectsPageItems = [
     },
     {
         id: 'weather-app',
+        image: weatherThumb,
+        imageLight: weatherThumbLight,
+        imageAlt: '날씨 확인 앱 화면 미리보기',
         categories: ['web', 'api'],
         gradient: 'sky',
         title: '날씨 확인 앱',
@@ -87,6 +100,9 @@ export const projectsPageItems = [
     },
     {
         id: 'emotion-diary',
+        image: emotionThumb,
+        imageLight: emotionThumbLight,
+        imageAlt: '감정 일기장 화면 미리보기',
         categories: ['web'],
         gradient: 'rose',
         title: '감정 일기장',

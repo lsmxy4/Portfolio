@@ -7,7 +7,7 @@ const GRADIENT = {
   emerald: styles.gradient_emerald,
   sunset: styles.gradient_sunset,
   sky: styles.gradient_sky,
-  ember: styles.gradient_ember,
+  amber: styles.gradient_amber,
   rose: styles.gradient_rose,
 }
 const META_ICONS = {
@@ -31,7 +31,10 @@ const FeaturedProjectCard = ({
   meta = [],
   demoHref = '#',
   codeHref = '#',
-  demoLabel = 'Live demo'
+  demoLabel = 'Live demo',
+  image,
+  imageLight,
+  imageAlt = ''
 }) => {
 
   const gradientClass = GRADIENT[gradient] ?? GRADIENT.violet
@@ -39,13 +42,22 @@ const FeaturedProjectCard = ({
 
   return (
     <article className={styles.card}>
-      <div className={`${styles.visual} ${gradientClass}`} aria-hidden>
-        <div className={styles.chrome}>
-          <span className={styles.dot} />
-          <span className={styles.dot} />
-          <span className={styles.dot} />
-        </div>
-        <div className={styles.mockContent} />
+      <div className={`${styles.visual} ${image ? styles.visualImage : gradientClass}`}>
+        {image ? (
+          <>
+            <img src={image} alt={imageAlt || `${title} 화면 미리보기`} className={styles.darkImg} />
+            <img src={imageLight || image} alt="" className={styles.lightImg} aria-hidden="true" />
+          </>
+        ) : (
+          <>
+            <div className={styles.chrome} aria-hidden>
+              <span className={styles.dot} />
+              <span className={styles.dot} />
+              <span className={styles.dot} />
+            </div>
+            <div className={styles.mockContent} aria-hidden />
+          </>
+        )}
       </div>
       <div className={styles.body}>
         <div className={styles.topRow}>
@@ -89,7 +101,7 @@ const FeaturedProjectCard = ({
             <IconExternal/>
             {demoLabel}
           </a>
-          <a href={demoHref} className={`btn btn__outline ${styles.btnOutline}`}>
+          <a href={codeHref} className={`btn btn__outline ${styles.btnOutline}`} aria-label={`${title} GitHub 보기`}>
             <IconGithub/>
           </a>
         </div>
