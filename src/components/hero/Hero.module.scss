@@ -11,12 +11,12 @@
     --hero-card-bg: rgba(255, 255, 255, 0.78);
     --hero-card-border: rgba(108, 93, 211, 0.18);
     --hero-card-shadow: 0 24px 70px rgba(93, 93, 255, 0.16);
-    --hero-grid-color: rgba(108, 93, 211, 0.14);
+    --hero-grid-color: rgba(108, 93, 211, 0.14);    
 }
 
 [data-theme='dark'] {
-    --hero-bg: #0a0a0a;
-    --hero-text: #ffffff;
+    --hero-bg: #0a0a0a; 
+    --hero-text: #1a1a1a;
     /* 다크 모드용 설정 */
     --hero-glow-opacity: 0.4; // 빛의 진하기 (다크 모드는 강하게)
     --hero-glow-mix-mode: screen; // 검은 배경에서는 발광해야 보임
