@@ -4,6 +4,12 @@ import emotionThumb from '../assets/sessionImg/Emotion.png'
 import emotionThumbLight from '../assets/sessionImg/EmotionLight.png'
 import wordgameThumb from '../assets/sessionImg/Wordgame.png'
 import wordgameThumbLight from '../assets/sessionImg/WordgameLight.png'
+import alarm from '../assets/sessionImg/alarm.png'
+import todolist from '../assets/sessionImg/todolist.png'
+import router from '../assets/sessionImg/router.png'
+import wifi from '../assets/sessionImg/wifi.png'
+import tocobo from '../assets/sessionImg/Tocobo.png'
+import { image } from 'framer-motion/client'
 
 export const projectFilters = [
     { id: 'all', label: 'All' },
@@ -35,6 +41,7 @@ export const projectsPageItems = [
     },
     {
         id: 'timer',
+        image:alarm,
         categories: ['web', 'utility'],
         gradient: 'emerald',
         title: '타이머 앱',
@@ -50,6 +57,7 @@ export const projectsPageItems = [
     },
     {
         id: 'router-study',
+        image:router,
         categories: ['web'],
         gradient: 'sunset',
         title: '라우터 학습 프로젝트',
@@ -85,6 +93,7 @@ export const projectsPageItems = [
     },
     {
         id: 'todo-list',
+        image:todolist,
         categories: ['web', 'utility'],
         gradient: 'amber',
         title: 'TODO LIST',
@@ -119,6 +128,7 @@ export const projectsPageItems = [
     },
     {
         id: 'wifi-map',
+        image: wifi,
         categories: ['web', 'api'],
         gradient: 'violet',
         title: '와이파이 찾기',
@@ -135,6 +145,7 @@ export const projectsPageItems = [
     },
     {
         id: 'tocobo-project',
+        image: tocobo,
         categories: ['web'],
         gradient: 'emerald',
         title: 'Tocobo 프로젝트',
