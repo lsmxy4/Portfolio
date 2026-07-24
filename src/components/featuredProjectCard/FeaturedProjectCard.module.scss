@@ -92,6 +92,20 @@
     background: linear-gradient(135deg, #fff1f2 0%, #fce7f3 50%, #ffedd5 100%);
 }
 
+.gradient_cyan {
+    background: linear-gradient(135deg, #ecfeff 0%, #cffafe 50%, #e0f2fe 100%);
+}
+
+.gradient_orichalcum {
+    background: linear-gradient(
+        135deg,
+        #dffbf7 0%,
+        #99e6dc 35%,
+        #67c7d4 65%,
+        #dbeafe 100%
+    );
+}
+
 .chrome {
     display: flex;
     align-items: center;

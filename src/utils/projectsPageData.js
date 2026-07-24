@@ -1,162 +1,195 @@
-import weatherThumb from '../assets/sessionImg/Weather.png'
-import weatherThumbLight from '../assets/sessionImg/WeatherLight.png'
-import emotionThumb from '../assets/sessionImg/Emotion.png'
-import emotionThumbLight from '../assets/sessionImg/EmotionLight.png'
-import wordgameThumb from '../assets/sessionImg/Wordgame.png'
-import wordgameThumbLight from '../assets/sessionImg/WordgameLight.png'
-import alarm from '../assets/sessionImg/alarm.png'
-import todolist from '../assets/sessionImg/todolist.png'
-import router from '../assets/sessionImg/router.png'
-import wifi from '../assets/sessionImg/wifi.png'
-import tocobo from '../assets/sessionImg/Tocobo.png'
-import { image } from 'framer-motion/client'
+import weatherThumb from "../assets/sessionImg/Weather.png";
+import weatherThumbLight from "../assets/sessionImg/WeatherLight.png";
+import emotionThumb from "../assets/sessionImg/Emotion.png";
+import emotionThumbLight from "../assets/sessionImg/EmotionLight.png";
+import wordgameThumb from "../assets/sessionImg/Wordgame.png";
+import wordgameThumbLight from "../assets/sessionImg/WordgameLight.png";
+import alarm from "../assets/sessionImg/alarm.png";
+import todolist from "../assets/sessionImg/todolist.png";
+import router from "../assets/sessionImg/router.png";
+import wifi from "../assets/sessionImg/wifi.png";
+import tocobo from "../assets/sessionImg/Tocobo.png";
+import { image } from "framer-motion/client";
 
 export const projectFilters = [
-    { id: 'all', label: 'All' },
-    { id: 'web', label: 'Web app' },
-    { id: 'api', label: 'API / Backend' },
-    { id: 'game', label: 'Game' },
-    { id: 'utility', label: 'Utility' },
-]
+  { id: "all", label: "All" },
+  { id: "web", label: "Web app" },
+  { id: "api", label: "API / Backend" },
+  { id: "game", label: "Game" },
+  { id: "utility", label: "Utility" },
+];
 
 export const projectsPageItems = [
-    {
-        id: 'word-chain',
-        image: wordgameThumb,
-        imageLight: wordgameThumbLight,
-        imageAlt: '끝말잇기 게임 화면 미리보기',
-        categories: ['web', 'game'],
-        gradient: 'violet',
-        title: '끝말잇기 게임',
-        description: '나혼자서 할 수 있는 끝말잇기 게임입니다. 연속 기록 시스템과 제한 시간 기능을 포함하고 있습니다.',
-        tags: [
-            { label: 'React', variant: 'neutral' },
-            { label: 'JavaScript', variant: 'info' },
-        ],
-        status: { type: 'featured', label: 'Featured' },
-        meta: [{ type: 'users', text: 'Game' }],
-        demoHref: '#',
-        codeHref: 'https://github.com',
-        demoLabel: 'Live demo',
-    },
-    {
-        id: 'timer',
-        image:alarm,
-        categories: ['web', 'utility'],
-        gradient: 'emerald',
-        title: '타이머 앱',
-        description: '다양한 시간 설정을 지원하는 직관적인 타이머 애플리케이션입니다.',
-        tags: [
-            { label: 'React', variant: 'neutral' },
-        ],
-        status: { type: 'live', label: 'Live' },
-        meta: [{ type: 'users', text: 'Utility' }],
-        demoHref: '#',
-        codeHref: 'https://github.com',
-        demoLabel: 'Live demo',
-    },
-    {
-        id: 'router-study',
-        image:router,
-        categories: ['web'],
-        gradient: 'sunset',
-        title: '라우터 학습 프로젝트',
-        description: 'React Router의 다양한 기능을 학습하고 구현해 본 프로젝트입니다.',
-        tags: [
-            { label: 'React Router', variant: 'warning' },
-        ],
-        status: null,
-        meta: [{ type: 'users', text: 'Learning' }],
-        demoHref: '#',
-        codeHref: 'https://github.com',
-        demoLabel: 'View Code',
-    },
-    {
-        id: 'weather-app',
-        image: weatherThumb,
-        imageLight: weatherThumbLight,
-        imageAlt: '날씨 확인 앱 화면 미리보기',
-        categories: ['web', 'api'],
-        gradient: 'sky',
-        title: '날씨 확인 앱',
-        description: '전국 250개 측정소의 실시간 데이터를 수집/분석하여 위치 기반 맞춤 알림을 제공하는 PWA 서비스입니다.',
-        tags: [
-            { label: 'React', variant: 'neutral' },
-            { label: 'JavaScript', variant: 'info' },
-            { label: 'PWA', variant: 'success' },
-        ],
-        status: { type: 'featured', label: 'Featured' },
-        meta: [{ type: 'users', text: 'Service' }],
-        demoHref: '#',
-        codeHref: 'https://github.com',
-        demoLabel: 'Live demo',
-    },
-    {
-        id: 'todo-list',
-        image:todolist,
-        categories: ['web', 'utility'],
-        gradient: 'amber',
-        title: 'TODO LIST',
-        description: '할 일을 관리하고 우선순위를 정할 수 있는 기본적인 투두 리스트 애플리케이션입니다.',
-        tags: [
-            { label: 'React', variant: 'neutral' },
-        ],
-        status: null,
-        meta: [{ type: 'users', text: 'Utility' }],
-        demoHref: '#',
-        codeHref: 'https://github.com',
-        demoLabel: 'Live demo',
-    },
-    {
-        id: 'emotion-diary',
-        image: emotionThumb,
-        imageLight: emotionThumbLight,
-        imageAlt: '감정 일기장 화면 미리보기',
-        categories: ['web'],
-        gradient: 'rose',
-        title: '감정 일기장',
-        description: '오늘의 기분을 기록하고 날짜별로 감정을 관리할 수 있는 다이어리 서비스입니다.',
-        tags: [
-            { label: 'React', variant: 'neutral' },
-            { label: 'JavaScript', variant: 'info' },
-        ],
-        status: { type: 'live', label: 'Live' },
-        meta: [{ type: 'users', text: 'Service' }],
-        demoHref: '#',
-        codeHref: 'https://github.com',
-        demoLabel: 'Live demo',
-    },
-    {
-        id: 'wifi-map',
-        image: wifi,
-        categories: ['web', 'api'],
-        gradient: 'violet',
-        title: '와이파이 찾기',
-        description: '사용자 주변의 공공 와이파이 위치를 지도상에 표시해주는 서비스입니다.',
-        tags: [
-            { label: 'API', variant: 'info' },
-            { label: 'Map', variant: 'success' },
-        ],
-        status: null,
-        meta: [{ type: 'users', text: 'Utility' }],
-        demoHref: '#',
-        codeHref: 'https://github.com',
-        demoLabel: 'Live demo',
-    },
-    {
-        id: 'tocobo-project',
-        image: tocobo,
-        categories: ['web'],
-        gradient: 'emerald',
-        title: 'Tocobo 프로젝트',
-        description: '신동환 님의 Tocobo 프로젝트 클론 코딩 및 구현 작업입니다.',
-        tags: [
-            { label: 'React', variant: 'neutral' },
-        ],
-        status: { type: 'featured', label: 'Featured' },
-        meta: [{ type: 'users', text: 'Clone' }],
-        demoHref: '#',
-        codeHref: 'https://github.com',
-        demoLabel: 'View Project',
-    },
-]
+  {
+    id: "word-chain",
+    image: wordgameThumb,
+    imageLight: wordgameThumbLight,
+    imageAlt: "끝말잇기 게임 화면 미리보기",
+    categories: ["web", "game"],
+    gradient: "violet",
+    title: "끝말잇기 게임",
+    description:
+      "나혼자서 할 수 있는 끝말잇기 게임입니다. 연속 기록 시스템과 제한 시간 기능을 포함하고 있습니다.",
+    tags: [
+      { label: "React", variant: "neutral" },
+      { label: "JavaScript", variant: "info" },
+    ],
+    status: { type: "featured", label: "Featured" },
+    meta: [{ type: "users", text: "Game" }],
+    demoHref: "#",
+    codeHref: "https://github.com",
+    demoLabel: "Live demo",
+  },
+  {
+    id: "timer",
+    image: alarm,
+    categories: ["web", "utility"],
+    gradient: "emerald",
+    title: "타이머 앱",
+    description:
+      "다양한 시간 설정을 지원하는 직관적인 타이머 애플리케이션입니다.",
+    tags: [{ label: "React", variant: "neutral" }],
+    status: { type: "live", label: "Live" },
+    meta: [{ type: "users", text: "Utility" }],
+    demoHref: "#",
+    codeHref: "https://github.com",
+    demoLabel: "Live demo",
+  },
+  {
+    id: "router-study",
+    image: router,
+    categories: ["web"],
+    gradient: "sunset",
+    title: "라우터 학습 프로젝트",
+    description:
+      "React Router의 다양한 기능을 학습하고 구현해 본 프로젝트입니다.",
+    tags: [{ label: "React Router", variant: "warning" }],
+    status: null,
+    meta: [{ type: "users", text: "Learning" }],
+    demoHref: "#",
+    codeHref: "https://github.com",
+    demoLabel: "View Code",
+  },
+  {
+    id: "weather-app",
+    image: weatherThumb,
+    imageLight: weatherThumbLight,
+    imageAlt: "날씨 확인 앱 화면 미리보기",
+    categories: ["web", "api"],
+    gradient: "sky",
+    title: "날씨 확인 앱",
+    description:
+      "전국 250개 측정소의 실시간 데이터를 수집/분석하여 위치 기반 맞춤 알림을 제공하는 PWA 서비스입니다.",
+    tags: [
+      { label: "React", variant: "neutral" },
+      { label: "JavaScript", variant: "info" },
+      { label: "PWA", variant: "success" },
+    ],
+    status: { type: "featured", label: "Featured" },
+    meta: [{ type: "users", text: "Service" }],
+    demoHref: "#",
+    codeHref: "https://github.com",
+    demoLabel: "Live demo",
+  },
+  {
+    id: "todo-list",
+    image: todolist,
+    categories: ["web", "utility"],
+    gradient: "amber",
+    title: "TODO LIST",
+    description:
+      "할 일을 관리하고 우선순위를 정할 수 있는 기본적인 투두 리스트 애플리케이션입니다.",
+    tags: [{ label: "React", variant: "neutral" }],
+    status: null,
+    meta: [{ type: "users", text: "Utility" }],
+    demoHref: "#",
+    codeHref: "https://github.com",
+    demoLabel: "Live demo",
+  },
+  {
+    id: "emotion-diary",
+    image: emotionThumb,
+    imageLight: emotionThumbLight,
+    imageAlt: "감정 일기장 화면 미리보기",
+    categories: ["web"],
+    gradient: "rose",
+    title: "감정 일기장",
+    description:
+      "오늘의 기분을 기록하고 날짜별로 감정을 관리할 수 있는 다이어리 서비스입니다.",
+    tags: [
+      { label: "React", variant: "neutral" },
+      { label: "JavaScript", variant: "info" },
+    ],
+    status: { type: "live", label: "Live" },
+    meta: [{ type: "users", text: "Service" }],
+    demoHref: "#",
+    codeHref: "https://github.com",
+    demoLabel: "Live demo",
+  },
+  {
+    id: "wifi-map",
+    image: wifi,
+    categories: ["web", "api"],
+    gradient: "violet",
+    title: "와이파이 찾기",
+    description:
+      "사용자 주변의 공공 와이파이 위치를 지도상에 표시해주는 서비스입니다.",
+    tags: [
+      { label: "API", variant: "info" },
+      { label: "Map", variant: "success" },
+    ],
+    status: null,
+    meta: [{ type: "users", text: "Utility" }],
+    demoHref: "#",
+    codeHref: "https://github.com",
+    demoLabel: "Live demo",
+  },
+  {
+    id: "tocobo-project",
+    image: tocobo,
+    categories: ["web"],
+    gradient: "emerald",
+    title: "Tocobo 프로젝트",
+    description: "신동환 님의 Tocobo 프로젝트 클론 코딩 및 구현 작업입니다.",
+    tags: [{ label: "React", variant: "neutral" }],
+    status: { type: "featured", label: "Featured" },
+    meta: [{ type: "users", text: "Clone" }],
+    demoHref: "#",
+    codeHref: "https://github.com",
+    demoLabel: "View Project",
+  },
+  {
+    id: "bookstory",
+    image: "",
+    categories: ["web", "api", "utility"],
+    gradient: "cyan",
+    title: "bookstory",
+    description:
+      "읽은 책을 기록하고 관리할 수 있도록 구현한 풀스택 기반 독서 기록 웹 애플리케이션입니다.",
+    tags: [{ label: "Fullstack", variant: "neutral" }],
+    status: { type: "featured", label: "Featured" },
+    meta: [{ type: "code", text: "Fullstack" }],
+    demoHref: "#",
+    codeHref: "https://github.com/lsmxy4/2-picstory",
+    demoLabel: "View Project",
+  },
+  {
+    id: "fresh-chain",
+    image: "",
+    categories: ["web", "utility"],
+    gradient: "orichalcum",
+    title: "Fresh Chain",
+    description:
+      "콜드체인 물류 서비스를 주제로 메인 웹사이트와 물류 관리 대시보드를 구현한 반응형 웹 프로젝트입니다.",
+    tags: [
+      { label: "React", variant: "neutral" },
+      { label: "TypeScript", variant: "info" },
+      { label: "Tailwind CSS", variant: "success" },
+    ],
+    status: { type: "featured", label: "Featured" },
+    meta: [{ type: "code", text: "Team Project" }],
+    demoHref: "https://github.com/lsmxy4/Responsive_Logistics_KDT_3_Demo",
+    codeHref: "https://github.com/lsmxy4/Responsive_Logistics_KDT_3",
+    demoLabel: "Dashboard",
+  },
+];

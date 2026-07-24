@@ -9,6 +9,8 @@ const GRADIENT = {
   sky: styles.gradient_sky,
   amber: styles.gradient_amber,
   rose: styles.gradient_rose,
+  cyan: styles.gradient_cyan,
+  orichalcum: styles.gradient_orichalcum,
 }
 const META_ICONS = {
   stack: icons.stack,
