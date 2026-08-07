@@ -21,6 +21,25 @@ export const projectFilters = [
 
 export const projectsPageItems = [
   {
+    id: "fresh-chain",
+    image: "",
+    categories: ["web", "utility"],
+    gradient: "orichalcum",
+    title: "Fresh Chain",
+    description:
+      "콜드체인 물류 서비스를 주제로 메인 웹사이트와 물류 관리 대시보드를 구현한 반응형 웹 프로젝트입니다.",
+    tags: [
+      { label: "React", variant: "neutral" },
+      { label: "TypeScript", variant: "info" },
+      { label: "Tailwind CSS", variant: "success" },
+    ],
+    status: { type: "featured", label: "Featured" },
+    meta: [{ type: "code", text: "Team Project" }],
+    demoHref: "https://github.com/lsmxy4/Responsive_Logistics_KDT_3_Demo",
+    codeHref: "https://github.com/lsmxy4/Responsive_Logistics_KDT_3",
+    demoLabel: "Dashboard",
+  },
+  {
     id: "word-chain",
     image: wordgameThumb,
     imageLight: wordgameThumbLight,
@@ -175,24 +194,5 @@ export const projectsPageItems = [
     demoHref: "#",
     codeHref: "https://github.com/lsmxy4/2-picstory",
     demoLabel: "View Project",
-  },
-  {
-    id: "fresh-chain",
-    image: "",
-    categories: ["web", "utility"],
-    gradient: "orichalcum",
-    title: "Fresh Chain",
-    description:
-      "콜드체인 물류 서비스를 주제로 메인 웹사이트와 물류 관리 대시보드를 구현한 반응형 웹 프로젝트입니다.",
-    tags: [
-      { label: "React", variant: "neutral" },
-      { label: "TypeScript", variant: "info" },
-      { label: "Tailwind CSS", variant: "success" },
-    ],
-    status: { type: "featured", label: "Featured" },
-    meta: [{ type: "code", text: "Team Project" }],
-    demoHref: "https://github.com/lsmxy4/Responsive_Logistics_KDT_3_Demo",
-    codeHref: "https://github.com/lsmxy4/Responsive_Logistics_KDT_3",
-    demoLabel: "Dashboard",
   },
 ];
