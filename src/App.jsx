@@ -3,6 +3,7 @@ import Home from "./pages/Home"
 import About from './pages/about/About'
 import Contact from './pages/contact/ContactPage'
 import ProjectsPages from "./pages/projects/ProjectsPages"
+import ProjectDetail from './pages/projects/ProjectDetail'
 // import Skills from "./pages/skills/Skills"
 import PlaceholderPage from "./pages/PlaceholderPage"
 import Blog from "./pages/Blog"
@@ -33,6 +34,7 @@ function App() {
             <Route index element={<Home />} />
             <Route path="about" element={<About />} />
             <Route path="projects" element={<ProjectsPages />} />
+            <Route path="projects/:projectId" element={<ProjectDetail />} />
             <Route path="skills" element={<SkillsPages />} />
             <Route path="blog" element={<Blog />} />
             <Route path="contact" element={<Contact />} />

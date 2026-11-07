@@ -1,139 +1,91 @@
-import React from 'react'
-import styles from './SkillsPages.module.scss'
-import { icons } from '../../utils/icons'
 import { motion as Motion, useReducedMotion } from 'framer-motion'
-import { certifications, skillCategories } from '../../utils/skillsPageData'
+import { Link } from 'react-router-dom'
+import { skillCategories, skillProjects, skillProjectCount, skillCount } from '../../utils/skillsPageData'
+import styles from './SkillsPages.module.scss'
 
-const CATEGORY_ICONS = {
-    monitor: icons.monitor,
-    moniter: icons.monitor,
-    server: icons.server,
-    flask: icons.flask,
-    cloud: icons.cloud,
-    sparkle: icons.sparkle,
+function AnimatedBar({ count, delay = 0, className }) {
+  const reduceMotion = useReducedMotion()
+  return (
+    <div className={`${styles.track} ${className || ''}`} aria-hidden="true">
+      <Motion.span
+        style={{ width: `${count / skillProjectCount * 100}%`, transformOrigin: 'left' }}
+        initial={reduceMotion ? false : { scaleX: 0 }}
+        whileInView={{ scaleX: 1 }}
+        viewport={{ once: true, amount: 0.5 }}
+        transition={reduceMotion ? { duration: 0 } : { duration: 0.75, delay, ease: [0.22, 1, 0.36, 1] }}
+      />
+    </div>
+  )
 }
 
-const pageStats = [
-    { value: `${skillCategories.length}`, label: '기술 영역' },
-    { value: `${skillCategories.reduce((total, category) => total + category.skills.length, 0)}`, label: '핵심 역량' },
-    { value: `${certifications.length}`, label: '인증/학습 기록' },
-]
+export default function SkillsPages() {
+  const reduceMotion = useReducedMotion()
+  return (
+    <div className={styles.page}>
+      <header className={styles.hero}>
+        <p className={styles.eyebrow}>Skills & growing</p>
+        <h1>하나씩 만들며,<br /><em>차곡차곡 쌓은 기술.</em></h1>
+        <p className={styles.intro}>화면을 만들고, 데이터를 연결하고, 센서의 신호를 받아보며.<br />프로젝트 속에서 배우고 사용한 기술들을 모았습니다.</p>
+        <div className={styles.stats}>
+          {[[skillCategories.length, '기술 영역'], [skillCount, '함께 쓴 기술'], [skillProjectCount, '경험을 쌓은 프로젝트']].map(([value, label]) => (
+            <div key={label}><strong>{value.toString().padStart(2, '0')}</strong><span>{label}</span></div>
+          ))}
+        </div>
+      </header>
 
-const workflow = ['Plan', 'Build', 'Test', 'Deploy']
+      <section className={styles.overview} aria-labelledby="overview-title" aria-describedby="graph-note">
+        <div className={styles.chartIntro}>
+          <p className={styles.eyebrow}>A little overview</p>
+          <h2 id="overview-title">어떤 기술과<br />함께 만들었을까요?</h2>
+          <p id="graph-note">함께 살펴볼 {skillProjectCount}개 프로젝트에서 각 기술 영역을 얼마나 사용했는지 담았습니다. 막대의 길이는 사용한 프로젝트 수를 뜻해요.</p>
+          <Link to="/projects">프로젝트 전체 보기 ↗</Link>
+        </div>
+        <div className={styles.chart}>
+          <div className={styles.axis}><span>사용 프로젝트 수</span><span>0 — {skillProjectCount}</span></div>
+          {skillCategories.map((category, index) => {
+            const count = new Set(category.skills.flatMap((skill) => skill.projects)).size
+            return (
+              <div className={styles.chartRow} key={category.key} style={{ '--skill-color': category.color }}>
+                <div className={styles.barLabel}><a href={`#${category.key}`}>{category.title}</a><strong>{count}<span> / {skillProjectCount}</span></strong></div>
+                <AnimatedBar count={count} delay={index * 0.06} />
+              </div>
+            )
+          })}
+        </div>
+      </section>
 
-const SkillsPages = () => {
-    const shouldReduceMotion = useReducedMotion()
-    const SparkleIcon = icons.sparkle
-
-    const revealMotion = shouldReduceMotion ? {} : {
-        initial: { opacity: 0, y: 24 },
-        whileInView: { opacity: 1, y: 0 },
-        viewport: { once: true, amount: 0.24 },
-        transition: { duration: 0.52, ease: 'easeOut' },
-    }
-
-    return (
-        <Motion.main
-            className={styles.skills_section}
-            initial={shouldReduceMotion ? undefined : { opacity: 0 }}
-            animate={shouldReduceMotion ? undefined : { opacity: 1 }}
-            transition={{ duration: 0.5 }}
-        >
-            <div className={styles.bgDecor} aria-hidden='true'>
-                <span className={styles.glowOne} />
-                <span className={styles.glowTwo} />
-                <span className={styles.gridPattern} />
-            </div>
-
-            <div className={`inner ${styles.inner}`}>
-                <header className={styles.hero}>
-                    <span className={styles.badge}>
-                        <SparkleIcon />
-                        Tech Stack
-                    </span>
-                    <h1 className={styles.title}>기술을 선택하고, 완성도 있게 연결합니다.</h1>
-                    <p className={styles.desc}>
-                        프론트엔드 경험부터 백엔드 API, 테스트, 배포 자동화까지 제품을 끝까지 완성하기 위한 기술 흐름을 정리했습니다.
-                    </p>
-
-                    <div className={styles.statPanel} aria-label='스킬 페이지 요약'>
-                        {pageStats.map((stat) => (
-                            <div key={stat.label} className={styles.statItem}>
-                                <strong>{stat.value}</strong>
-                                <span>{stat.label}</span>
-                            </div>
-                        ))}
-                    </div>
-                </header>
-
-                <section className={styles.workflow} aria-label='개발 워크플로우'>
-                    {workflow.map((step, index) => (
-                        <div key={step} className={styles.workflowItem}>
-                            <span>{String(index + 1).padStart(2, '0')}</span>
-                            <strong>{step}</strong>
-                        </div>
-                    ))}
-                </section>
-
-                <section className={styles.stackSection} aria-labelledby='stack-heading'>
-                    <div className={styles.sectionHeader}>
-                        <span className={styles.eyebrow}>Stack Map</span>
-                        <h2 id='stack-heading'>주요 기술 영역</h2>
-                        <p>각 영역에서 자주 사용하는 기술과 숙련도를 한눈에 확인할 수 있게 구성했습니다.</p>
-                    </div>
-
-                    <div className={styles.grid}>
-                        {skillCategories.map((category, index) => {
-                            const IconCmp = CATEGORY_ICONS[category.iconKey] ?? icons.monitor
-
-                            return (
-                                <Motion.article
-                                    key={category.key}
-                                    className={styles.skillCard}
-                                    style={{ '--skill-color': category.iconColor }}
-                                    {...revealMotion}
-                                    transition={shouldReduceMotion ? undefined : {
-                                        ...revealMotion.transition,
-                                        delay: index * 0.07,
-                                    }}
-                                >
-                                    <div className={styles.cardTop}>
-                                        <div className={styles.iconBox}>
-                                            <IconCmp />
-                                        </div>
-                                        <span className={styles.cardIndex}>{String(index + 1).padStart(2, '0')}</span>
-                                    </div>
-
-                                    <h3>{category.title}</h3>
-                                    <p>{category.subtitle}</p>
-
-                                    <div className={styles.skillList}>
-                                        {category.skills.map((skill) => (
-                                            <div key={skill.name} className={styles.skillRow}>
-                                                <div className={styles.skillMeta}>
-                                                    <span>{skill.name}</span>
-                                                    {skill.showPercent !== false && <strong>{skill.percent}%</strong>}
-                                                </div>
-                                                <div className={styles.progressTrack} aria-hidden='true'>
-                                                    <span style={{ width: `${skill.percent}%` }} />
-                                                </div>
-                                            </div>
-                                        ))}
-                                    </div>
-
-                                    <div className={styles.tags}>
-                                        {category.tags.map((tag) => (
-                                            <span key={`${category.key}-${tag}`}>{tag}</span>
-                                        ))}
-                                    </div>
-                                </Motion.article>
-                            )
-                        })}
-                    </div>
-                </section>
-            </div>
-        </Motion.main>
-    )
+      <div className={styles.sectionHead}><p className={styles.eyebrow}>My toolbox</p><h2>기술마다, 쌓여 있는 이야기.</h2><p>기술 아래 작은 프로젝트 이름을 눌러보세요. 어떤 작업에 사용했는지 GitHub에서 살펴볼 수 있어요.</p></div>
+      <div className={styles.grid}>
+        {skillCategories.map((category) => (
+          <Motion.section
+            id={category.key}
+            key={category.key}
+            aria-labelledby={`${category.key}-title`}
+            className={styles.card}
+            style={{ '--skill-color': category.color }}
+            initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.1 }}
+            transition={{ duration: reduceMotion ? 0 : 0.4 }}
+          >
+            <div className={styles.cardTop}><span>{category.label}</span><span className={styles.status}>만들며 익힌 기술</span></div>
+            <h2 id={`${category.key}-title`}>{category.title}</h2>
+            <p className={styles.cardIntro}>{category.description}</p>
+            <ul className={styles.skills}>
+              {category.skills.map((skill, index) => (
+                <li key={skill.name}>
+                  <div className={styles.barLabel}><h3>{skill.name}</h3><span className={styles.count}>{skill.projects.length}개 프로젝트</span></div>
+                  <AnimatedBar count={skill.projects.length} delay={index * 0.04} className={styles.smallTrack} />
+                  <div className={styles.evidence} aria-label={`${skill.name} 사용 프로젝트`}>
+                    {skill.projects.map((id) => <a key={id} href={skillProjects[id].href} target="_blank" rel="noreferrer">{skillProjects[id].title} ↗<span className="sr-only"> (새 창)</span></a>)}
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </Motion.section>
+        ))}
+      </div>
+      <div className={styles.bottomLink}><span>이 기술들로 어떤 걸 만들었는지 궁금하다면</span><Link to="/projects">프로젝트 살펴보기 →</Link></div>
+    </div>
+  )
 }
-
-export default SkillsPages

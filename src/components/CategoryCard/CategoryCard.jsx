@@ -1,29 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import { useTheme } from '../../context/useTheme';
 import styles from './CategoryCard.module.scss';
 
 const CategoryCard = ({ title, subtitle, version, icon, iconLight, iconColor, bgGlow }) => {
-    const [isLightMode, setIsLightMode] = useState(false);
-
-    useEffect(() => {
-        const currentTheme = document.documentElement.getAttribute('data-theme');
-        setIsLightMode(currentTheme === 'light');
-
-        const observer = new MutationObserver((mutations) => {
-            mutations.forEach((mutation) => {
-                if (mutation.attributeName === 'data-theme') {
-                    const updatedTheme = document.documentElement.getAttribute('data-theme');
-                    setIsLightMode(updatedTheme === 'light');
-                }
-            });
-        });
-
-        observer.observe(document.documentElement, {
-            attributes: true,
-            attributeFilter: ['data-theme']
-        });
-
-        return () => observer.disconnect();
-    }, []);
+    const { theme } = useTheme();
+    const isLightMode = theme === 'light';
 
     const currentIcon = (isLightMode && iconLight) ? iconLight : icon;
 
