@@ -1,25 +1,65 @@
-@use '../../styles/variables' as *;
-
-.footer{
-    background-color: var(--color-bg-muted);
+.footer {
     border-top: 1px solid var(--color-border);
-    .inner{
-        padding: $space-3 0;
-        display: flex;
-        justify-content: space-between;
-        font-size: $font-size-sm;
-        .copy{
-            color: var(--color-text-muted);
-        }
-        .links{
-            display: flex;
-            gap: $space-1;
-            a{
-                color: var(--color-text-muted);
-                &:hover{
-                    color: var(--color-primary);
-                }
-            }
-        }
+    padding: 48px 32px 24px;
+}
+
+.inner,
+.bottom {
+    max-width: 1136px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.logo {
+    font-size: 3rem;
+    font-weight: 800;
+    letter-spacing: -2px;
+
+    span {
+        color: var(--color-primary);
+    }
+}
+
+.inner p {
+    font-size: 1.3rem;
+    color: var(--color-text-muted);
+    margin-top: 10px;
+}
+
+.inner nav {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    font-size: 1.3rem;
+
+    a:hover {
+        color: var(--color-primary);
+    }
+}
+
+.bottom {
+    border-top: 1px solid var(--color-border);
+    margin-top: 36px;
+    padding-top: 22px;
+    color: var(--color-text-muted);
+    font-size: 1.1rem;
+
+    span:last-child {
+        font-size: 1rem;
+        letter-spacing: 1.5px;
+    }
+}
+
+@media (max-width: 600px) {
+    .footer {
+        padding: 32px 20px 24px;
+    }
+
+    .inner,
+    .bottom {
+        flex-direction: column;
+        gap: 20px;
     }
 }

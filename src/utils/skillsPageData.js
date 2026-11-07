@@ -1,90 +1,68 @@
+import { projectLinks } from '../data/projectLinks'
+
+// README, package.json, Gradle 의존성 및 소스에서 확인한 프로젝트만 집계합니다.
+export const skillProjects = {
+  capstone: { title: 'FitMap', href: projectLinks.capstone },
+  smartrad: { title: 'SmartRAD', href: projectLinks.smartrad },
+  picstory: { title: 'Picstory', href: projectLinks.picstory },
+  logistics: { title: 'Fresh Chain', href: projectLinks['fresh-chain'] },
+  exhibition: { title: '온라인 전시관', href: projectLinks.exhibition },
+  senser: { title: 'Senser', href: projectLinks.senser },
+  leafy: { title: 'Leafy', href: projectLinks.leafy },
+}
+
 export const skillCategories = [
-    {
-        key: 'frontend',
-        iconKey: 'monitor',
-        iconColor: '#61DAFB',
-        accent: 'frontend',
-        title: 'Frontend',
-        subtitle: 'React와 JavaScript를 중심으로 사용자 화면을 구현하고 Vite로 빠르게 개발합니다.',
-        skills: [
-            { name: 'React', percent: 88 },
-            { name: 'JavaScript', percent: 86 },
-            { name: 'Vite', percent: 78 },
-            { name: 'Responsive UI', percent: 82, showPercent: false },
-        ],
-        tags: ['React', 'JavaScript', 'Vite', 'UI 구현'],
-    },
-    {
-        key: 'backend',
-        iconKey: 'server',
-        iconColor: '#6DB33F',
-        accent: 'backend',
-        title: 'Backend',
-        subtitle: 'Spring Boot 기반으로 API 흐름과 프론트엔드 연동을 설계하고 구현합니다.',
-        skills: [
-            { name: 'Spring Boot', percent: 76 },
-            { name: 'REST API', percent: 74, showPercent: false },
-            { name: 'Frontend ↔ Backend 연결', percent: 80, showPercent: false },
-        ],
-        tags: ['Spring Boot', 'REST API', '연동 개발'],
-    },
-    {
-        key: 'infra-devops',
-        iconKey: 'cloud',
-        iconColor: '#2496ED',
-        accent: 'devops',
-        title: 'Infra / DevOps',
-        subtitle: 'Git, Docker, GitHub Actions로 버전 관리와 배포 자동화 흐름을 다룹니다.',
-        skills: [
-            { name: 'Git / GitHub', percent: 84 },
-            { name: 'Docker', percent: 72 },
-            { name: 'GitHub Actions', percent: 70, showPercent: false },
-            { name: 'CI/CD workflow', percent: 68, showPercent: false },
-        ],
-        tags: ['Git', 'GitHub Actions', 'Docker', 'CI/CD'],
-    },
-    {
-        key: 'design-collaboration',
-        iconKey: 'sparkle',
-        iconColor: '#F24E1E',
-        accent: 'design',
-        title: 'Design & Collaboration',
-        subtitle: 'Figma로 화면 구조와 디자인 의도를 이해하고 구현 단계까지 연결합니다.',
-        skills: [
-            { name: 'Figma', percent: 82 },
-            { name: 'Design handoff', percent: 78, showPercent: false },
-            { name: 'UI documentation', percent: 74, showPercent: false },
-        ],
-        tags: ['Figma', '디자인 협업', 'UI 문서화'],
-    },
+  {
+    key: 'backend', title: 'Backend', label: 'API & BUSINESS LOGIC', color: 'var(--color-primary)',
+    description: '인증과 데이터 처리부터 외부 API 연동까지, 서비스의 동작을 연결합니다.',
+    skills: [
+      { name: 'Java · Spring Boot', projects: ['capstone', 'smartrad', 'picstory'] },
+      { name: 'Node.js · API Server', projects: ['capstone'] },
+      { name: 'Spring Security', projects: ['smartrad', 'picstory'] },
+      { name: 'JWT', projects: ['smartrad'] },
+    ],
+  },
+  {
+    key: 'database', title: 'Database', label: 'PERSISTENCE & DATA', color: 'var(--skill-green)',
+    description: '프로젝트에 맞는 저장소와 데이터 접근 방식을 사용합니다.',
+    skills: [
+      { name: 'MySQL', projects: ['smartrad', 'picstory'] },
+      { name: 'H2 · JDBC', projects: ['capstone'] },
+      { name: 'Spring Data JPA', projects: ['smartrad', 'picstory'] },
+    ],
+  },
+  {
+    key: 'frontend', title: 'Frontend', label: 'INTERFACE & INTERACTION', color: 'var(--skill-blue)',
+    description: 'React로 사용자 흐름을 구현하고 백엔드·장치 데이터와 연결합니다.',
+    skills: [
+      { name: 'React', projects: ['capstone', 'smartrad', 'picstory', 'logistics', 'exhibition', 'senser', 'leafy'] },
+      { name: 'JavaScript', projects: ['picstory', 'senser'] },
+      { name: 'TypeScript', projects: ['capstone', 'smartrad', 'logistics', 'exhibition', 'leafy'] },
+      { name: 'Next.js', projects: ['smartrad'] },
+      { name: 'Vite', projects: ['capstone', 'picstory', 'logistics', 'exhibition', 'senser', 'leafy'] },
+    ],
+  },
+  {
+    key: 'devops', title: 'DevOps & Tools', label: 'BUILD & DELIVERY', color: 'var(--skill-violet)',
+    description: '버전 관리, 컨테이너 배포와 파일 저장소를 프로젝트에 연결합니다.',
+    skills: [
+      { name: 'Git · GitHub', projects: ['capstone', 'smartrad', 'picstory', 'logistics', 'exhibition', 'senser', 'leafy'] },
+      { name: 'Docker Compose · Nginx · Caddy', projects: ['capstone'] },
+      { name: 'AWS S3', projects: ['smartrad', 'picstory'] },
+      { name: 'Vercel', projects: ['logistics', 'exhibition'] },
+    ],
+  },
+  {
+    key: 'iot', title: 'IoT & Embedded', label: 'DEVICE TO WEB', color: 'var(--skill-amber)',
+    description: '센서 측정과 장치 상태를 웹 화면으로 연결합니다. Leafy의 실제 펌프·팬 출력은 현재 비활성 상태입니다.',
+    skills: [
+      { name: 'ESP8266', projects: ['senser'] },
+      { name: 'ESP32', projects: ['leafy'] },
+      { name: 'Arduino · DHT11', projects: ['senser', 'leafy'] },
+      { name: 'HTTP 장치 상태 연동', projects: ['senser', 'leafy'] },
+    ],
+  },
 ]
 
-export const certifications = [
-    {
-        key: 'react-js',
-        monogram: 'FE',
-        brandColor: '#61DAFB',
-        title: 'React · JavaScript 중심 화면 개발',
-        issuer: 'Frontend Stack',
-        year: 'Current',
-        detail: '컴포넌트 기반 UI, 상태 흐름, 반응형 화면 구현을 중심으로 프로젝트에 적용하고 있습니다.',
-    },
-    {
-        key: 'spring-api',
-        monogram: 'BE',
-        brandColor: '#6DB33F',
-        title: 'Spring Boot API 연동 경험',
-        issuer: 'Backend Stack',
-        year: 'Current',
-        detail: 'Spring Boot API와 프론트엔드 화면을 연결하고 로그인/서비스 흐름을 구현한 경험이 있습니다.',
-    },
-    {
-        key: 'deploy-flow',
-        monogram: 'OPS',
-        brandColor: '#2496ED',
-        title: 'Git · Docker · GitHub Actions workflow',
-        issuer: 'Infra / DevOps Stack',
-        year: 'Current',
-        detail: '버전 관리, 컨테이너 기반 실행 환경, GitHub Actions를 활용한 자동화 흐름을 학습·적용합니다.',
-    },
-]
+export const skillProjectCount = Object.keys(skillProjects).length
+export const skillCount = skillCategories.reduce((total, category) => total + category.skills.length, 0)

@@ -1,29 +1,44 @@
-import weatherThumb from "../assets/sessionImg/Weather.png";
-import weatherThumbLight from "../assets/sessionImg/WeatherLight.png";
-import emotionThumb from "../assets/sessionImg/Emotion.png";
-import emotionThumbLight from "../assets/sessionImg/EmotionLight.png";
-import wordgameThumb from "../assets/sessionImg/Wordgame.png";
-import wordgameThumbLight from "../assets/sessionImg/WordgameLight.png";
-import alarm from "../assets/sessionImg/alarm.png";
-import todolist from "../assets/sessionImg/todolist.png";
+import { additionalProjects } from '../data/additionalProjects'
+import picstoryThumb from '../assets/sessionImg/picstory-illustration.png'
+import freshChainThumb from '../assets/sessionImg/fresh-chain-illustration.png'
+import smartradThumb from '../assets/sessionImg/smartrad-illustration.png'
+import { projectLinks, projectDemoLinks, logisticsDashboardUrl } from '../data/projectLinks'
+import weatherThumb from "../assets/sessionImg/weather-illustration.png";
+import emotionThumb from "../assets/sessionImg/emotion-illustration.png";
 import router from "../assets/sessionImg/router.png";
 import wifi from "../assets/sessionImg/wifi.png";
 import tocobo from "../assets/sessionImg/Tocobo.png";
-import { image } from "framer-motion/client";
 
 export const projectFilters = [
   { id: "all", label: "All" },
+  { id: "major", label: "대형 프로젝트" },
+  { id: "iot", label: "IoT / Hardware" },
   { id: "web", label: "Web app" },
   { id: "api", label: "API / Backend" },
-  { id: "game", label: "Game" },
   { id: "utility", label: "Utility" },
 ];
 
 export const projectsPageItems = [
+  ...additionalProjects,
+  {
+    id: 'smartrad',
+    image: smartradThumb,
+    imageAlt: '인사·근태·급여 관리를 표현한 SmartRAD 3D 일러스트',
+    title: 'SmartRAD',
+    description: '팀으로 함께 진행한 프로젝트입니다.',
+    categories: ['web', 'api', 'major'],
+    status: { type: 'featured', label: '대형 프로젝트' },
+    tags: [],
+    meta: [{ type: 'code', text: 'Team Project' }],
+    codeHref: projectLinks.smartrad,
+    demoHref: projectDemoLinks['smartrad'] ?? null,
+    gradient: 'cyan',
+  },
   {
     id: "fresh-chain",
-    image: "",
-    categories: ["web", "utility"],
+    image: freshChainThumb,
+    imageAlt: '냉장 물류·창고·온도 관리를 표현한 Fresh Chain 3D 일러스트',
+    categories: ["web", "utility", "major"],
     gradient: "orichalcum",
     title: "Fresh Chain",
     description:
@@ -33,46 +48,12 @@ export const projectsPageItems = [
       { label: "TypeScript", variant: "info" },
       { label: "Tailwind CSS", variant: "success" },
     ],
-    status: { type: "featured", label: "Featured" },
+    status: { type: "featured", label: "대형 프로젝트" },
     meta: [{ type: "code", text: "Team Project" }],
-    demoHref: "https://github.com/lsmxy4/Responsive_Logistics_KDT_3_Demo",
-    codeHref: "https://github.com/lsmxy4/Responsive_Logistics_KDT_3",
-    demoLabel: "Dashboard",
-  },
-  {
-    id: "word-chain",
-    image: wordgameThumb,
-    imageLight: wordgameThumbLight,
-    imageAlt: "끝말잇기 게임 화면 미리보기",
-    categories: ["web", "game"],
-    gradient: "violet",
-    title: "끝말잇기 게임",
-    description:
-      "나혼자서 할 수 있는 끝말잇기 게임입니다. 연속 기록 시스템과 제한 시간 기능을 포함하고 있습니다.",
-    tags: [
-      { label: "React", variant: "neutral" },
-      { label: "JavaScript", variant: "info" },
-    ],
-    status: { type: "featured", label: "Featured" },
-    meta: [{ type: "users", text: "Game" }],
-    demoHref: "#",
-    codeHref: "https://github.com",
-    demoLabel: "Live demo",
-  },
-  {
-    id: "timer",
-    image: alarm,
-    categories: ["web", "utility"],
-    gradient: "emerald",
-    title: "타이머 앱",
-    description:
-      "다양한 시간 설정을 지원하는 직관적인 타이머 애플리케이션입니다.",
-    tags: [{ label: "React", variant: "neutral" }],
-    status: { type: "live", label: "Live" },
-    meta: [{ type: "users", text: "Utility" }],
-    demoHref: "#",
-    codeHref: "https://github.com",
-    demoLabel: "Live demo",
+    demoHref: projectDemoLinks['fresh-chain'] ?? null,
+    dashboardHref: logisticsDashboardUrl,
+    codeHref: projectLinks["fresh-chain"],
+    demoLabel: "사이트 보기",
   },
   {
     id: "router-study",
@@ -85,51 +66,33 @@ export const projectsPageItems = [
     tags: [{ label: "React Router", variant: "warning" }],
     status: null,
     meta: [{ type: "users", text: "Learning" }],
-    demoHref: "#",
-    codeHref: "https://github.com",
-    demoLabel: "View Code",
+    demoHref: projectDemoLinks['router-study'] ?? null,
+    codeHref: projectLinks["router-study"],
+    demoLabel: "사이트 보기",
   },
   {
     id: "weather-app",
     image: weatherThumb,
-    imageLight: weatherThumbLight,
-    imageAlt: "날씨 확인 앱 화면 미리보기",
+    imageAlt: "도시 검색과 기온·습도 조회를 표현한 날씨 앱 3D 일러스트",
     categories: ["web", "api"],
     gradient: "sky",
     title: "날씨 확인 앱",
     description:
-      "전국 250개 측정소의 실시간 데이터를 수집/분석하여 위치 기반 맞춤 알림을 제공하는 PWA 서비스입니다.",
+      "도시를 검색해 현재 날씨와 기온, 습도를 확인하는 날씨 앱입니다. 날씨 상태에 따라 배경이 바뀝니다.",
     tags: [
       { label: "React", variant: "neutral" },
       { label: "JavaScript", variant: "info" },
-      { label: "PWA", variant: "success" },
     ],
     status: { type: "featured", label: "Featured" },
     meta: [{ type: "users", text: "Service" }],
-    demoHref: "#",
-    codeHref: "https://github.com",
-    demoLabel: "Live demo",
-  },
-  {
-    id: "todo-list",
-    image: todolist,
-    categories: ["web", "utility"],
-    gradient: "amber",
-    title: "TODO LIST",
-    description:
-      "할 일을 관리하고 우선순위를 정할 수 있는 기본적인 투두 리스트 애플리케이션입니다.",
-    tags: [{ label: "React", variant: "neutral" }],
-    status: null,
-    meta: [{ type: "users", text: "Utility" }],
-    demoHref: "#",
-    codeHref: "https://github.com",
-    demoLabel: "Live demo",
+    demoHref: projectDemoLinks['weather-app'] ?? null,
+    codeHref: projectLinks["weather-app"],
+    demoLabel: "사이트 보기",
   },
   {
     id: "emotion-diary",
     image: emotionThumb,
-    imageLight: emotionThumbLight,
-    imageAlt: "감정 일기장 화면 미리보기",
+    imageAlt: "날짜와 다섯 가지 감정 선택·일기 작성을 표현한 3D 일러스트",
     categories: ["web"],
     gradient: "rose",
     title: "감정 일기장",
@@ -139,11 +102,11 @@ export const projectsPageItems = [
       { label: "React", variant: "neutral" },
       { label: "JavaScript", variant: "info" },
     ],
-    status: { type: "live", label: "Live" },
+    status: null,
     meta: [{ type: "users", text: "Service" }],
-    demoHref: "#",
-    codeHref: "https://github.com",
-    demoLabel: "Live demo",
+    demoHref: projectDemoLinks['emotion-diary'] ?? null,
+    codeHref: projectLinks["emotion-diary"],
+    demoLabel: "사이트 보기",
   },
   {
     id: "wifi-map",
@@ -159,9 +122,9 @@ export const projectsPageItems = [
     ],
     status: null,
     meta: [{ type: "users", text: "Utility" }],
-    demoHref: "#",
-    codeHref: "https://github.com",
-    demoLabel: "Live demo",
+    demoHref: projectDemoLinks['wifi-map'] ?? null,
+    codeHref: projectLinks["wifi-map"],
+    demoLabel: "사이트 보기",
   },
   {
     id: "tocobo-project",
@@ -173,13 +136,14 @@ export const projectsPageItems = [
     tags: [{ label: "React", variant: "neutral" }],
     status: { type: "featured", label: "Featured" },
     meta: [{ type: "users", text: "Clone" }],
-    demoHref: "#",
-    codeHref: "https://github.com",
-    demoLabel: "View Project",
+    demoHref: projectDemoLinks['tocobo-project'] ?? null,
+    codeHref: projectLinks["tocobo-project"],
+    demoLabel: "사이트 보기",
   },
   {
     id: "picstory",
-    image: "",
+    image: picstoryThumb,
+    imageAlt: '책과 독서 기록을 표현한 BookTrace 3D 일러스트',
     categories: ["web", "api", "utility"],
     gradient: "cyan",
     title: "Picstory",
@@ -191,8 +155,8 @@ export const projectsPageItems = [
     ],
     status: { type: "featured", label: "Featured" },
     meta: [{ type: "code", text: "Fullstack Project" }],
-    demoHref: "#",
-    codeHref: "https://github.com/lsmxy4/2-picstory",
-    demoLabel: "View Project",
+    demoHref: projectDemoLinks['picstory'] ?? null,
+    codeHref: projectLinks["picstory"],
+    demoLabel: "사이트 보기",
   },
 ];

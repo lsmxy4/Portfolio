@@ -4,17 +4,6 @@ import CategoryCard from '../CategoryCard/CategoryCard';
 import { categories } from '../../utils/categories';
 import { motion as Motion } from 'framer-motion';
 
-const collaborationTools = [
-    { title: "Git / GitHub", desc: "브랜치 전략 · PR 리뷰 문화", color: "#FF8C00" },
-    { title: "Figma", desc: "디자이너 협업 · 디자인 토큰", color: "#FF4500" },
-    { title: "Slack / Notion", desc: "팀 협업 · 기술 문서화", color: "#800080" },
-    { title: "Jest / Playwright", desc: "유닛 · 통합 · E2E 테스트", color: "#FFD700" },
-    { title: "Vite / Webpack", desc: "번들 최적화 · 코드 스플릿팅", color: "#646CFF" },
-    { title: "Storybook", desc: "컴포넌트 문서화 · UI 카탈로그", color: "#FF4785" },
-    { title: "Vercel / Netlify", desc: "원클릭 배포 · Preview 환경", color: "#ffffff" },
-    { title: "Turborepo / Nx", desc: "모노레포 구조 설계 경험", color: "#00CED1" },
-];
-
 const toolHighlights = [
     { value: 'CI/CD', label: '자동화 파이프라인' },
     { value: 'Docs', label: '협업 문서화' },

@@ -1,4 +1,6 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+import { projectDetails } from '../../data/projectDetails'
 import styles from './FeaturedProjectCard.module.scss'
 import { icons } from '../../utils/icons'
 import Tag from '../../components/tag/Tag'
@@ -25,15 +27,17 @@ const IconExternal = icons.external
 const IconGithub = icons.github
 
 const FeaturedProjectCard = ({
+  id,
   title,
   description,
   tags = [],
   gradient = 'violet',
   status,
   meta = [],
-  demoHref = '#',
-  codeHref = '#',
-  demoLabel = 'Live demo',
+  demoHref = null,
+  dashboardHref = null,
+  codeHref = null,
+  demoLabel = '사이트 보기',
   image,
   imageLight,
   imageAlt = ''
@@ -47,17 +51,15 @@ const FeaturedProjectCard = ({
       <div className={`${styles.visual} ${image ? styles.visualImage : gradientClass}`}>
         {image ? (
           <>
-            <img src={image} alt={imageAlt || `${title} 화면 미리보기`} className={styles.darkImg} />
-            <img src={imageLight || image} alt="" className={styles.lightImg} aria-hidden="true" />
+            <img src={image} alt={imageAlt || `${title} 화면 미리보기`} className={styles.darkImg} loading="lazy" decoding="async" />
+            <img src={imageLight || image} alt="" className={styles.lightImg} aria-hidden="true" loading="lazy" decoding="async" />
           </>
         ) : (
           <>
-            <div className={styles.chrome} aria-hidden>
-              <span className={styles.dot} />
-              <span className={styles.dot} />
-              <span className={styles.dot} />
+            <div className={styles.placeholder}>
+              <strong>{title}</strong>
+              <span>프로젝트 미리보기 준비 중</span>
             </div>
-            <div className={styles.mockContent} aria-hidden />
           </>
         )}
       </div>
@@ -79,7 +81,7 @@ const FeaturedProjectCard = ({
             </span>
           ) : null}
         </div>
-        <h3 className={styles.title}>{title}</h3>
+        <h3 className={styles.title}>{Object.hasOwn(projectDetails, id) ? <Link className={styles.detailLink} to={`/projects/${id}`}>{title}<span className={styles.detailHint}>프로젝트 이야기 ↗</span></Link> : title}</h3>
         <p className={styles.desc}>{description}</p>
         {meta.length > 0 ? (
           <div className={styles.meta}>
@@ -99,13 +101,17 @@ const FeaturedProjectCard = ({
         ) : null}
 
         <div className={styles.actions}>
-          <a href={demoHref} className={`btn btn__primary ${styles.btnPrimary}`}>
+          {Object.hasOwn(projectDetails, id) && <Link to={`/projects/${id}`} className={`btn btn__outline ${styles.btnOutline}`}>자세히 보기 →</Link>}
+          {dashboardHref && <a href={dashboardHref} target="_blank" rel="noreferrer" className={`btn btn__outline ${styles.btnOutline}`}>대시보드 ↗<span className="sr-only"> (새 창)</span></a>}
+          {demoHref && demoHref !== '#' && <a href={demoHref} target="_blank" rel="noreferrer" className={`btn btn__primary ${styles.btnPrimary}`}>
             <IconExternal/>
             {demoLabel}
-          </a>
-          <a href={codeHref} className={`btn btn__outline ${styles.btnOutline}`} aria-label={`${title} GitHub 보기`}>
+            <span className="sr-only"> (새 창)</span>
+          </a>}
+          {codeHref && codeHref !== '#' && codeHref !== 'https://github.com' && <a href={codeHref} target="_blank" rel="noreferrer" className={`btn btn__outline ${styles.btnOutline}`} aria-label={`${title} GitHub 저장소 (새 창)`}>
             <IconGithub/>
-          </a>
+            GitHub 저장소
+          </a>}
         </div>
       </div>
     </article>

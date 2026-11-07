@@ -1,196 +1,36 @@
-import React, { useCallback, useEffect, useId, useState } from 'react'
-import { createPortal } from 'react-dom'
-import { motion as Motion } from 'framer-motion'
+import { useEffect, useRef, useState } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import { useTheme } from '../../context/useTheme'
 import { navItems } from '../../utils/nav'
+import { profile } from '../../data/profile'
 import styles from './Header.module.scss'
-const Header = () => {
+
+export default function Header() {
   const { theme, toggleTheme } = useTheme()
   const { pathname } = useLocation()
-  const [menuOpen, setMenuOpen] = useState(false)
-
-  const [mounted, setMounted] = useState(false)
-  const panelId = useId()
-
-  const closeMenu = useCallback(() => {
-    setMenuOpen(false)
+  const [openPath, setOpenPath] = useState(null)
+  const open = openPath === pathname
+  const menuRef = useRef(null)
+  const closeMenu = () => setOpenPath(null)
+  useEffect(() => {
+    const query = window.matchMedia('(min-width: 900px)')
+    const closeOnDesktop = (event) => { if (event.matches) setOpenPath(null) }
+    query.addEventListener('change', closeOnDesktop)
+    return () => query.removeEventListener('change', closeOnDesktop)
   }, [])
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  useEffect(() => {
-    const mq = window.matchMedia('(min-width:900px)')
-
-    const handleMediaChange = () => {
-      if (mq.matches) {
-        closeMenu()
-      }
-    }
-
-    mq.addEventListener('change', handleMediaChange)
-
-    return () => {
-      mq.removeEventListener('change', handleMediaChange)
-    }
-
-  }, [closeMenu])
-
-
-  useEffect(() => {
-
-    if (!menuOpen) return
-
-    const handleKeyDown = (e) => {
-      if (e.key == 'Escape') {
-        closeMenu()
-      }
-    }
-
-    const previousOverflow = document.body.style.overflow
-
-    window.addEventListener('keydown', handleKeyDown)
-    document.body.style.overflow = 'hidden'
-
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown)
-      document.body.style.overflow = previousOverflow
-    }
-
-  }, [menuOpen, closeMenu])
-
-  return (
-    <header key={pathname} className={styles.header}>
-      <div className={`inner ${styles.inner}`}>
-        <NavLink to="/" className={styles.logo} end onClick={closeMenu}>
-          SDH
-        </NavLink>
-        <nav className={styles.nav} aria-label='Main'>
-          {navItems.map(({ to, label }) => (
-            <Motion.div key={to} whileHover={{ y: -2 }} whileTap={{ scale: 0.96 }}>
-
-              <NavLink
-                to={to}
-                key={to}
-                className={({ isActive }) =>
-                  isActive ? `${styles.link} ${styles.linkActive}` : styles.link
-                }
-              >
-                {label}
-              </NavLink>
-            </Motion.div>
-          ))}
-        </nav>
-        <div className={styles.actions}>
-          <Motion.button
-
-            whileTap={{ scale: 0.97 }}
-            type='button'
-            className={`btn btn__outline btn__small ${styles.btn__small}`}>
-            Resume
-          </Motion.button>
-          <Motion.button
-            whileTap={{ scale: 0.97 }}
-
-            type='button'
-            className={`btn btn__primary btn__small ${styles.btn__small}`}>
-            Hire me
-          </Motion.button>
-          <Motion.button
-            whileTap={{ scale: 0.97 }}
-
-            className={styles.themeToggle}
-            onClick={toggleTheme}
-            aria-label={theme === 'dark' ? 'switch to light mode' : 'switch to dark mode'}
-          >
-            {theme == 'dark' ? 'L' : 'D'}
-          </Motion.button>
-          <button
-          type='button'
-          className={styles.menuToggle}
-          aria-expanded={menuOpen}
-          aria-controls={menuOpen? panelId :undefined}
-          aria-label={menuOpen? 'Close menu':'Open menu'}
-          onClick={()=>setMenuOpen((prev)=>!prev)}
-          >
-
-            <span className={styles.menuIcon} aria-hidden>
-              <span className={styles.menuBar} />
-              <span className={styles.menuBar} />
-              <span className={styles.menuBar} />
-            </span>
-          </button>
+  return <header className={styles.header}>
+    <a className="skip-link" href="#main-content">본문으로 바로가기</a>
+    <div className={styles.inner}>
+      <NavLink to="/" end className={styles.logo} onClick={closeMenu} aria-label="신동환 포트폴리오 홈">sdh<span>.</span><small>PORTFOLIO</small></NavLink>
+      <nav className={styles.nav} aria-label="주요 메뉴">{navItems.map(({ to, label }) => <NavLink key={to} to={to} className={({ isActive }) => isActive ? styles.active : undefined}>{label}</NavLink>)}</nav>
+      <div className={styles.actions}>
+        <a className={styles.github} href={profile.github} target="_blank" rel="noreferrer">GitHub ↗<span className="sr-only"> (새 창)</span></a>
+        <button className={styles.themeToggle} type="button" onClick={toggleTheme} aria-label={theme === 'dark' ? '라이트 모드로 전환' : '다크 모드로 전환'}><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">{theme === 'dark' ? <><circle cx="12" cy="12" r="4" /><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5" /></> : <path d="M20 15a8.5 8.5 0 0 1-11-11A8.5 8.5 0 1 0 20 15Z" />}</svg></button>
+        <div className={styles.mobileMenu} onKeyDown={(event) => { if (event.key === 'Escape' && open) { closeMenu(); menuRef.current?.focus() } }} onBlur={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) closeMenu() }}>
+          <button ref={menuRef} type="button" className={styles.menuToggle} aria-expanded={open} aria-controls="mobile-navigation" onClick={() => setOpenPath(open ? null : pathname)}>{open ? '닫기' : '메뉴'} <span aria-hidden="true">{open ? '−' : '+'}</span></button>
+          <nav id="mobile-navigation" hidden={!open} className={styles.mobileNav} aria-label="모바일 주요 메뉴">{navItems.map(({ to, label }) => <NavLink key={to} to={to} onClick={closeMenu} className={({ isActive }) => isActive ? styles.active : undefined}>{label}<span aria-hidden="true">↗</span></NavLink>)}</nav>
         </div>
       </div>
-      {mounted &&
-        menuOpen &&
-        createPortal(
-          <>
-            <button
-              type='button'
-              className={styles.mobileBackdrop}
-              aria-label='Close menu'
-              tabIndex={-1}
-              onClick={closeMenu}
-            />
-            <div
-              id={panelId}
-              className={styles.mobilePanel}
-              role='dialog'
-              aria-modal="true"
-              aria-label='Menu'
-            >
-              <nav className={styles.mobileNav} aria-label='Main'>
-                {navItems.map(({ to, label }) => (
-
-
-                  <NavLink
-                    to={to}
-                    key={to}
-                    className={({ isActive }) =>
-                      isActive ? `${styles.linkMobile} ${styles.linkMobileActive}` : styles.linkMobile
-                    }
-                    onClick={closeMenu}
-                  >
-                    {label}
-                  </NavLink>
-
-                ))}
-              </nav>
-              <div className={styles.mobileActions}>
-                <button
-
-                  type='button'
-                  className={styles.btnMobileOutline}
-                >
-                  Resume
-                </button>
-                <button
-                  whileTap={{ scale: 0.97 }}
-                  className={styles.btnMobilePrimary}
-                  type='button'
-                >
-                  Hire me
-                </button>
-                <button
-                  whileTap={{ scale: 0.97 }}
-
-                  className={styles.themeToggleMobile}
-                  onClick={toggleTheme}
-                  aria-label={theme === 'dark' ? 'switch to light mode' : 'switch to dark mode'}
-                >
-                  {theme == 'dark' ? 'Light Mode' : 'Dark Mode'}
-                </button>
-              </div>
-            </div>
-          </>,
-          document.body
-        )
-      }
-    </header>
-  )
+    </div>
+  </header>
 }
-
-export default Header

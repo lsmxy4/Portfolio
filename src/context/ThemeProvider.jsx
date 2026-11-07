@@ -4,16 +4,14 @@ import { ThemeContext } from './themeContext'
 const STORAGE_KEY = 'portfolio-theme'
 
 function getInitialTheme(){
-  if(typeof window==='undefined') return 'light'
+  if(typeof window==='undefined') return 'dark'
 
-  const stored =localStorage.getItem(STORAGE_KEY)
+  let stored
+  try { stored = localStorage.getItem(STORAGE_KEY) } catch { /* 저장소 접근 제한 시 기본 테마 사용 */ }
 
   if(stored==='light' || stored==='dark')return stored
 
-
-  if (window.matchMedia('(prefers-color-scheme: dark)').matches) return 'dark'
-
-  return 'light'
+  return 'dark'
 
 }
 
@@ -25,7 +23,7 @@ const ThemeProvider = ({children}) => {
   useEffect(()=>{
 
     document.documentElement.setAttribute('data-theme',theme)
-    localStorage.setItem(STORAGE_KEY,theme)
+    try { localStorage.setItem(STORAGE_KEY,theme) } catch { /* 현재 세션에서 테마 전환 유지 */ }
 
   },[theme])
  
